@@ -22,7 +22,7 @@ public class doorController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        initialAngle = transform.rotation.y;
+        initialAngle = transform.rotation.eulerAngles.y;
         //myPlayer = GameObject.FindGameObjectWithTag("player");
         //playerCollider = myPlayer.GetComponent<Collider>();
         //doorCollider = GetComponent<Collider>();
