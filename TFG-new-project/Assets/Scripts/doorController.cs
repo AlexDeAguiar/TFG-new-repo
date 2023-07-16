@@ -5,9 +5,9 @@ using UnityEngine;
 public class doorController : MonoBehaviour
 {
     public float openAngle; // El angulo de apertura de la puerta
-    public float closeAngle = 0f; // El angulo de cierre de la puerta
     public float smoothTime = 2f; // El tiempo que tarda la puerta en abrirse o cerrarse
     private bool open = false;
+    private float initialAngle;
     private Quaternion targetRotation;
 
     //icono de interaccion:
@@ -22,6 +22,7 @@ public class doorController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        initialAngle = transform.rotation.y;
         //myPlayer = GameObject.FindGameObjectWithTag("player");
         //playerCollider = myPlayer.GetComponent<Collider>();
         //doorCollider = GetComponent<Collider>();
@@ -48,13 +49,14 @@ public class doorController : MonoBehaviour
     public void openDoor()
     {
        //x, y ,z
-        targetRotation = Quaternion.Euler(0, openAngle, 0);
+
+        targetRotation = Quaternion.Euler(0, initialAngle+openAngle, 0);
         open = true;
     }
 
     public void closeDoor()
     {
-        targetRotation = Quaternion.Euler(0, closeAngle, 0);
+        targetRotation = Quaternion.Euler(0, initialAngle, 0);
         open = false;
     }
 
