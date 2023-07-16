@@ -29,9 +29,9 @@ public class doorTagEditor : Editor
             }
 
             // Verifica si el collider ya existe antes de agregarlo
-            if (Selection.activeGameObject.GetComponent<BoxCollider>() == null)
+            if (Selection.activeGameObject.GetComponent<MeshCollider>() == null)
             {
-                Selection.activeGameObject.AddComponent<BoxCollider>();
+                Selection.activeGameObject.AddComponent<MeshCollider>();
             }
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class doorController : MonoBehaviour
 {
-    public float openAngle = 90f; // El angulo de apertura de la puerta
+    public float openAngle; // El angulo de apertura de la puerta
     public float closeAngle = 0f; // El angulo de cierre de la puerta
     public float smoothTime = 2f; // El tiempo que tarda la puerta en abrirse o cerrarse
     private bool open = false;
@@ -47,6 +47,7 @@ public class doorController : MonoBehaviour
 
     public void openDoor()
     {
+       //x, y ,z
         targetRotation = Quaternion.Euler(0, openAngle, 0);
         open = true;
     }
