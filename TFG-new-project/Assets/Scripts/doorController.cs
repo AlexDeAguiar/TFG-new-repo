@@ -15,31 +15,33 @@ public class doorController : MonoBehaviour
     private Texture2D texture;
     private Vector3 iconOffset = new Vector3(0, 2.5f, 0); // Offset hacia arriba
 
-    public GameObject myPlayer;
-    Collider playerCollider;
-    Collider doorCollider;
+   // public GameObject myPlayer;
+    //Collider playerCollider;
+    //Collider doorCollider;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerCollider = myPlayer.GetComponent<Collider>();
-        doorCollider = GetComponent<Collider>();
-        texture = Resources.Load<Texture2D>("Graphics/iconInteract");
-        targetRotation = transform.rotation;
-
+        //myPlayer = GameObject.FindGameObjectWithTag("player");
+        //playerCollider = myPlayer.GetComponent<Collider>();
+        //doorCollider = GetComponent<Collider>();
+        //texture = Resources.Load<Texture2D>("Graphics/iconInteract");
+        //targetRotation = transform.rotation;
+        /*
         Material iconMat = new Material(Shader.Find("Standard"));
         iconMat.mainTexture = texture;
         interactionIcon.transform.position = transform.position + iconOffset;
         interactionIcon.GetComponentInChildren<MeshRenderer>().material = iconMat;
+        */
     }
 
-
+/*
     void OnCollisionEnter(Collision collision)
     {
         bool cond = collision.collider.CompareTag("Player");
         //interactionIcon.SetActive(cond);
         if (cond) { Physics.IgnoreCollision(collision.collider, GetComponent<Collider>()); }
-    }
+    }*/
 
     public bool isOpen() { return open; }
 

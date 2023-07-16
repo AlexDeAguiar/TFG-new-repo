@@ -14,7 +14,7 @@ public class TagDoor : MonoBehaviour
         foreach (GameObject obj in objects)
         {
             // Verifica si el nombre del objeto contiene la palabra "Puerta"
-            if (obj.name.Contains("PuertaDer"))
+            if (obj.name.Contains("Puerta"))
             {
                 // Asigna la etiqueta "Door" al objeto
                 obj.tag = "Door";
