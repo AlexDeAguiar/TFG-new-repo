@@ -2,16 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System;
+using TMPro;
 
 public class MainGUI : MonoBehaviour{
     UIDocument myUI;
+    VisualElement root;
     VisualElement userPic;
+    Label timeLabel;
+
+    void Update(){
+        updateTime();
+    }
+
+    void updateTime(){
+        if (timeLabel != null){
+            timeLabel.text = DateTime.Now.ToShortTimeString();
+            print(timeLabel.text);
+        }
+    }
 
     void onEnable(){
         myUI = GetComponent<UIDocument>();
-        VisualElement root = myUI.rootVisualElement;
+        root = myUI.rootVisualElement;
         userPic = root.Q<VisualElement>("UserPic");
         userPic.RegisterCallback<ClickEvent>(ChangeBackgroundSprite);
+
+        timeLabel = root
+            .Q<VisualElement>("root")
+            .Q<VisualElement>("TopBar")
+            .Q<VisualElement>("TimeFrame")
+            .Q<Label>("timeLabel");
+        updateTime();
+        print("holu?");
     }
 
     // Llamamos a este método para cambiar el fondo del UI Element.
