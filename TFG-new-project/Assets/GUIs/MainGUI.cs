@@ -2,17 +2,89 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System;
+using TMPro;
 
 public class MainGUI : MonoBehaviour{
     UIDocument myUI;
+    VisualElement root;
     VisualElement userPic;
+    Label timeLabel;
 
-    void onEnable(){
+    Boolean showRight;
+    Boolean showLeft;
+    VisualElement rightTab;
+    VisualElement leftTab;
+    Label rightTabLabel;
+    Label leftTabLabel;
+
+    void Start(){
+        showRight = false;
+        showLeft  = false;
+
         myUI = GetComponent<UIDocument>();
-        VisualElement root = myUI.rootVisualElement;
+        root = myUI.rootVisualElement;
         userPic = root.Q<VisualElement>("UserPic");
-        userPic.RegisterCallback<ClickEvent>(ChangeBackgroundSprite);
+        userPic.RegisterCallback<ClickEvent>(evt => ChangeBackgroundSprite(evt));
+
+        rightTab = root.Q<VisualElement>("RightTab");
+        rightTab.Q<VisualElement>("RightArrowBtn").RegisterCallback<ClickEvent>(toggleRightTab);
+        rightTabLabel = rightTab.Q<VisualElement>("RightArrowBtn").Q<Label>();
+
+        leftTab = root.Q<VisualElement>("LeftTab");
+        leftTab.Q<VisualElement>("LeftArrowBtn").RegisterCallback<ClickEvent>(toggleLeftTab);
+        leftTabLabel = leftTab.Q<VisualElement>("LeftArrowBtn").Q<Label>();
+
+        timeLabel = root
+            .Q<VisualElement>("root")
+            .Q<VisualElement>("TopBar")
+            .Q<VisualElement>("TimeFrame")
+            .Q<Label>("timeLabel");
+        updateTime();
     }
+
+    void Update(){
+        updateTime();
+    }
+
+    void updateTime(){
+        if (timeLabel != null){
+            timeLabel.text = DateTime.Now.ToShortTimeString();
+        }
+    }
+
+    void toggleRightTab(ClickEvent evt){        
+        showRight = !showRight;
+        if(showRight){
+            rightTab.AddToClassList("showRightContainer");
+            rightTab.RemoveFromClassList("hideRightContainer");
+            rightTabLabel.AddToClassList("showRightLabel");
+            rightTabLabel.RemoveFromClassList("hideRightLabel");
+        }
+        else{
+            rightTab.AddToClassList("hideRightContainer");
+            rightTab.RemoveFromClassList("showRightContainer");
+            rightTabLabel.AddToClassList("hideRightLabel");
+            rightTabLabel.RemoveFromClassList("showRightLabel");
+        }
+    }
+
+    void toggleLeftTab(ClickEvent evt){
+        showLeft = !showLeft;
+        if(showLeft){
+            leftTab.AddToClassList("showLeftContainer");
+            leftTab.RemoveFromClassList("hideLeftContainer");
+            leftTabLabel.AddToClassList("showLeftLabel");
+            leftTabLabel.RemoveFromClassList("hideLeftLabel");
+        }
+        else{
+            leftTab.AddToClassList("hideLeftContainer");
+            leftTab.RemoveFromClassList("showLeftContainer");
+            leftTabLabel.AddToClassList("hideLeftLabel");
+            leftTabLabel.RemoveFromClassList("showLeftLabel");
+        }
+    }
+
 
     // Llamamos a este método para cambiar el fondo del UI Element.
     public void ChangeBackgroundSprite(ClickEvent evt){

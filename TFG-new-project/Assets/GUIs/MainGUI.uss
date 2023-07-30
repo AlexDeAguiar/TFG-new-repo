@@ -1,0 +1,33 @@
+.showRightContainer {
+    right: 15px;
+    bottom: 15px;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in;
+    position: absolute;
+}
+
+.hideRightContainer {
+    right: -218px;
+    position: absolute;
+    bottom: 15px;
+}
+
+.showRightLabel {
+    rotate: 150deg;
+}
+
+.hideRightLabel {
+    rotate: -30deg;
+}
+
+.hideLeftContainer {
+    left: -240px;
+}
+
+.hideLeftLabel {
+    rotate: -30deg;
+}
+
+.showLeftLabel {
+    rotate: 150deg;
+}
