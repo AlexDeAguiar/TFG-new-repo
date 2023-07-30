@@ -21,7 +21,7 @@ public class SC_TPSController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-		playerCameraParent =Instantiate(playerCameraParent, transform);
+		playerCameraParent = Instantiate(playerCameraParent, transform);
 
 		rotation.y = transform.eulerAngles.y;
     }

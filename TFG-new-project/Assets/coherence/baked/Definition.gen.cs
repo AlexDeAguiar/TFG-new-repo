@@ -16,7 +16,7 @@ namespace Coherence.Generated
 
 	public class Definition : IDefinition
 	{
-		public const string schemaId = "3bdb5824ea729c9a0a80670614195c11e68a2eb6";
+		public const string schemaId = "8b9d73d16728fa8825e68dd4190877a4f6b19ade";
 		public const uint InternalWorldPosition = 0;
 		public const uint InternalWorldOrientation = 1;
 		public const uint InternalLocalUser = 2;
@@ -120,7 +120,7 @@ namespace Coherence.Generated
 		public const uint InternalGenericFieldULong3 = 100;
 		public const uint InternalGenericFieldColor0 = 101;
 		public const uint InternalGenericFieldColor1 = 102;
-		public const uint InternalPlayer__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_6296568538305122474 = 103;
+		public const uint InternalPlayer__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_1316131640092332172 = 103;
 		public const uint InternalAuthorityRequest = 0;
 		public const uint InternalAuthorityTransfer = 1;
 		public const uint InternalQuerySynced = 2;
@@ -232,7 +232,7 @@ namespace Coherence.Generated
 			{ 100, "GenericFieldULong3" },
 			{ 101, "GenericFieldColor0" },
 			{ 102, "GenericFieldColor1" },
-			{ 103, "Player__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_6296568538305122474" },
+			{ 103, "Player__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_1316131640092332172" },
 		};
 
 		public static string ComponentNameForTypeId(uint typeId)
@@ -460,8 +460,8 @@ namespace Coherence.Generated
 					return GenericFieldColor0.Deserialize(inProtocolStream);
 				case InternalGenericFieldColor1:
 					return GenericFieldColor1.Deserialize(inProtocolStream);
-				case InternalPlayer__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_6296568538305122474:
-					return Player__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_6296568538305122474.Deserialize(inProtocolStream);
+				case InternalPlayer__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_1316131640092332172:
+					return Player__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_1316131640092332172.Deserialize(inProtocolStream);
 				default:
 					return (null, 0);
 			}
@@ -678,8 +678,8 @@ namespace Coherence.Generated
 					return GenericFieldColor0.Serialize((GenericFieldColor0)data, mask, protocolStream);
 				case InternalGenericFieldColor1:
 					return GenericFieldColor1.Serialize((GenericFieldColor1)data, mask, protocolStream);
-				case InternalPlayer__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_6296568538305122474:
-					return Player__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_6296568538305122474.Serialize((Player__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_6296568538305122474)data, mask, protocolStream);
+				case InternalPlayer__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_1316131640092332172:
+					return Player__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_1316131640092332172.Serialize((Player__char_32___char_40_Networked__char_41__394226a786d0c1d499b22e6b6bffa171_UnityEngine__char_46_Transform_1316131640092332172)data, mask, protocolStream);
 				default:
 					logger.Error("Missing serialization implementation for a component.", ("component", data.GetComponentType()));
 					return 0;
