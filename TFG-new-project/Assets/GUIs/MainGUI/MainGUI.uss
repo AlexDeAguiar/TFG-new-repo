@@ -31,3 +31,14 @@
 .showLeftLabel {
     rotate: 150deg;
 }
+
+.my-input-text {
+}
+
+.my-input-text > .unity-base-field__label {
+    width: 122px;
+}
+
+.my-input-text > .unity-base-field__input {
+    width: 0;
+}
