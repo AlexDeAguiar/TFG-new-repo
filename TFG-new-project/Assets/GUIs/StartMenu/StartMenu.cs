@@ -41,21 +41,6 @@ public class StartMenu : MonoBehaviour{
         loadSignUp = false;
 
         root = GetComponent<UIDocument>().rootVisualElement;
-        //MAIN BUTTONS ==========================================================
-        mainOptions = root.Q<VisualElement>("mainOptions");
-        mainOptions.Q<Button>("SignIn_Btn").text = Translator._INTL("Login");
-        mainOptions.Q<Button>("SignUp_Btn").text = Translator._INTL("Sign Up");
-        mainOptions.Q<Button>("Settings_Btn").text = Translator._INTL("Settings");
-
-        //play sound callback:
-        mainOptions.Q<Button>("SignIn_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-        mainOptions.Q<Button>("SignUp_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-        mainOptions.Q<Button>("Settings_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-
-        //clicking events of mainOptions tab:
-        mainOptions.Q<Button>("SignIn_Btn").RegisterCallback<ClickEvent>(evt => OpenSignIn(evt));
-        mainOptions.Q<Button>("SignUp_Btn").RegisterCallback<ClickEvent>(evt => OpenSignUp(evt));
-        mainOptions.Q<Button>("Settings_Btn").RegisterCallback<ClickEvent>(evt => OpenSettings(evt));
         
         //LOGIN =================================================================
         SignIn = root.Q<VisualElement>("SignIn");
@@ -92,6 +77,22 @@ public class StartMenu : MonoBehaviour{
         ErrorWindow.Q<VisualElement>("ErrorContainer")
                    .Q<VisualElement>("ErrorBtn")
                    .RegisterCallback<ClickEvent>(evt => CloseErrorWindow(evt));
+
+        //MAIN BUTTONS ==========================================================
+        mainOptions = root.Q<VisualElement>("mainOptions");
+        mainOptions.Q<Button>("SignIn_Btn").text = Translator._INTL("Login");
+        mainOptions.Q<Button>("SignUp_Btn").text = Translator._INTL("Sign Up");
+        mainOptions.Q<Button>("Settings_Btn").text = Translator._INTL("Settings");
+
+        //play sound callback:
+        mainOptions.Q<Button>("SignIn_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
+        mainOptions.Q<Button>("SignUp_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
+        mainOptions.Q<Button>("Settings_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
+
+        //clicking events of mainOptions tab:
+        mainOptions.Q<Button>("SignIn_Btn").RegisterCallback<ClickEvent>(evt => OpenSignIn(evt));
+        mainOptions.Q<Button>("SignUp_Btn").RegisterCallback<ClickEvent>(evt => OpenSignUp(evt));
+        mainOptions.Q<Button>("Settings_Btn").RegisterCallback<ClickEvent>(evt => OpenSettings(evt));
 
         setUp1();
         setUp2();
@@ -152,7 +153,6 @@ public class StartMenu : MonoBehaviour{
         VisualElement ErrorWindow = root.Q<VisualElement>("ErrorWindow");
         ErrorWindow.Q<Label>("ErrorLabel").text = text;
         ErrorWindow.RemoveFromClassList("hidden");
-        curTab = ErrorWindow;
         Debug.Log(text);
     }
 
