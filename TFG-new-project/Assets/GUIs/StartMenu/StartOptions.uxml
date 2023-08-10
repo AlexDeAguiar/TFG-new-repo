@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/GUIs/StartMenu/StartMenu.uss?fileID=7433441132597879392&amp;guid=5732aad222fa3b743b16cdf4513b4288&amp;type=3#StartMenu" />
-    <ui:VisualElement name="botonera" style="align-items: center; max-width: 100%; max-height: 100%;">
-        <ui:Button text="Sign in" display-tooltip-when-elided="true" name="SignIn" class="boton" />
-        <ui:Button text="Sign Up" display-tooltip-when-elided="true" name="SignUp" class="boton" />
-        <ui:Button text="Settings" display-tooltip-when-elided="true" name="Settings" class="boton" />
-    </ui:VisualElement>
-</ui:UXML>

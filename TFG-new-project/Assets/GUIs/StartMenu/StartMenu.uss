@@ -40,7 +40,7 @@ VisualElement {
 
 .username-field > .unity-text-field__label {
     width: 114px;
-    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
     background-color: rgba(255, 255, 255, 0);
     max-width: none;
     -unity-text-align: middle-right;
@@ -52,6 +52,7 @@ VisualElement {
     font-size: 17px;
     -unity-font: url('project://database/Assets/Fonts/neuropol.otf?fileID=12800000&guid=4b7f8da8185d07943810bdbb5e0a05e0&type=3#neuropol');
     -unity-font-definition: initial;
+    white-space: normal;
 }
 
 .username-field > .unity-text-field__input {
@@ -66,6 +67,6 @@ VisualElement {
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-    color: rgba(0, 0, 0, 255);
+    color: rgb(0, 0, 0);
     height: 39px;
 }

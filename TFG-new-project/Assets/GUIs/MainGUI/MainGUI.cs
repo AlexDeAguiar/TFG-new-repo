@@ -41,6 +41,8 @@ public class MainGUI : MonoBehaviour{
             .Q<VisualElement>("TimeFrame")
             .Q<Label>("timeLabel");
         updateTime();
+
+        updateUserData();
     }
 
     void Update(){
@@ -53,6 +55,11 @@ public class MainGUI : MonoBehaviour{
         }
     }
 
+    void updateUserData(){
+        User myUser = User.Instance;
+        root.Q<Label>("Username").text = myUser.username;
+
+    }
     void toggleRightTab(ClickEvent evt){        
         showRight = !showRight;
         if(showRight){
