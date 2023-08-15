@@ -20,7 +20,7 @@ VisualElement {
     align-items: center;
     justify-content: center;
     -unity-background-image-tint-color: rgb(255, 255, 255);
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     -unity-font: url('project://database/Assets/Fonts/neuropol.otf?fileID=12800000&guid=4b7f8da8185d07943810bdbb5e0a05e0&type=3#neuropol');
     -unity-font-definition: initial;
     height: 50px;
@@ -53,7 +53,7 @@ VisualElement {
     margin-top: 10px;
     margin-bottom: 10px;
     -unity-font-style: bold;
-    font-size: 17px;
+    font-size: 14px;
     -unity-font: url('project://database/Assets/Fonts/neuropol.otf?fileID=12800000&guid=4b7f8da8185d07943810bdbb5e0a05e0&type=3#neuropol');
     -unity-font-definition: initial;
     white-space: normal;

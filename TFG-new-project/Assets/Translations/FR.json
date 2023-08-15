@@ -1,0 +1,20 @@
+{
+    "Provide a username": "Fournir un nom d'utilisateur",
+    "Provide a Password": "Fournir un mot de passe",
+    "Passwords do not match": "Les mots de passe ne correspondent pas",
+    "Please select a user Type": "Veuillez sélectionner un type d'utilisateur",
+    "Username is already taken": "Nom d'utilisateur déjà pris",
+    "Accept": "Accepter",
+    "Username": "Nom d'utilisateur",
+    "Password": "Mot de passe",
+    "Repeat Password": "Répéter le mot de passe",
+
+    "Login": "Se connecter",
+    "Sign Up": "S'inscrire",
+    "Settings": "Paramètres",
+
+    "Student": "Étudiant",
+    "Professor": "Professeur",
+
+    "Language": "Langue"
+}

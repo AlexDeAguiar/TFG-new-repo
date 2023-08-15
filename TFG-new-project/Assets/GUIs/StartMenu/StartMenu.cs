@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class StartMenu : MonoBehaviour{
-    VisualElement mainOptions;
+public class StartMenu : SuperGUI, Translatable {
+    VisualElement MainOptions;
     VisualElement SignIn;
     VisualElement SignUp;
     VisualElement Settings;
@@ -12,110 +12,108 @@ public class StartMenu : MonoBehaviour{
 
     TextField UsernameInput;
     TextField PasswordInput;
-
     TextField UsernameInput2;
     TextField PasswordInput2;
     TextField PasswordInput2_confirm;
+
+    Button SignUpBtn;
+    Button SignUpBackBtn;
+    Button SignInBtn;
+    Button SignInBackBtn;
     RadioButtonGroup UserType;
 
-    public const int MAINOPTIONS = 0;
-    public const int SIGNIN      = 1;
-    public const int SIGNUP      = 2;
-    public const int SETTINGS    = 3;
-
-    VisualElement root;
-    VisualElement curTab;
-
-    bool loadSignIn;
-    bool loadSignUp;
-
-    public AudioSource soundPlayer;
-    public AudioSource soundPlayerSelect;
-    public AudioSource soundPlayerClose;
+    VisualElement CurTab;
 
     // Start is called before the first frame update
     void Start(){
-        Translator.InitDicts();
-
-        loadSignIn = false;
-        loadSignUp = false;
-
-        root = GetComponent<UIDocument>().rootVisualElement;
+        base.Init();
         
         //LOGIN =================================================================
-        SignIn = root.Q<VisualElement>("SignIn");
-        SignIn.Q<Button>("LoginBtn").text = Translator._INTL("Login");
-        UsernameInput = SignIn.Q<TextField>("LoginUsername");
-        UsernameInput.label = Translator._INTL("Username");
-        
-        PasswordInput = SignIn.Q<TextField>("LoginPassword");
-        PasswordInput.label = Translator._INTL("Password");
+        SignIn = Root.Q<VisualElement>("SignIn");
 
+        UsernameInput = SignIn.Q<TextField>("LoginUsername");
         PasswordInput = SignIn.Q<TextField>("LoginPassword");
+
+        //clicking events for going back to the MainOptions tab:
+        SignInBackBtn = SignIn.Q<Button>("LoginBack");
+        SignInBtn     = SignIn.Q<Button>("LoginBtn");
+
+        SignInBtn.RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
+        SignInBtn.RegisterCallback<ClickEvent>(evt => Login(evt));
+        SignInBackBtn.RegisterCallback<ClickEvent>(evt => CloseTab(evt));
 
         //SIGNUP ================================================================
-        SignUp = root.Q<VisualElement>("SignUp");
-        SignUp.Q<Button>("SignUpBtn").text = Translator._INTL("Sign Up");
-
+        SignUp = Root.Q<VisualElement>("SignUp");
         UsernameInput2 = SignUp.Q<TextField>("SignUpUsername");
-        UsernameInput2.label = Translator._INTL("Username");
-
         PasswordInput2 = SignUp.Q<TextField>("SignUpPassword");
-        PasswordInput2.label = Translator._INTL("Password");
-
         PasswordInput2_confirm = SignUp.Q<TextField>("SignUpPassword2");
-        PasswordInput2_confirm.label = Translator._INTL("Repeat Password");
-
         UserType = SignUp.Q<RadioButtonGroup>("UserType");
-        List<string> aux = (List<string>) UserType.choices;
-        aux[0] = Translator._INTL("Student");
-        aux[1] = Translator._INTL("Professor");
 
+        //clicking events for going back to the MainOptions tab:
+        SignUpBtn     = SignUp.Q<Button>("SignUpBtn");
+        SignUpBackBtn = SignUp.Q<Button>("SignUpBack");
+
+        SignUpBtn.RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
+        SignUpBtn.RegisterCallback<ClickEvent>(evt => Sign_Up(evt));
+        SignUpBackBtn.RegisterCallback<ClickEvent>(evt => CloseTab(evt));
+
+        //SETTINGS ==============================================================
+        Settings = Root.Q<VisualElement>("Settings");
+        Settings.Q<Button>("SettingsBack").RegisterCallback<ClickEvent>(evt => CloseTab(evt));
 
         //ERROR WINDOW ==========================================================
-        ErrorWindow = root.Q<VisualElement>("ErrorWindow");
-        ErrorWindow.Q<VisualElement>("ErrorContainer")
-                   .Q<VisualElement>("ErrorBtn")
-                   .RegisterCallback<ClickEvent>(evt => CloseErrorWindow(evt));
+        ErrorWindow = Root.Q<VisualElement>("ErrorWindow");
 
         //MAIN BUTTONS ==========================================================
-        mainOptions = root.Q<VisualElement>("mainOptions");
-        mainOptions.Q<Button>("SignIn_Btn").text = Translator._INTL("Login");
-        mainOptions.Q<Button>("SignUp_Btn").text = Translator._INTL("Sign Up");
-        mainOptions.Q<Button>("Settings_Btn").text = Translator._INTL("Settings");
+        MainOptions = Root.Q<VisualElement>("mainOptions");
 
         //play sound callback:
-        mainOptions.Q<Button>("SignIn_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-        mainOptions.Q<Button>("SignUp_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-        mainOptions.Q<Button>("Settings_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
+        MainOptions.Q<Button>("SignIn_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
+        MainOptions.Q<Button>("SignUp_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
+        MainOptions.Q<Button>("Settings_Btn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
 
-        //clicking events of mainOptions tab:
-        mainOptions.Q<Button>("SignIn_Btn").RegisterCallback<ClickEvent>(evt => OpenSignIn(evt));
-        mainOptions.Q<Button>("SignUp_Btn").RegisterCallback<ClickEvent>(evt => OpenSignUp(evt));
-        mainOptions.Q<Button>("Settings_Btn").RegisterCallback<ClickEvent>(evt => OpenSettings(evt));
-
-        setUp1();
-        setUp2();
+        //clicking events of MainOptions tab:
+        MainOptions.Q<Button>("SignIn_Btn").RegisterCallback<ClickEvent>(evt => OpenSignIn(evt));
+        MainOptions.Q<Button>("SignUp_Btn").RegisterCallback<ClickEvent>(evt => OpenSignUp(evt));
+        MainOptions.Q<Button>("Settings_Btn").RegisterCallback<ClickEvent>(evt => OpenSettings(evt));
     }
 
-    void setUp1(){
-        //clicking events for going back to the mainOptions tab:
-        Button signInBackBtn = SignIn.Q<Button>("LoginBack");
-        signInBackBtn.RegisterCallback<ClickEvent>(evt => CloseTab(evt));
-        SignIn.Q<Button>("LoginBtn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-
-        Button signInBtn = SignIn.Q<Button>("LoginBtn");
-        signInBtn.RegisterCallback<ClickEvent>(evt => Login(evt));
+    void OpenSignIn(ClickEvent evt){
+        MainOptions.AddToClassList("hidden");
+        soundPlayerSelect.Play();
+        SignIn.RemoveFromClassList("hidden");
+        CurTab = SignIn;
+        UsernameInput.value = "";
+        PasswordInput.value = "";
     }
 
-    void setUp2(){
-        //clicking events for going back to the mainOptions tab:
-        Button signUpBackBtn = SignUp.Q<Button>("SignUpBack");
-        signUpBackBtn.RegisterCallback<ClickEvent>(evt => CloseTab(evt));
-        SignUp.Q<Button>("SignUpBtn").RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-        
-        Button signUpBtn = SignUp.Q<Button>("SignUpBtn");
-        signUpBtn.RegisterCallback<ClickEvent>(evt => Sign_Up(evt));
+    void OpenSignUp(ClickEvent evt){
+        MainOptions.AddToClassList("hidden");
+        soundPlayerSelect.Play();
+        SignUp.RemoveFromClassList("hidden");
+        CurTab = SignUp;
+        UsernameInput2.value = "";
+        PasswordInput2.value = "";
+    }
+
+    void OpenSettings(ClickEvent evt){
+        MainOptions.AddToClassList("hidden");
+        soundPlayerSelect.Play();
+        Settings.RemoveFromClassList("hidden");
+        CurTab = Settings;
+        //Translator.changeLan(LANGUAGES.TM);
+    }
+
+    public void showErrorWindow(string text){
+        ErrorWindow.Q<Label>("ErrorLabel").text = Translator._INTL(text);
+        ErrorWindow.RemoveFromClassList("hidden");
+        Debug.Log(text);
+    }
+
+    void CloseTab(ClickEvent evt){
+        CurTab.AddToClassList("hidden");
+        soundPlayerClose.Play();
+        MainOptions.RemoveFromClassList("hidden");
     }
 
     void Login(ClickEvent evt){
@@ -138,73 +136,38 @@ public class StartMenu : MonoBehaviour{
                     if(UserType.value != -1){
                         StartCoroutine(Main.Instance.Web.UserAction(data, Web.SIGNUP));
                     }
-                    else{ showErrorWindow(Translator._INTL("Please select a user Type")); }
+                    else{ showErrorWindow("Please select a user Type"); }
                 }
-                else{ showErrorWindow(Translator._INTL("Passwords do not match")); }
+                else{ showErrorWindow("Passwords do not match"); }
             }
-            else{ showErrorWindow(Translator._INTL("Provide a Password")); }
+            else{ showErrorWindow("Provide a Password"); }
         }
-        else{ showErrorWindow(Translator._INTL("Provide a username")); }
-
-
+        else{ showErrorWindow("Provide a username"); }
     }
 
-    public void showErrorWindow(string text){
-        VisualElement ErrorWindow = root.Q<VisualElement>("ErrorWindow");
-        ErrorWindow.Q<Label>("ErrorLabel").text = text;
-        ErrorWindow.RemoveFromClassList("hidden");
-        Debug.Log(text);
+    public new void updateTexts(){
+        SignIn.Q<Button>("LoginBtn").text = Translator._INTL("Login");
+        SignUpBtn.text = Translator._INTL("Sign Up");
+
+        UsernameInput.label = Translator._INTL("Username");
+        PasswordInput.label = Translator._INTL("Password");
+
+        UsernameInput2.label         = Translator._INTL("Username");
+        PasswordInput2.label         = Translator._INTL("Password");
+        PasswordInput2_confirm.label = Translator._INTL("Repeat Password");
+
+        List<RadioButton> a = UserType.Query<RadioButton>().ToList();
+        a[0].text = Translator._INTL("Student");
+        a[1].text = Translator._INTL("Professor");
+
+        MainOptions.Q<Button>("SignIn_Btn").text   = Translator._INTL("Login");
+        MainOptions.Q<Button>("SignUp_Btn").text   = Translator._INTL("Sign Up");
+        MainOptions.Q<Button>("Settings_Btn").text = Translator._INTL("Settings");
     }
 
-    void OpenSignIn(ClickEvent evt){
-        if(!loadSignIn){
-            setUp1();
-            loadSignIn = true;
-        }
-
-        mainOptions.AddToClassList("hidden");
-        soundPlayerSelect.Play();
-        SignIn.RemoveFromClassList("hidden");
-        curTab = SignIn;
-        UsernameInput.value = "";
-        PasswordInput.value = "";
-    }
-
-    void OpenSignUp(ClickEvent evt){
-        if(!loadSignUp){
-            setUp2();
-            loadSignUp = true;
-        }
-
-        mainOptions.AddToClassList("hidden");
-        soundPlayerSelect.Play();
-        SignUp.RemoveFromClassList("hidden");
-        curTab = SignUp;
-        UsernameInput2.value = "";
-        PasswordInput2.value = "";
-    }
-
-    void CloseTab(ClickEvent evt){
-        curTab.AddToClassList("hidden");
-        soundPlayerClose.Play();
-        mainOptions.RemoveFromClassList("hidden");
-    }
-
-    void CloseErrorWindow(ClickEvent evt){
-        ErrorWindow.AddToClassList("hidden");
-        soundPlayerClose.Play();
-    }
-
-    void OpenSettings(ClickEvent evt){
-        Debug.Log("Settings");
-    }
-
-    void PlaySelectSound(MouseEnterEvent evt){
-        soundPlayer.Play();
-    }
-
-    public VisualElement getRoot(){ return root; }
-    public VisualElement getCurTab(){ return curTab; }
+    void PlaySelectSound(MouseEnterEvent evt){ soundPlayer.Play(); }
+    public VisualElement getRoot(){ return Root; }
+    public VisualElement getCurTab(){ return CurTab; }
 }
 
 //id, username, pwd, type, userPic

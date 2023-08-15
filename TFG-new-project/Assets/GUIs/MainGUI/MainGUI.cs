@@ -117,7 +117,7 @@ public class MainGUI : MonoBehaviour{
 */
     }
 
-    // Método para cargar un sprite desde un archivo dado.
+    // Método para cargar un sprite desde un archivo dado. no se usa ahora mismo
     private Sprite LoadSpriteFromFile(string path){
         // Cargar los bytes del archivo seleccionado.
         byte[] bytes = System.IO.File.ReadAllBytes(path);

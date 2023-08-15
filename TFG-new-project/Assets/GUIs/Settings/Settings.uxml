@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/GUIs/StartMenu/StartMenu.uss?fileID=7433441132597879392&amp;guid=5732aad222fa3b743b16cdf4513b4288&amp;type=3#StartMenu" />
+    <ui:VisualElement name="root" style="width: 100%; height: 100%; align-items: center; justify-content: space-around;">
+        <ui:VisualElement name="SignUp" style="align-items: center; max-width: 100%; max-height: 100%; background-image: url(&apos;project://database/Assets/Graphics/sprites/panel00.png?fileID=21300000&amp;guid=245b40be110aaa443aed5469a795d7bb&amp;type=3#panel00&apos;); padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px; color: rgb(255, 255, 255); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; width: 100%; height: 100%; flex-direction: row;">
+            <ui:VisualElement name="Col1" style="height: 90%; width: 100%;">
+                <ui:DropdownField label="Language" name="LanDropdown" style="-unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-definition: initial; -unity-font-style: bold; font-size: 18px; -unity-text-align: middle-right;" />
+                <ui:Button display-tooltip-when-elided="true" name="SettingsBack" class="boton" style="position: absolute; background-color: rgba(188, 188, 188, 0); background-image: url(&apos;project://database/Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconundo@2x.png?fileID=21300000&amp;guid=6d6088174bb906b49ad8428526ee337b&amp;type=3#d_iconundo@2x&apos;); width: 40px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; height: 40px; bottom: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Col2" style="height: 90%; width: 100%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
