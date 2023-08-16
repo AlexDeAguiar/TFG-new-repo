@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public abstract class SuperGUI : MonoBehaviour, Translatable{
-    protected AudioSource soundPlayer;
-    protected AudioSource soundPlayerSelect;
-    protected AudioSource soundPlayerClose;
+public class SuperGUI : MonoBehaviour, Translatable{
+    public static SuperGUI Instance;
+    public AudioSource soundPlayer;
+    public AudioSource soundPlayerSelect;
+    public AudioSource soundPlayerClose;
     protected VisualElement Root;
 
+    void Start(){ Instance = this; }
+
     protected void Init(){
-        soundPlayer       = gameObject.AddComponent<AudioSource>();
-        soundPlayerSelect = gameObject.AddComponent<AudioSource>();
-        soundPlayerClose  = gameObject.AddComponent<AudioSource>();
-        soundPlayer.clip       = Resources.Load<AudioClip>("BW2OpenMenu");
-        soundPlayerSelect.clip = Resources.Load<AudioClip>("BW2MenuSelect");
-        soundPlayerClose.clip  = Resources.Load<AudioClip>("GUI menu close");
+        soundPlayer       = SuperGUI.Instance.soundPlayer;
+        soundPlayerSelect = SuperGUI.Instance.soundPlayerSelect;
+        soundPlayerClose  = SuperGUI.Instance.soundPlayerClose;
         Root = GetComponent<UIDocument>().rootVisualElement;
         Translator.Register(this);
     }
 
     public void updateTexts(){}
+
+    public void PlaySelectSound(MouseEnterEvent evt){ soundPlayer.Play(); }
 }

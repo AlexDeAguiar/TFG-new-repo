@@ -165,7 +165,6 @@ public class StartMenu : SuperGUI, Translatable {
         MainOptions.Q<Button>("Settings_Btn").text = Translator._INTL("Settings");
     }
 
-    void PlaySelectSound(MouseEnterEvent evt){ soundPlayer.Play(); }
     public VisualElement getRoot(){ return Root; }
     public VisualElement getCurTab(){ return CurTab; }
 }
