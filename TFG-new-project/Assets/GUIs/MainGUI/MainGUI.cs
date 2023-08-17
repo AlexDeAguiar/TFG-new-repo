@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using System;
 using TMPro;
 
-public class MainGUI : MonoBehaviour{
+public class MainGUI : SuperGUI {
     UIDocument myUI;
     VisualElement root;
     VisualElement userPic;
@@ -19,6 +19,7 @@ public class MainGUI : MonoBehaviour{
     Label leftTabLabel;
 
     void Start(){
+        base.Init();
         showRight = false;
         showLeft  = false;
 
@@ -58,8 +59,8 @@ public class MainGUI : MonoBehaviour{
     void updateUserData(){
         User myUser = User.Instance;
         root.Q<Label>("Username").text = myUser.username;
-
     }
+
     void toggleRightTab(ClickEvent evt){        
         showRight = !showRight;
         if(showRight){

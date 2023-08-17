@@ -6,11 +6,13 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class Web : MonoBehaviour{
-    public const string SERVER = "http://localhost/UnityBackendTutorial/";
+    public const string SERVER = "http://localhost/UnityBackend/";
     public bool error = false;
     public const string WRONG_CREDENTIALS = "Wrong Credentials";
     public const string INEXISTENT_USER   = "Inexistent Username";
     public const string PREXISTENT_USER   = "Username is already taken";
+    public const string NEXT_SCENE        = "InGameNoOffline";
+    public const string DATABASE          = "unitybackend";
 
     public StartMenu sm;
 
@@ -42,6 +44,7 @@ public class Web : MonoBehaviour{
         form.AddField("loginUsername", _data["Username"]);
         form.AddField("loginPassword", _data["Password"]);
         form.AddField("loginUserType", _data["UserType"]);
+        form.AddField("database", DATABASE);
 
         UnityWebRequest www = UnityWebRequest.Post(SERVER + Web.modes[mode] + ".php", form);
         yield return www.SendWebRequest();
@@ -55,11 +58,11 @@ public class Web : MonoBehaviour{
             Debug.Log(data);
             if((mode == LOGIN  && data != WRONG_CREDENTIALS && data != INEXISTENT_USER)){
                 User.Instance = new User(parseUserData(data));
-                SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+                SceneManager.LoadScene(NEXT_SCENE, LoadSceneMode.Single);
             }
             else if(mode == SIGNUP && data != PREXISTENT_USER){
                 User.Instance = new User(_data);
-                SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+                SceneManager.LoadScene(NEXT_SCENE, LoadSceneMode.Single);
             }
             else{
                 sm.showErrorWindow(Translator._INTL(data));

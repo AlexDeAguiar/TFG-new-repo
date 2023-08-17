@@ -10,7 +10,7 @@ public class SuperGUI : MonoBehaviour, Translatable{
     public AudioSource soundPlayerClose;
     protected VisualElement Root;
 
-    void Start(){ Instance = this; }
+    public SuperGUI(){ Instance = this; }
 
     protected void Init(){
         soundPlayer       = SuperGUI.Instance.soundPlayer;

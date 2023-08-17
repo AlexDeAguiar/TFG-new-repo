@@ -315,9 +315,9 @@ GameObject:
   - component: {fileID: 1829270414}
   - component: {fileID: 1829270415}
   - component: {fileID: 1829270413}
+  - component: {fileID: 1829270412}
   - component: {fileID: 1829270409}
   - component: {fileID: 1829270411}
-  - component: {fileID: 1829270412}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
