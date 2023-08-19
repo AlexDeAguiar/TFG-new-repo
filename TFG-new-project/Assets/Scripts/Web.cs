@@ -61,12 +61,10 @@ public class Web : MonoBehaviour{
         string SignUpQuery = "INSERT INTO users (Username, Password, UserType) VALUES ('" +_data["Username"] + "', '" + _data["Password"] + "', " + _data["UserType"] + ")";
         error = false;
         WWWForm form = new WWWForm();
-        var timeNow = System.DateTime.Now;
-        var date = timeNow.Year.ToString() + "-" + timeNow.Month.ToString() + "-" + timeNow.Day.ToString() + " " + timeNow.Hour.ToString() + ":" + timeNow.Minute.ToString() + ":" + timeNow.Second.ToString();
         form.AddField("loginUsername", _data["Username"]);
         form.AddField("loginPassword", _data["Password"]);
         form.AddField("loginUserType", _data["UserType"]);
-        form.AddField("lastActivityT", date);
+        form.AddField("lastActivityT", Main.DateToString());
         form.AddField("signInQuery", SignInQuery);
         form.AddField("signUpQuery", SignUpQuery);
         form.AddField("database", DATABASE);
@@ -93,6 +91,7 @@ public class Web : MonoBehaviour{
             }
         }
     }
+
 
     public List<Dictionary<string, string>> ParseList(string data){
         List<Dictionary<string, string>> resultList = new List<Dictionary<string, string>>();
