@@ -16,7 +16,24 @@ public class Web : MonoBehaviour{
 
     public StartMenu sm;
 
-    public IEnumerator GetInfoFromServer(string phpFile, string ret){
+    public IEnumerator GetInfoFromServer(string query, string phpFile){
+        error = false;
+        WWWForm form = new WWWForm();
+        form.AddField("database", DATABASE);
+        form.AddField("query", query);
+
+        UnityWebRequest www = UnityWebRequest.Post(SERVER + phpFile + ".php", form);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success){
+            Debug.Log(www.error);
+            error = true;
+        }
+        else{
+            string data = www.downloadHandler.text;
+            //ParseList(data);
+        }
+        /*
         error = false;
         using (UnityWebRequest www = UnityWebRequest.Get(SERVER + phpFile)){
             yield return www.SendWebRequest();
@@ -32,6 +49,7 @@ public class Web : MonoBehaviour{
                 byte[] results = www.downloadHandler.data;
             }
         }
+        */
     }
 
     public static string[] modes = { "Login", "SignUp" };
@@ -39,11 +57,18 @@ public class Web : MonoBehaviour{
     public const int SIGNUP = 1;
 
     public IEnumerator UserAction(Dictionary<string, string> _data, int mode){
+        string SignInQuery = "SELECT * FROM users u WHERE u.Username = '" + _data["Username"] + "'";
+        string SignUpQuery = "INSERT INTO users (Username, Password, UserType) VALUES ('" +_data["Username"] + "', '" + _data["Password"] + "', " + _data["UserType"] + ")";
         error = false;
         WWWForm form = new WWWForm();
+        var timeNow = System.DateTime.Now;
+        var date = timeNow.Year.ToString() + "-" + timeNow.Month.ToString() + "-" + timeNow.Day.ToString() + " " + timeNow.Hour.ToString() + ":" + timeNow.Minute.ToString() + ":" + timeNow.Second.ToString();
         form.AddField("loginUsername", _data["Username"]);
         form.AddField("loginPassword", _data["Password"]);
         form.AddField("loginUserType", _data["UserType"]);
+        form.AddField("lastActivityT", date);
+        form.AddField("signInQuery", SignInQuery);
+        form.AddField("signUpQuery", SignUpQuery);
         form.AddField("database", DATABASE);
 
         UnityWebRequest www = UnityWebRequest.Post(SERVER + Web.modes[mode] + ".php", form);
@@ -55,9 +80,8 @@ public class Web : MonoBehaviour{
         }
         else{
             string data = www.downloadHandler.text;
-            Debug.Log(data);
             if((mode == LOGIN  && data != WRONG_CREDENTIALS && data != INEXISTENT_USER)){
-                User.Instance = new User(parseUserData(data));
+                User.Instance = new User(ParseList(data)[0]);
                 SceneManager.LoadScene(NEXT_SCENE, LoadSceneMode.Single);
             }
             else if(mode == SIGNUP && data != PREXISTENT_USER){
@@ -70,7 +94,34 @@ public class Web : MonoBehaviour{
         }
     }
 
-    public Dictionary<string, string> parseUserData(string data){
+    public List<Dictionary<string, string>> ParseList(string data){
+        List<Dictionary<string, string>> resultList = new List<Dictionary<string, string>>();
+
+        Debug.Log(data);
+        // Remover los corchetes exteriores
+        data = data.Trim('(',')').Trim('\t').Trim('\r');
+
+        // Dividir la cadena en diccionarios individuales
+        string[] dictionaryStrings = data.Split(")\nArray");
+        foreach (string dictionaryString in dictionaryStrings){
+            Dictionary<string, string> dictionary = ParseDictionary(dictionaryString);
+            resultList.Add(dictionary);
+        }
+
+        // Imprimir la información para verificar
+        /*
+        foreach (var dictionary in resultList){
+            foreach (var pair in dictionary){
+                Debug.Log($"{pair.Key}: {pair.Value}");
+            }
+            Debug.Log("---------");
+        }
+        */
+
+        return resultList;
+    }
+
+    public Dictionary<string, string> ParseDictionary(string data){
         // Eliminar los paréntesis y dividir la cadena en líneas
         string[] lines = data.Split('\n');
 
@@ -79,7 +130,6 @@ public class Web : MonoBehaviour{
         foreach (string line in lines){
             // Dividir la línea utilizando '=>' como delimitador
             string[] keyValue = line.Split(" => ");
-
             if (keyValue.Length == 2){
                 // Limpiar claves y valores (eliminar espacios y corchetes)
                 string key = keyValue[0].Trim().Trim('[', ']');
@@ -88,10 +138,7 @@ public class Web : MonoBehaviour{
                 // Agregar al diccionario resultante
                 resultDictionary.Add(key, value);
             }
-        }
-
-        foreach (var pair in resultDictionary){
-            Debug.Log($"{pair.Key}: {pair.Value}");
+            else if(keyValue.Length > 0 && keyValue[0] == ")"){ break; }
         }
 
         return resultDictionary;

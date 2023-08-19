@@ -121,7 +121,8 @@ public class StartMenu : SuperGUI, Translatable {
         data.Add("Username",UsernameInput.text);
         data.Add("Password",PasswordInput.text);
         data.Add("UserType","0");
-        StartCoroutine(Main.Instance.Web.UserAction(data, Web.LOGIN));
+        StartCoroutine(Main.Instance.Web.UserAction(data, Web.LOGIN)); 
+        //StartCoroutine(Main.Instance.Web.GetInfoFromServer("SELECT * FROM users","GetUserInfo"));
     }
 
     void Sign_Up(ClickEvent evt){
