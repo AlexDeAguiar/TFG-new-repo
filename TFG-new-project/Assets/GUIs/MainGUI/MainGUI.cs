@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System;
+using Unity.Netcode;
+using System; 
 using TMPro;
 
 public class MainGUI : SuperGUI {
@@ -44,6 +45,9 @@ public class MainGUI : SuperGUI {
         updateTime();
 
         updateUserData();
+
+        //limpiar esto, es provisional:
+        NetworkManager.Singleton.StartHost();
     }
 
     void Update(){
@@ -59,6 +63,7 @@ public class MainGUI : SuperGUI {
     void updateUserData(){
         User myUser = User.Instance;
         root.Q<Label>("Username").text = myUser.username;
+        NetworkManager.Singleton.StartHost();
     }
 
     void toggleRightTab(ClickEvent evt){        

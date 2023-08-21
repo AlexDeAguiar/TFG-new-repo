@@ -15,11 +15,11 @@ public class Main : MonoBehaviour{
 
 
 
-        var audio = new AudioSource();
-        audio.clip = Microphone.Start(null, true, 10, 44100);
-        audio.loop = true;
-        while(Microphone.GetPosition(null) > 0);
-        audio.Play();
+        //var audio = new AudioSource();
+        //audio.clip = Microphone.Start(null, true, 10, 44100);
+        //audio.loop = true;
+        //while(Microphone.GetPosition(null) > 0);
+        //audio.Play();
     }
 
     public static string DateToString(){

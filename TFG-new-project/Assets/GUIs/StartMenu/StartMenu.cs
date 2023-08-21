@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class StartMenu : SuperGUI, Translatable {
     VisualElement MainOptions;
@@ -9,6 +11,7 @@ public class StartMenu : SuperGUI, Translatable {
     VisualElement SignUp;
     VisualElement Settings;
     VisualElement ErrorWindow;
+    VisualElement Cosos;
 
     TextField UsernameInput;
     TextField PasswordInput;
@@ -23,6 +26,9 @@ public class StartMenu : SuperGUI, Translatable {
     RadioButtonGroup UserType;
 
     VisualElement CurTab;
+
+    //cambiar esto y dejarlo menos guarro:
+    public static Toggle toggle;
 
     // Start is called before the first frame update
     void Start(){
@@ -39,7 +45,7 @@ public class StartMenu : SuperGUI, Translatable {
         SignInBtn     = SignIn.Q<Button>("LoginBtn");
 
         SignInBtn.RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-        SignInBtn.RegisterCallback<ClickEvent>(evt => Login(evt));
+        //SignInBtn.RegisterCallback<ClickEvent>(evt => Login(evt));
         SignInBackBtn.RegisterCallback<ClickEvent>(evt => CloseTab(evt));
 
         //SIGNUP ================================================================
@@ -54,7 +60,7 @@ public class StartMenu : SuperGUI, Translatable {
         SignUpBackBtn = SignUp.Q<Button>("SignUpBack");
 
         SignUpBtn.RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-        SignUpBtn.RegisterCallback<ClickEvent>(evt => Sign_Up(evt));
+        //SignUpBtn.RegisterCallback<ClickEvent>(evt => Sign_Up(evt));
         SignUpBackBtn.RegisterCallback<ClickEvent>(evt => CloseTab(evt));
 
         //SETTINGS ==============================================================
@@ -76,8 +82,34 @@ public class StartMenu : SuperGUI, Translatable {
         MainOptions.Q<Button>("SignIn_Btn").RegisterCallback<ClickEvent>(evt => OpenSignIn(evt));
         MainOptions.Q<Button>("SignUp_Btn").RegisterCallback<ClickEvent>(evt => OpenSignUp(evt));
         MainOptions.Q<Button>("Settings_Btn").RegisterCallback<ClickEvent>(evt => OpenSettings(evt));
+
+
+        //nuevos cosos:
+        Cosos = Root.Q<VisualElement>("Cosos");
+
+        toggle           = Cosos.Q<Toggle>("AudioToggle");
+        Button HostBtn   = Cosos.Q<Button>("HostBtn");
+        Button ClientBtn = Cosos.Q<Button>("ClientBtn");
+        toggle.RegisterCallback<ClickEvent>(evt => VivoxToggle(evt, toggle));
+        HostBtn.RegisterCallback<ClickEvent>(evt => VivoxHostBtn(evt));
+        ClientBtn.RegisterCallback<ClickEvent>(evt => VivoxClientBtn(evt));
     }
 
+    void VivoxToggle(ClickEvent evt, Toggle t){
+        Debug.Log("Hello there General KenUwUi, toggle is " + t.value);
+    }
+
+    void VivoxHostBtn(ClickEvent evt){
+        Debug.Log("Host started");
+        SceneManager.LoadScene("InGameNoOffline", LoadSceneMode.Single);
+        //NetworkManager.Singleton.StartHost();
+    }
+
+    void VivoxClientBtn(ClickEvent evt){
+        Debug.Log("Client started");
+        //NetworkManager.Singleton.StartClient();
+    }
+    
     void OpenSignIn(ClickEvent evt){
         MainOptions.AddToClassList("hidden");
         soundPlayerSelect.Play();
@@ -116,6 +148,7 @@ public class StartMenu : SuperGUI, Translatable {
         MainOptions.RemoveFromClassList("hidden");
     }
 
+/*
     void Login(ClickEvent evt){
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("Username",UsernameInput.text);
@@ -145,7 +178,7 @@ public class StartMenu : SuperGUI, Translatable {
         }
         else{ showErrorWindow("Provide a username"); }
     }
-
+*/
     public new void updateTexts(){
         SignIn.Q<Button>("LoginBtn").text = Translator._INTL("Login");
         SignUpBtn.text = Translator._INTL("Sign Up");

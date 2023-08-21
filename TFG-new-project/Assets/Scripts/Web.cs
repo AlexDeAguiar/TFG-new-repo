@@ -16,7 +16,7 @@ public class Web : MonoBehaviour{
 
     public StartMenu sm;
 
-    public IEnumerator GetInfoFromServer(string query, string phpFile){
+    public IEnumerator GetInfoFromServer(string query, string phpFile, Game_Backend _ref){
         error = false;
         WWWForm form = new WWWForm();
         form.AddField("database", DATABASE);
@@ -30,8 +30,7 @@ public class Web : MonoBehaviour{
             error = true;
         }
         else{
-            string data = www.downloadHandler.text;
-            //ParseList(data);
+            if(_ref != null){ _ref.UpdateLocal(ParseList(www.downloadHandler.text)); }
         }
         /*
         error = false;
