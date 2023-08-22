@@ -18,5 +18,7 @@ EditorBuildSettings:
     path: Assets/Samples/Vivox/15.1.210000-pre.1/Chat Channel Sample/Assets/ChatChannelSample/Scenes/MainScene.unity
     guid: dbc457e6df4234749aff8bd5ffa028ef
   m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4ad44d9692ac6c443bb88d012b79a9fd, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 9d574056cedb75f4a8334c5c814820d7, type: 2}
     io.coherence.simulator.build.options: {fileID: 11400000, guid: 1c1e1ec5858a8104ba7b181bc762be7c, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 8854823a47a1300448272b817958570f, type: 2}
