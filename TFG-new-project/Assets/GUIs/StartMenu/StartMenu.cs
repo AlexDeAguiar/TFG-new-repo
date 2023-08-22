@@ -45,7 +45,7 @@ public class StartMenu : SuperGUI, Translatable {
         SignInBtn     = SignIn.Q<Button>("LoginBtn");
 
         SignInBtn.RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-        //SignInBtn.RegisterCallback<ClickEvent>(evt => Login(evt));
+        SignInBtn.RegisterCallback<ClickEvent>(evt => Login(evt));
         SignInBackBtn.RegisterCallback<ClickEvent>(evt => CloseTab(evt));
 
         //SIGNUP ================================================================
@@ -60,7 +60,7 @@ public class StartMenu : SuperGUI, Translatable {
         SignUpBackBtn = SignUp.Q<Button>("SignUpBack");
 
         SignUpBtn.RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
-        //SignUpBtn.RegisterCallback<ClickEvent>(evt => Sign_Up(evt));
+        SignUpBtn.RegisterCallback<ClickEvent>(evt => Sign_Up(evt));
         SignUpBackBtn.RegisterCallback<ClickEvent>(evt => CloseTab(evt));
 
         //SETTINGS ==============================================================
@@ -148,7 +148,6 @@ public class StartMenu : SuperGUI, Translatable {
         MainOptions.RemoveFromClassList("hidden");
     }
 
-/*
     void Login(ClickEvent evt){
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("Username",UsernameInput.text);
@@ -178,7 +177,7 @@ public class StartMenu : SuperGUI, Translatable {
         }
         else{ showErrorWindow("Provide a username"); }
     }
-*/
+    
     public new void updateTexts(){
         SignIn.Q<Button>("LoginBtn").text = Translator._INTL("Login");
         SignUpBtn.text = Translator._INTL("Sign Up");

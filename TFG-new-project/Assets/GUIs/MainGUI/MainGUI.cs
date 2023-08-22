@@ -45,9 +45,12 @@ public class MainGUI : SuperGUI {
         updateTime();
 
         updateUserData();
-
-        //limpiar esto, es provisional:
-        NetworkManager.Singleton.StartHost();
+        if(User.Instance.userType == 0){
+            NetworkManager.Singleton.StartClient();
+        }
+        else{
+            NetworkManager.Singleton.StartHost();
+        }
     }
 
     void Update(){

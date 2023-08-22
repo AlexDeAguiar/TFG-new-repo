@@ -2,8 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 
-public class SC_TPSController : MonoBehaviour
-{
+public class SC_TPSController : MonoBehaviour{
     public float speed = 7.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
@@ -18,18 +17,15 @@ public class SC_TPSController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
-    void Start()
-    {
+    void Start() {
         characterController = GetComponent<CharacterController>();
 		playerCameraParent = Instantiate(playerCameraParent, transform);
 
 		rotation.y = transform.eulerAngles.y;
     }
 
-    void Update()
-    {
-        if (characterController.isGrounded)
-        {
+    void Update() {
+        if (characterController.isGrounded) {
             // We are grounded, so recalculate move direction based on axes
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
@@ -37,8 +33,7 @@ public class SC_TPSController : MonoBehaviour
             float curSpeedY = canMove ? speed * Input.GetAxis("Horizontal") : 0;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-            if (Input.GetButton("Jump") && canMove)
-            {
+            if (Input.GetButton("Jump") && canMove){
                 moveDirection.y = jumpSpeed;
             }
         }
@@ -52,8 +47,7 @@ public class SC_TPSController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
 
         // Player and Camera rotation
-        if (canMove)
-        {
+        if (canMove) {
             rotation.y += Input.GetAxis("Mouse X") * lookSpeed;
             rotation.x += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotation.x = Mathf.Clamp(rotation.x, -lookXLimit, lookXLimit);

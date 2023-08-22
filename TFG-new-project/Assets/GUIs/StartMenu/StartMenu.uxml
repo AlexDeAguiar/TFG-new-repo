@@ -6,7 +6,7 @@
         <ui:VisualElement name="titulo" style="background-image: url(&apos;project://database/Assets/Resources/Graphics/sprites/panel02.png?fileID=21300000&amp;guid=69fbbf5510c8bd04594b3bc9383dc567&amp;type=3#panel02&apos;); width: 400px; height: 130px; align-items: center; justify-content: center; -unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-definition: initial; flex-shrink: 2;">
             <ui:Label text="LA PELOTA&#10;TFG EDITION" display-tooltip-when-elided="true" style="align-items: auto; -unity-text-align: upper-center; font-size: 32px; -unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-style: bold; bottom: 0; left: -26px; color: rgb(0, 162, 212); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(140, 140, 140);" />
         </ui:VisualElement>
-        <ui:VisualElement name="mainOptions" class="hidden" style="align-items: center; max-width: 100%; max-height: 100%;">
+        <ui:VisualElement name="mainOptions" style="align-items: center; max-width: 100%; max-height: 100%;">
             <ui:Button text="Sign in" display-tooltip-when-elided="true" name="SignIn_Btn" class="boton" style="height: 50px;" />
             <ui:Button text="Sign Up" display-tooltip-when-elided="true" name="SignUp_Btn" class="boton" />
             <ui:Button text="Settings" display-tooltip-when-elided="true" name="Settings_Btn" class="boton" />
@@ -27,7 +27,7 @@
         </ui:VisualElement>
         <ui:Instance template="Settings" name="Settings" class="hidden" style="width: 100%; height: 70%;" />
         <ui:Instance template="ErrorWindow" name="ErrorWindow" class="hidden" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" />
-        <ui:VisualElement name="Cosos" style="justify-content: center; align-items: center;">
+        <ui:VisualElement name="Cosos" class="hidden" style="justify-content: center; align-items: center;">
             <ui:Button text="Host" display-tooltip-when-elided="true" name="HostBtn" />
             <ui:Button text="Client" display-tooltip-when-elided="true" name="ClientBtn" />
             <ui:Toggle label="Join Audio" name="AudioToggle" style="color: rgb(255, 255, 255);" />
