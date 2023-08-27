@@ -3,10 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 
 public class SC_TPSController : MonoBehaviour{
+	private GameObject player;
+	private GameObject head;
+	private GameObject body;
+
+
+
+
     public float speed = 7.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-    public GameObject playerCameraParent;
+    public GameObject playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 60.0f;
 
@@ -18,8 +25,15 @@ public class SC_TPSController : MonoBehaviour{
     public bool canMove = true;
 
     void Start() {
-        characterController = GetComponent<CharacterController>();
-		playerCameraParent = Instantiate(playerCameraParent, transform);
+		player = gameObject;
+		head = Utility.FindChildByTag(player, "Head");
+		body = Utility.FindChildByTag(player, "Body");
+
+
+		characterController = GetComponent<CharacterController>();
+		playerCamera = GameObject.Find("MainCamera");
+
+		playerCamera.transform.SetPositionAndRotation(head.transform.position, head.transform.rotation);
 
 		rotation.y = transform.eulerAngles.y;
     }
@@ -48,11 +62,29 @@ public class SC_TPSController : MonoBehaviour{
 
         // Player and Camera rotation
         if (canMove) {
-            rotation.y += Input.GetAxis("Mouse X") * lookSpeed;
-            rotation.x += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotation.x = Mathf.Clamp(rotation.x, -lookXLimit, lookXLimit);
-            playerCameraParent.transform.localRotation = Quaternion.Euler(rotation.x, 0, 0);
-            transform.eulerAngles = new Vector2(0, rotation.y);
-        }
-    }
+			float currRotationX = head.transform.rotation.eulerAngles.x;
+            float rotationChangeY = Input.GetAxis("Mouse X") * lookSpeed;
+			float rotationChangeX = -Input.GetAxis("Mouse Y") * lookSpeed;
+			//if (rotationChangeX < 180) { //Looking down
+				//float maxDownChange = -lookXLimit - currRotationX;
+				//if (rotationChangeX > max)
+			//)
+			//if (rotationChangeX < -lookXLimit - currRotationX) { rotationChangeX = -lookXLimit - currRotationX; }
+			//if (rotationChangeX > lookXLimit - currRotationX) { rotationChangeX = lookXLimit - currRotationX; }
+			rotationChangeX = Mathf.Clamp(rotationChangeX,  -lookXLimit - currRotationX, lookXLimit - currRotationX);
+
+			player.transform.Rotate(new Vector3(0, rotationChangeY, 0));
+			head.transform.Rotate(new Vector3(rotationChangeX, 0, 0));
+
+
+			//playerCamera.transform.localRotation = Quaternion.Euler(rotation.x, rotation.y, 0);
+			//transform.eulerAngles = new Vector2(0, rotation.y);
+			//head.transform.eulerAngles = new Vector2(rotation.x, 0);
+
+		}
+
+		playerCamera.transform.SetPositionAndRotation(head.transform.position, head.transform.rotation);
+	}
+
+
 }
