@@ -62,16 +62,22 @@ public class SC_TPSController : MonoBehaviour{
 
         // Player and Camera rotation
         if (canMove) {
-			float currRotationX = head.transform.rotation.eulerAngles.x;
+			float currRotationX = head.transform.rotation.eulerAngles.x; // De 0 a 360 grados (90 es abajo, 270 es arriba)
             float rotationChangeY = Input.GetAxis("Mouse X") * lookSpeed;
 			float rotationChangeX = -Input.GetAxis("Mouse Y") * lookSpeed;
-			//if (rotationChangeX < 180) { //Looking down
-				//float maxDownChange = -lookXLimit - currRotationX;
-				//if (rotationChangeX > max)
-			//)
+			if (currRotationX <= 180 )
+			{ //Looking down
+				float maxDownChange = lookXLimit - currRotationX;
+				if (rotationChangeX > maxDownChange) { currRotationX = maxDownChange; }
+			}
+			else
+			{
+				float maxUpChange = -(lookXLimit - currRotationX);
+				if (rotationChangeX < maxUpChange) { currRotationX = 360 + maxUpChange; }
+			}
 			//if (rotationChangeX < -lookXLimit - currRotationX) { rotationChangeX = -lookXLimit - currRotationX; }
 			//if (rotationChangeX > lookXLimit - currRotationX) { rotationChangeX = lookXLimit - currRotationX; }
-			rotationChangeX = Mathf.Clamp(rotationChangeX,  -lookXLimit - currRotationX, lookXLimit - currRotationX);
+			//rotationChangeX = Mathf.Clamp(rotationChangeX,  -lookXLimit - currRotationX, lookXLimit - currRotationX);
 
 			player.transform.Rotate(new Vector3(0, rotationChangeY, 0));
 			head.transform.Rotate(new Vector3(rotationChangeX, 0, 0));
