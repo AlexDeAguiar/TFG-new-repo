@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class Web : MonoBehaviour{
-    public const string SERVER = "http://localhost/UnityBackend/";
+    public const string SERVER = "http://88.0.236.218:7777/UnityBackend/";
     public bool error = false;
     public const string WRONG_CREDENTIALS = "Wrong Credentials";
     public const string INEXISTENT_USER   = "Inexistent Username";
