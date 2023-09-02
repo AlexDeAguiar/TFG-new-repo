@@ -6,18 +6,8 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum LANGUAGES{
-    ES,
-    EN,
-    DE,
-    FR,
-    TM,
-    //...
-}
-
-public interface Translatable{
-    public void updateTexts();
-}
+public enum LANGUAGES{ ES, EN, DE, FR, JP, TM, /*...*/ }
+public interface Translatable{ public void updateTexts(); }
 
 public class Translator : MonoBehaviour {
     public const  string PATH   = "./Assets/Translations/";
@@ -31,6 +21,7 @@ public class Translator : MonoBehaviour {
         { LANGUAGES.EN, "English"  },
         { LANGUAGES.DE, "Deutsch"  },
         { LANGUAGES.FR, "Français" },
+        { LANGUAGES.JP, "日本語"    },
         { LANGUAGES.TM, "TU MAMA"  },
     };
 
@@ -63,7 +54,5 @@ public class Translator : MonoBehaviour {
         foreach (Translatable tr in translatables) { tr.updateTexts(); }
     }
 
-    public static void Register(Translatable tr){
-        translatables.Add(tr);
-    }
+    public static void Register(Translatable tr){ translatables.Add(tr); }
 }

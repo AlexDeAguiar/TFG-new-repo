@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Settings : SuperGUI {
+public class Settings : SuperGUI, Translatable {
     DropdownField Dropdown;
 
     // Start is called before the first frame update
