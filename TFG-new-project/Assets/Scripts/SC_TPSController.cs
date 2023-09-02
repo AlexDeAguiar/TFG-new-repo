@@ -5,10 +5,8 @@ using UnityEngine;
 public class SC_TPSController : MonoBehaviour{
 	private GameObject player;
 	private GameObject head;
-	private GameObject body;
-
-
-
+	//private GameObject body;
+	//private GameObject faceCam;
 
     public float speed = 7.5f;
     public float jumpSpeed = 8.0f;
@@ -27,7 +25,7 @@ public class SC_TPSController : MonoBehaviour{
     void Start() {
 		player = gameObject;
 		head = Utility.FindChildByTag(player, "Head");
-		body = Utility.FindChildByTag(player, "Body");
+		//body = Utility.FindChildByTag(player, "Body");
 
 
 		characterController = GetComponent<CharacterController>();
@@ -75,22 +73,11 @@ public class SC_TPSController : MonoBehaviour{
 				float maxUpChange = -(lookXLimit - currRotationX);
 				if (rotationChangeX < maxUpChange) { currRotationX = 360 + maxUpChange; }
 			}
-			//if (rotationChangeX < -lookXLimit - currRotationX) { rotationChangeX = -lookXLimit - currRotationX; }
-			//if (rotationChangeX > lookXLimit - currRotationX) { rotationChangeX = lookXLimit - currRotationX; }
-			//rotationChangeX = Mathf.Clamp(rotationChangeX,  -lookXLimit - currRotationX, lookXLimit - currRotationX);
 
 			player.transform.Rotate(new Vector3(0, rotationChangeY, 0));
 			head.transform.Rotate(new Vector3(rotationChangeX, 0, 0));
-
-
-			//playerCamera.transform.localRotation = Quaternion.Euler(rotation.x, rotation.y, 0);
-			//transform.eulerAngles = new Vector2(0, rotation.y);
-			//head.transform.eulerAngles = new Vector2(rotation.x, 0);
-
 		}
 
 		playerCamera.transform.SetPositionAndRotation(head.transform.position, head.transform.rotation);
 	}
-
-
 }

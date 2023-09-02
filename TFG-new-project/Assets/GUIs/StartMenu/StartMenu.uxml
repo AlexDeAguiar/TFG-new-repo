@@ -27,7 +27,7 @@
         </ui:VisualElement>
         <ui:Instance template="Settings" name="Settings" class="hidden" style="width: 100%; height: 70%;" />
         <ui:Instance template="ErrorWindow" name="ErrorWindow" class="hidden" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" />
-        <ui:VisualElement name="Cosos" class="hidden" style="justify-content: center; align-items: center;">
+        <ui:VisualElement name="Cosos" style="justify-content: center; align-items: center;">
             <ui:Button text="Host" display-tooltip-when-elided="true" name="HostBtn" />
             <ui:Button text="Client" display-tooltip-when-elided="true" name="ClientBtn" />
             <ui:Toggle label="Join Audio" name="AudioToggle" style="color: rgb(255, 255, 255);" />
