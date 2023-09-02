@@ -30,7 +30,9 @@ public class WebcamTextureController : MonoBehaviour
         if (webcamDisplay != null)
         {
             webcamDisplay.texture = webcamTexture;
-        }
+			var playerCameraModelRendered = GameObject.Find("FaceCamNew").GetComponent<Renderer>();
+			playerCameraModelRendered.material.SetTexture("RawImage", webcamTexture);
+		}
     }
 
     void OnDestroy()
