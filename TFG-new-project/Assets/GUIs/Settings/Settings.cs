@@ -16,7 +16,7 @@ public class Settings : SuperGUI, Translatable {
 
         // Crea una nueva lista de opciones
         List<string> nuevasOpciones = new List<string>();
-        foreach (LANGUAGES lan in Enum.GetValues(typeof(LANGUAGES))){ nuevasOpciones.Add(Translator.LANGUAGE_NAMES[lan]); }
+        foreach (LANGUAGES lan in Enum.GetValues(typeof(LANGUAGES))){ nuevasOpciones.Add(Translator._INTL("LAN_NAME", lan)); }
         // Agrega más opciones según sea necesario
 
         // Actualiza la lista de opciones del Dropdown

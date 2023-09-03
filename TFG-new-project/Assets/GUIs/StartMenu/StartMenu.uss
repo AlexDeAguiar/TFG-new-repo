@@ -28,6 +28,7 @@ VisualElement {
     font-size: 170%;
     -unity-font-style: bold;
     -unity-text-align: middle-center;
+    transition-duration: 0.25s;
 }
 
 .boton:hover {
@@ -36,6 +37,7 @@ VisualElement {
     width: 110%;
     height: 50%;
     font-size: 180%;
+    transition-duration: 0.25s;
 }
 
 .hidden {

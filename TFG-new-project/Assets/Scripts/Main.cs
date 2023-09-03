@@ -10,10 +10,7 @@ public class Main : MonoBehaviour{
     void Start(){
         Instance = this;
         Web = GetComponent<Web>();
-        Translator.InitDicts();
-
-
-
+        Translator.changeLan(Translator.LAN);
 
         //var audio = new AudioSource();
         //audio.clip = Microphone.Start(null, true, 10, 44100);

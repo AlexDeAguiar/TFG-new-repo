@@ -17,6 +17,7 @@ public class SuperGUI : MonoBehaviour, Translatable{
         soundPlayerSelect = SuperGUI.Instance.soundPlayerSelect;
         soundPlayerClose  = SuperGUI.Instance.soundPlayerClose;
         Root = GetComponent<UIDocument>().rootVisualElement;
+        Translator.InitDicts();
         Translator.Register(this);
     }
 

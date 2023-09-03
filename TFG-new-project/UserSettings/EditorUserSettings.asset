@@ -27,7 +27,7 @@ EditorUserSettings:
       value: 5001
       flags: 0
     Coherence.Portal.SyncState:
-      value: 51
+      value: 53
       flags: 0
     Coherence.Settings.ActiveSchemas.Hash:
       value: 530256040407580c555b5e234175094441151e2829702536297e4e63b1b7633a
@@ -39,7 +39,7 @@ EditorUserSettings:
       value: 0056500d5d5a0559025f0429437052041e13147a
       flags: 0
     Coherence.Settings.UserLoginEncryptedToken:
-      value: 1a7e45172e711c700107292c1f296d1a47200f0c0d2e31223f281261b5e87b37cddd3ce6e30e252b112eca08262a0705ab522f23d224191c471cb22a49f9070329e7299711d9483ee91213cfc21bc8d38d80d0be8ecec4888ed4aff6d1e7bbcbd7cb86cef890c5c1a0a5b1b4bbf4e6e698d89efde9fececfbf81f680f1e6e6eaf2fead99f4a5d1d4de9da8a7a880958198eaf49d93a98cb9c8ca949a63a09b6352764faa8e8b8581b7a344b1785582aa6262b1413883bf9599956dabb2debfd74e97afaa1e95ce8249897dc63100475978016e7e61693231
+      value: 
       flags: 0
     RecentlyUsedSceneGuid-0:
       value: 050955045c565a585d0d5d7144770f44474f1e7b74792263747a4c64e6b63539
@@ -51,10 +51,10 @@ EditorUserSettings:
       value: 5a5757560101590a5d0c0e24427b5d44434e4c7a7b7a23677f2b4565b7b5353a
       flags: 0
     RecentlyUsedSceneGuid-3:
-      value: 5255020404505f0a5f5f0824497a5c4442151e2f757d77602e7d1c66b3b63761
+      value: 0002030456005c5a59575d7744220d44134e487f747f736979284832b4b96c6d
       flags: 0
     RecentlyUsedSceneGuid-4:
-      value: 0002030456005c5a59575d7744220d44134e487f747f736979284832b4b96c6d
+      value: 5255020404505f0a5f5f0824497a5c4442151e2f757d77602e7d1c66b3b63761
       flags: 0
     vcSharedLogLevel:
       value: 0d5e400f0650
