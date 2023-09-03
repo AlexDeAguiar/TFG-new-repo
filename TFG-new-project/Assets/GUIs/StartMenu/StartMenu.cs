@@ -102,13 +102,14 @@ public class StartMenu : SuperGUI, Translatable {
     void VivoxHostBtn(ClickEvent evt){
         Debug.Log("Host started");
 
-        //NetworkManager.Singleton.StartHost();
         SceneManager.LoadScene("InGameNoOffline", LoadSceneMode.Single);
+		NetworkManager.Singleton.StartHost();
     }
 
     void VivoxClientBtn(ClickEvent evt){
-        //NetworkManager.Singleton.StartClient();
         Debug.Log("Client started");
+		SceneManager.LoadScene("InGameNoOffline", LoadSceneMode.Single);
+		NetworkManager.Singleton.StartClient();
     }
     
     void OpenSignIn(ClickEvent evt){

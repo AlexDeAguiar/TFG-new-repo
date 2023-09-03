@@ -9,8 +9,8 @@ public class NetworkPlayer : NetworkBehaviour {
     //First define some global variables in order to speed up the Update() function
     GameObject myXRRig;
     //HandsAndControllersManager HaCM;                    //what mode are we in: controller, hands, none?
-    Transform myXRLH, myXRRH, myXRLC, myXRRC, myXRCam;  //positions and rotations
-    Transform avHead, avLeft, avRight, avBody;          //avatars moving parts 
+    //Transform myXRLH, myXRRH, myXRLC, myXRRC, myXRCam;  //positions and rotations
+    //Transform avHead, avLeft, avRight, avBody;          //avatars moving parts 
 
     //some fine tuning parameters if needed
     [SerializeField] private Vector3 avatarLeftPositionOffset, avatarRightPositionOffset;
@@ -21,10 +21,14 @@ public class NetworkPlayer : NetworkBehaviour {
     // Start is called before the first frame update
     public override void OnNetworkSpawn() {
         var myID = transform.GetComponent<NetworkObject>().NetworkObjectId;
-        if (IsOwnedByServer){ transform.name = "Host:" + myID; } //this must be the host
+        if (IsOwnedByServer){
+			transform.name = "Host:" + myID;
+		} //this must be the host
         else{ transform.name = "Client:" + myID; }               //this must be the client 
+		Debug.Log(transform.name);
 
-        if (!IsOwner) { return; }
+
+		if (!IsOwner) { return; }
 
         myXRRig = GameObject.Find("XR Origin");
         if (myXRRig) { Debug.Log("Found XR Origin"); }
