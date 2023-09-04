@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,13 +17,15 @@ public class LaunchUI : MonoBehaviour
 
         hostButton.onClick.AddListener(() =>
         {
-            //todo
+			//todo
+			NetworkManager.Singleton.StartHost();
         });
 
         clientButton.onClick.AddListener(() =>
         {
-            //todo
-        });
+			//todo
+			NetworkManager.Singleton.StartClient();
+		});
 
     }
 }
