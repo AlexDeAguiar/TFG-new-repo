@@ -29,11 +29,13 @@ public class NetworkPlayer : NetworkBehaviour {
 
 
 		if (!IsOwner) { return; }
+		gameObject.AddComponent<SC_TPSController>();
 
+		/*
         myXRRig = GameObject.Find("XR Origin");
         if (myXRRig) { Debug.Log("Found XR Origin"); }
         else { Debug.Log("Could not find XR Origin!"); }
-
+		*/
         /*
         //pointers to the XR RIg
         HaCM = myXRRig.GetComponent<HandsAndControllersManager>();

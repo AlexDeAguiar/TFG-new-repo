@@ -79,6 +79,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 90c01304de50afc4983f67bb0492f9d9, type: 2}
+    - target: {fileID: 4162854438358986850, guid: 4f8f5e656e92cd24589460da03f063a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162854438358986850, guid: 4f8f5e656e92cd24589460da03f063a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162854438358986850, guid: 4f8f5e656e92cd24589460da03f063a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8f5e656e92cd24589460da03f063a0, type: 3}
 --- !u!1 &2874446871764321865 stripped
@@ -196,25 +208,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactDistance: 2
   interactKey: 101
---- !u!114 &1635329503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3173820562415476449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6103c0123fe93b84e81438e6dfa94c5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7.5
-  jumpSpeed: 8
-  gravity: 20
-  playerCamera: {fileID: 0}
-  lookSpeed: 2
-  lookXLimit: 60
-  canMove: 1
 --- !u!114 &872164259539268268
 MonoBehaviour:
   m_ObjectHideFlags: 0
