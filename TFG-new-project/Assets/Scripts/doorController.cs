@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class doorController : MonoBehaviour
-{
+public class doorController : MonoBehaviour{
     public float openAngle; // El angulo de apertura de la puerta
     public float smoothTime = 2f; // El tiempo que tarda la puerta en abrirse o cerrarse
     private bool open = false;
@@ -16,13 +15,12 @@ public class doorController : MonoBehaviour
     private Texture2D texture;
     private Vector3 iconOffset = new Vector3(0, 2.5f, 0); // Offset hacia arriba
 
-   // public GameObject myPlayer;
+    //public GameObject myPlayer;
     //Collider playerCollider;
     //Collider doorCollider;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         initialAngle = transform.rotation.eulerAngles.y;
 		//doorCollider = GetComponent<Collider>();
 
@@ -40,8 +38,7 @@ public class doorController : MonoBehaviour
 	}
 
 /*
-    void OnCollisionEnter(Collision collision)
-    {
+    void OnCollisionEnter(Collision collision){
         bool cond = collision.collider.CompareTag("Player");
         //interactionIcon.SetActive(cond);
         if (cond) { Physics.IgnoreCollision(collision.collider, GetComponent<Collider>()); }
@@ -49,8 +46,7 @@ public class doorController : MonoBehaviour
 
     public bool isOpen() { return open; }
 
-    public void openDoor()
-    {
+    public void openDoor(){
        //x, y ,z
 
         targetRotation = Quaternion.Euler(0, initialAngle+openAngle, 0);
@@ -58,16 +54,14 @@ public class doorController : MonoBehaviour
 		open = true;
     }
 
-    public void closeDoor()
-    {
+    public void closeDoor(){
         targetRotation = Quaternion.Euler(0, initialAngle, 0);
 		//doorCollider.enabled = true;
 		open = false;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, smoothTime * Time.deltaTime);
     }
 }

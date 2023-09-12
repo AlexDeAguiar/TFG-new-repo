@@ -128,6 +128,5 @@ public class VivoxPlayer : NetworkBehaviour {
                 _nextUpdate += 0.5f;
             }
         }
-        
     }
 }
