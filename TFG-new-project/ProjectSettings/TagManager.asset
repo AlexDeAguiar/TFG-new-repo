@@ -8,6 +8,7 @@ TagManager:
   - Door
   - Head
   - Body
+  - BlackBoard
   layers:
   - Default
   - TransparentFX
