@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour{
        
 
     public float interactDistance = 2f; // La distancia a la que el jugador puede interactuar con la puerta
-    public KeyCode doorInteractKey = KeyCode.E; // La tecla que el jugador debe presionar para interactuar con la puerta
-    public KeyCode bBoardInteractKey = KeyCode.P; // La tecla que el jugador debe presionar para interactuar con la puerta
-    private GameObject door; // La puerta actual con la que el jugador est� interactuando
+	public const KeyCode doorInteractKey = KeyCode.E; // La tecla que el jugador debe presionar para interactuar con la puerta
+    public const KeyCode bBoardPlayPauseKey = KeyCode.P; // La tecla que el jugador debe presionar para pausar o reanudar el video de la pizarra
+	private GameObject door; // La puerta actual con la que el jugador est� interactuando
     private GameObject blackBoard; // La puerta actual con la que el jugador est� interactuando
     
     // Start is called before the first frame update
@@ -42,11 +42,27 @@ public class PlayerController : MonoBehaviour{
             }
         }
 
-        if (blackBoard != null && Input.GetKeyDown(bBoardInteractKey)){
+        if (blackBoard != null && Input.GetKeyDown(bBoardPlayPauseKey)){
             OnTriggerEnter(GetComponent<Collider>());
 
-            if (blackBoard.GetComponent<VideoWithAudio>().isPlaying()){ blackBoard.GetComponent<VideoWithAudio>().Pause(); }
+            if (blackBoard.GetComponent<VideoWithAudio>().isPlaying()){
+				blackBoard.GetComponent<VideoWithAudio>().Pause();
+			}
             else{ blackBoard.GetComponent<VideoWithAudio>().Play(); }
         }
-    }
+	}
+
+	public void changeVideo(string path) {
+		RaycastHit hit;
+		if (Physics.Raycast(transform.position, transform.forward, out hit, interactDistance)) {
+			if (hit.collider.CompareTag("BlackBoard")) {
+				blackBoard = hit.collider.gameObject;
+
+				if (blackBoard != null) {
+					OnTriggerEnter(GetComponent<Collider>());
+					blackBoard.GetComponent<VideoWithAudio>().changeVideo(path);
+				}
+			}
+		}
+	}
 }

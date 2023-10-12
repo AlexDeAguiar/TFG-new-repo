@@ -31,12 +31,16 @@ public class NetworkPlayer : NetworkBehaviour {
 		if (!IsOwner) { return; }
 		gameObject.AddComponent<SC_TPSController>();
 
+
+		var playerControler = gameObject.GetComponent<PlayerController>();
+		GameObject.Find("UIDocument").GetComponent<VideoSelector>().setPlayerController(playerControler);
+
 		/*
         myXRRig = GameObject.Find("XR Origin");
         if (myXRRig) { Debug.Log("Found XR Origin"); }
         else { Debug.Log("Could not find XR Origin!"); }
 		*/
-        /*
+		/*
         //pointers to the XR RIg
         HaCM = myXRRig.GetComponent<HandsAndControllersManager>();
         myXRLH = HaCM.m_LeftHand.transform.Find("Direct Interactor");
@@ -52,9 +56,9 @@ public class NetworkPlayer : NetworkBehaviour {
         avBody = transform.Find("Body");
         */
 
-        //Toggle vTog = StartMenu.toggle;
-        //if (vTog.value){ GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox(); }
-        GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox();
+		//Toggle vTog = StartMenu.toggle;
+		//if (vTog.value){ GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox(); }
+		GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox();
     }
 
     // Update is called once per frame

@@ -9,6 +9,18 @@ public class VideoWithAudio : MonoBehaviour{
 
     public void Play(){ videoPlayer.Play(); is_Playing = true; }
     public void Pause(){ videoPlayer.Pause(); is_Playing = false; }
+	public void Stop() {
+		videoPlayer.Stop();
+		is_Playing = false;
+	}
 
-    public bool isPlaying(){ return is_Playing; }
+	public void changeVideo(string path) {
+		videoPlayer.Stop();
+		is_Playing = false;
+		videoPlayer.url = path;
+
+		Debug.Log("Changed the video path of the blackboard to: " + path);
+	}
+
+	public bool isPlaying(){ return is_Playing; }
 }
