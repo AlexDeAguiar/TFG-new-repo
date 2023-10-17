@@ -32,4 +32,13 @@ public class VideoSelector : SuperGUI, Translatable
 
 		playerController.changeVideo(path);
 	}
+
+
+	public void show() {
+		fileSelector.RemoveFromClassList("hidden");
+	}
+
+	public void hide() {
+		fileSelector.AddToClassList("hidden");
+	}
 }

@@ -22,7 +22,16 @@ public class SC_TPSController : MonoBehaviour{
     [HideInInspector]
     public bool canMove = true;
 
-    void Start() {
+	public void enableMove() {
+		canMove = true;
+	}
+
+	public void disableMove()
+	{
+		canMove = false;
+	}
+
+	void Start() {
 		player = gameObject;
 		head = Utility.FindChildByTag(player, "Head");
 		//body = Utility.FindChildByTag(player, "Body");

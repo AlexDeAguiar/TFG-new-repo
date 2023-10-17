@@ -29,10 +29,11 @@ public class NetworkPlayer : NetworkBehaviour {
 
 
 		if (!IsOwner) { return; }
-		gameObject.AddComponent<SC_TPSController>();
+		var scTpsController = gameObject.AddComponent<SC_TPSController>();
 
 
 		var playerControler = gameObject.GetComponent<PlayerController>();
+		playerControler.setScTpsController(scTpsController);
 		GameObject.Find("UIDocument").GetComponent<VideoSelector>().setPlayerController(playerControler);
 
 		/*

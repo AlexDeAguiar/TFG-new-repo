@@ -1,1 +1,6 @@
-VisualElement {}
+VisualElement {
+}
+
+.hidden {
+    display: none;
+}

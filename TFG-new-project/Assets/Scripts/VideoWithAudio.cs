@@ -7,7 +7,9 @@ public class VideoWithAudio : MonoBehaviour{
 
     void Start(){ is_Playing = false; }
 
-    public void Play(){ videoPlayer.Play(); is_Playing = true; }
+    public void Play(){
+		videoPlayer.Play(); is_Playing = true;
+	}
     public void Pause(){ videoPlayer.Pause(); is_Playing = false; }
 	public void Stop() {
 		videoPlayer.Stop();
@@ -20,6 +22,13 @@ public class VideoWithAudio : MonoBehaviour{
 		videoPlayer.url = path;
 
 		Debug.Log("Changed the video path of the blackboard to: " + path);
+
+		Debug.Log("Playing first frame");
+
+		//YES
+		videoPlayer.Play();
+		System.Threading.Thread.Sleep(100);
+		videoPlayer.Pause();
 	}
 
 	public bool isPlaying(){ return is_Playing; }
