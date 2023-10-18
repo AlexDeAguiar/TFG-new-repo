@@ -6,6 +6,10 @@
     position: absolute;
 }
 
+.hidden {
+    display: none;
+}
+
 .hideRightContainer {
     right: -218px;
     position: absolute;

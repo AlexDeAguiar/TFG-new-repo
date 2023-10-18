@@ -19,7 +19,12 @@ public class MainGUI : SuperGUI {
     Label rightTabLabel;
     Label leftTabLabel;
 
-    void Start(){
+	PlayerController playerController = null;
+	VisualElement fileSelector;
+	TextField filePathTextBox;
+	Button filePathSubmitButton;
+
+	void Start(){
         base.Init();
         showRight = false;
         showLeft  = false;
@@ -37,7 +42,12 @@ public class MainGUI : SuperGUI {
         leftTab.Q<VisualElement>("LeftArrowBtn").RegisterCallback<ClickEvent>(toggleLeftTab);
         leftTabLabel = leftTab.Q<VisualElement>("LeftArrowBtn").Q<Label>();
 
-        timeLabel = root
+		fileSelector = root.Q<VisualElement>("FileSelector");
+		filePathTextBox = fileSelector.Q<TextField>("FilePathBox");
+		filePathSubmitButton = fileSelector.Q<Button>("FilePathSubmitButton");
+		filePathSubmitButton.RegisterCallback<ClickEvent>(evt => submitFilePath(evt));
+
+		timeLabel = root
             .Q<VisualElement>("root")
             .Q<VisualElement>("TopBar")
             .Q<VisualElement>("TimeFrame")
@@ -51,7 +61,7 @@ public class MainGUI : SuperGUI {
         else{
             NetworkManager.Singleton.StartHost();
         }
-    }
+	}
 
     void Update(){
         updateTime();
@@ -140,4 +150,34 @@ public class MainGUI : SuperGUI {
 
         return null;
     }
+
+	public void setPlayerController(PlayerController playerController)
+	{
+		this.playerController = playerController;
+	}
+
+	void submitFilePath(ClickEvent evt)
+	{
+		if (playerController == null)
+		{
+			Debug.Log("video Selector can not submit the video pat, because playerController is null. Has the player connected to the world?");
+			return;
+		}
+
+		string path = filePathTextBox.text;
+		Debug.Log("Selected path: " + path);
+
+		playerController.changeVideo(path);
+	}
+
+	public void show()
+	{
+		fileSelector.RemoveFromClassList("hidden");
+	}
+
+	public void hide()
+	{
+		fileSelector.AddToClassList("hidden");
+	}
+
 }

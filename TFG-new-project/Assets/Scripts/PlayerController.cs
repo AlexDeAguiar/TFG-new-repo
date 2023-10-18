@@ -13,16 +13,17 @@ public class PlayerController : MonoBehaviour{
 	private SC_TPSController scTpsController;
 
 	private GameObject currentBlackboard;
-	private VideoSelector videoSelector;
+	private MainGUI mainGui;
 	private bool enabledKeys = true;
 
 	// Start is called before the first frame update
 	void Start(){
-		videoSelector = GameObject.Find("UIDocument").GetComponent<VideoSelector>();
+		mainGui = GameObject.Find("UIDocument").GetComponent<MainGUI>();
 	}
     
     void OnTriggerEnter(Collider other){
         if (other.gameObject == door){
+			//TODO: En vez de esto, deberiamos simplemente desactivar el componente collider de la puerta (para que otros usuarios puedan pasar tambien)
             Physics.IgnoreCollision(other.GetComponent<Collider>(), GetComponent<Collider>());
         }
     }
@@ -33,12 +34,14 @@ public class PlayerController : MonoBehaviour{
 
 			// Raycast para detectar la puerta cercana
 			RaycastHit hit;
+			door = null;
+			blackBoard = null;
+
 			if (Physics.Raycast(transform.position, transform.forward, out hit, interactDistance))
 			{
-				if (hit.collider.CompareTag("Door")) { door = hit.collider.gameObject; }
+				if (hit.collider.CompareTag("Door")) { handleDoorBehaviour(hit.collider.gameObject); }
 				if (hit.collider.CompareTag("BlackBoard")) { blackBoard = hit.collider.gameObject; }
 			}
-			else { door = null; }
 
 			// Interactuar con la puerta si el jugador presiona la tecla
 			if (door != null && Input.GetKeyDown(doorInteractKey))
@@ -73,7 +76,7 @@ public class PlayerController : MonoBehaviour{
 					OnTriggerEnter(GetComponent<Collider>());
 
 					//Mostar la UI
-					videoSelector.show();
+					mainGui.show();
 
 					//Deshabilitar teclas del controller
 					enabledKeys = false;
@@ -86,9 +89,35 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	//TODO: Mover este texto tambien a la puerta, por si queremos que mande distintos mensajes si esta abierto o cerrado, o para que cambie el mensaje dependiendo del idioma
+	private const string doorInteractionText = "Press E to open/close the door";
+
+	private void handleDoorBehaviour(GameObject door) {
+		//Mostrar el mensaje informativo siempre
+		//interactionBox.setText(doorInteractionText);
+		//interactionBox.makeVisible()
+
+		//Detectar teclas y llamar a los metodos apropiados
+		if (Input.GetKeyDown(doorInteractKey))
+		{
+			//TODO: Mover esta logica a la puerta, no tiene porque estar en el controller
+			//Ignore collisions with the door
+			OnTriggerEnter(GetComponent<Collider>());
+
+			if (door.GetComponent<doorController>().isOpen())
+			{
+				door.GetComponent<doorController>().closeDoor();
+			}
+			else
+			{
+				door.GetComponent<doorController>().openDoor();
+			}
+		}
+	}
+
 	public void changeVideo(string path) {
 		currentBlackboard.GetComponent<VideoWithAudio>().changeVideo(path);
-		videoSelector.hide();
+		mainGui.hide();
 		currentBlackboard = null;
 		enabledKeys = true;
 		scTpsController.enableMove();
