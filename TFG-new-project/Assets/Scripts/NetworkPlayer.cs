@@ -34,7 +34,7 @@ public class NetworkPlayer : NetworkBehaviour {
 
 		var playerControler = gameObject.GetComponent<PlayerController>();
 		playerControler.setScTpsController(scTpsController);
-		GameObject.Find("UIDocument").GetComponent<MainGUI>().setPlayerController(playerControler);
+		GameObject.Find("UIDocument").GetComponent<MainGUI>().getVideoSelectorBoxManager().setPlayerController(playerControler);
 
 		/*
         myXRRig = GameObject.Find("XR Origin");

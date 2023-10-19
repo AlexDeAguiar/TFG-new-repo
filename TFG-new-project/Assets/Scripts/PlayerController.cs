@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour{
 
 	private GameObject currentBlackboard;
 	private MainGUI mainGui;
+	private VideoSelectorBoxManager videoSelectorBoxManager;
 	private InfoBoxManager infoBoxManager;
 	private bool enabledKeys = true;
 
 	// Start is called before the first frame update
 	void Start(){
 		mainGui = GameObject.Find("UIDocument").GetComponent<MainGUI>();
+		videoSelectorBoxManager = mainGui.getVideoSelectorBoxManager();
 		infoBoxManager = mainGui.getInfoBoxManager();
 	}
     
@@ -40,14 +42,14 @@ public class PlayerController : MonoBehaviour{
 			if (Physics.Raycast(transform.position, transform.forward, out hit, interactDistance))
 			{
 				var targetObject = hit.collider.gameObject;
-				
-				if (hit.collider.CompareTag("Door")) {
-					handleDoorBehaviour(targetObject);
-					return;
-				}
-				if (hit.collider.CompareTag("BlackBoard")) {
-					handleBlackBoardBehaviour(targetObject);
-					return;
+
+				switch (hit.collider.tag) {
+					case "Door":
+						handleDoorBehaviour(targetObject);
+						break;
+					case "BlackBoard":
+						handleBlackBoardBehaviour(targetObject);
+						break;
 				}
 			}
 		}
@@ -94,7 +96,7 @@ public class PlayerController : MonoBehaviour{
 		if (Input.GetKeyDown(boardSelectVideoKey))
 		{
 			//Mostar la UI
-			mainGui.show();
+			videoSelectorBoxManager.show();
 
 			//Deshabilitar teclas del controller
 			enabledKeys = false;
@@ -107,7 +109,7 @@ public class PlayerController : MonoBehaviour{
 
 	public void changeVideo(string path) {
 		currentBlackboard.GetComponent<VideoWithAudio>().changeVideo(path);
-		mainGui.hide();
+		videoSelectorBoxManager.hide();
 		currentBlackboard = null;
 		enabledKeys = true;
 		scTpsController.enableMove();
