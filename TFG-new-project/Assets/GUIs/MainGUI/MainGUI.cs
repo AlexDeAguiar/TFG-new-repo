@@ -24,6 +24,11 @@ public class MainGUI : SuperGUI {
 	TextField filePathTextBox;
 	Button filePathSubmitButton;
 
+	VisualElement infoBox;
+	Label infoText;
+
+	InfoBoxManager infoBoxManager;
+
 	void Start(){
         base.Init();
         showRight = false;
@@ -46,6 +51,11 @@ public class MainGUI : SuperGUI {
 		filePathTextBox = fileSelector.Q<TextField>("FilePathBox");
 		filePathSubmitButton = fileSelector.Q<Button>("FilePathSubmitButton");
 		filePathSubmitButton.RegisterCallback<ClickEvent>(evt => submitFilePath(evt));
+
+		infoBox = root.Q<VisualElement>("InfoBox");
+		infoBoxManager = new InfoBoxManager(infoBox);
+
+		infoBoxManager.showText("Presiona E para seleccionar el video\nPresiona P para pausar/reanudar el video");
 
 		timeLabel = root
             .Q<VisualElement>("root")
@@ -180,4 +190,7 @@ public class MainGUI : SuperGUI {
 		fileSelector.AddToClassList("hidden");
 	}
 
+	public InfoBoxManager getInfoBoxManager() {
+		return infoBoxManager;
+	}
 }
