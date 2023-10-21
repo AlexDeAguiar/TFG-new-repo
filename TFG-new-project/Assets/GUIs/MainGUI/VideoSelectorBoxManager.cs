@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class VideoSelectorBoxManager : SuperGUI
+public class VideoSelectorBoxManager : MonoBehaviour
 {
 	private VisualElement videoSelectorBox;
 	private TextField videoSelectorTextBox;
@@ -12,7 +12,6 @@ public class VideoSelectorBoxManager : SuperGUI
 	PlayerController playerController;
 
 	public VideoSelectorBoxManager(VisualElement videoSelectorBox) {
-		base.Init();
 		this.videoSelectorBox = videoSelectorBox;
 		videoSelectorTextBox = videoSelectorBox.Q<TextField>("FilePathBox");
 		videoSelectorSubmitButton = videoSelectorBox.Q<Button>("FilePathSubmitButton");

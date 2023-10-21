@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class InfoBoxManager : SuperGUI
+public class InfoBoxManager : MonoBehaviour
 {
 	VisualElement infoBox;
 	Label infoText;
 
 	public InfoBoxManager(VisualElement infoBox) {
-		base.Init();
 		this.infoBox = infoBox;
 		infoText = infoBox.Q<Label>("InfoText");
 	}
