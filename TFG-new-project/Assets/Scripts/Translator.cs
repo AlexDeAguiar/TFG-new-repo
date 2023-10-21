@@ -40,7 +40,14 @@ public class Translator : MonoBehaviour {
 
     public static string _INTL(string text, LANGUAGES lang){
         Dictionary<string, string> lan = jsons[lang];
-        return lan.ContainsKey(text) ? lan[text] : text;
+		if (lan.ContainsKey(text)) {
+			return lan[text];
+		}
+		else {
+			Debug.LogWarning(
+				String.Format("Could not find a tranlation for key: %s and language %s", text, lang));
+			return text;
+		}
     }
 
     public static void changeLan(LANGUAGES newLan){

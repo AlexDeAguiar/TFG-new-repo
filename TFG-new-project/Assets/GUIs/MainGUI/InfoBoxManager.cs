@@ -18,9 +18,9 @@ public class InfoBoxManager : MonoBehaviour
 		infoBox.AddToClassList("hidden");
 	}
 
-	public void showText(string text) {
+	public void showText(string textKey) {
 		//TODO
-		infoText.text = text;
+		infoText.text = Translator._INTL(textKey);
 		infoBox.RemoveFromClassList("hidden");
 	}
 }

@@ -1,1 +1,5 @@
-{ "LAN_NAME": "English" }
+{
+    "LAN_NAME": "English",
+    "INTERACTION_INFO_BLACKBOARD": "Press E to choose the video\nPress P to pause/unpause the video",
+    "INTERACTION_INFO_DOOR": "Press E to open/close the door"
+}

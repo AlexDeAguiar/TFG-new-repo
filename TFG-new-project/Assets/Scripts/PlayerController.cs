@@ -56,10 +56,10 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	//TODO: Mover este texto tambien a la puerta, por si queremos que mande distintos mensajes si esta abierto o cerrado, o para que cambie el mensaje dependiendo del idioma
-	private const string doorInteractionText = "Press E to open/close the door";
+	private const string doorInteractionTextKey = "INTERACTION_INFO_DOOR";
 	private void handleDoorBehaviour(GameObject door) {
 		//Mostrar el mensaje informativo siempre
-		infoBoxManager.showText(doorInteractionText);
+		infoBoxManager.showText(doorInteractionTextKey);
 
 		//Detectar teclas y llamar a los metodos apropiados
 		if (Input.GetKeyDown(doorInteractKey))
@@ -79,9 +79,9 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
-	private const string blackboardInteractionText = "Presiona E para seleccionar el video\nPresiona P para pausar/reanudar el video";
+	private const string blackboardInteractionTextKey = "INTERACTION_INFO_BLACKBOARD";
 	private void handleBlackBoardBehaviour(GameObject blackboard) {
-		infoBoxManager.showText(blackboardInteractionText);
+		infoBoxManager.showText(blackboardInteractionTextKey);
 
 		if (Input.GetKeyDown(bBoardPlayPauseKey))
 		{

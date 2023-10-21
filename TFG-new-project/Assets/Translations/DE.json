@@ -17,5 +17,8 @@
     "Student": "Student",
     "Professor": "Professor",
 
-    "Language": "Sprache"
+    "Language": "Sprache",
+
+    "INTERACTION_INFO_BLACKBOARD": "Drücken Sie E, um das Video auszuwählen\nDrücken Sie P, um das Video anzuhalten bzw. die Pause aufzuheben",
+    "INTERACTION_INFO_DOOR": "Drücken Sie E, um die Tür zu öffnen/schließen"
 }
