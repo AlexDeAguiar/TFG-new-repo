@@ -19,7 +19,7 @@ public class VideoWithAudio : MonoBehaviour{
 	public void changeVideo(string path) {
 		videoPlayer.Stop();
 		is_Playing = false;
-		videoPlayer.url = path;
+		videoPlayer.url = "File://" + path;
 
 		Debug.Log("Changed the video path of the blackboard to: " + path);
 
