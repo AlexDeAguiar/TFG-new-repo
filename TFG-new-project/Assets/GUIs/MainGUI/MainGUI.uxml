@@ -27,8 +27,8 @@
             <ui:TextField picking-mode="Ignore" label="videoFilePath" value="filler text" text="file://C:/myFolder/myVideo.mp4" name="FilePathBox" style="align-items: center; justify-content: flex-start; height: 100%; width: 80%; color: rgb(2, 2, 2); background-color: rgb(142, 142, 142);" />
             <ui:Button text="Button" display-tooltip-when-elided="true" name="FilePathSubmitButton" style="width: 20%; height: 100%;" />
         </ui:VisualElement>
-        <ui:VisualElement name="InfoBox" class="hidden" style="height: 20%; width: 50%; left: 25%; top: 40%; right: 0; bottom: 0; -unity-background-image-tint-color: rgb(125, 121, 121); background-color: rgb(53, 53, 55); opacity: 0.8; transition-timing-function: ease; transition-duration: 0s; transition-property: all;">
-            <ui:Label text="info" display-tooltip-when-elided="true" name="InfoText" style="justify-content: center; align-items: center; width: 100%; height: 100%; -unity-text-align: middle-center; white-space: normal; color: rgb(255, 255, 255); font-size: 25%;" />
+        <ui:VisualElement name="InfoBox" class="hidden" style="height: 20%; width: 50%; left: 25%; top: 40%; right: 0; bottom: 0; -unity-background-image-tint-color: rgb(125, 121, 121); background-color: rgb(53, 53, 55); opacity: 0.8; transition-timing-function: ease; transition-duration: 0s; transition-property: all; align-items: center; justify-content: center;">
+            <ui:Label text="info" display-tooltip-when-elided="true" name="InfoText" style="justify-content: center; align-items: center; width: 100%; height: 30%; -unity-text-align: middle-center; white-space: normal; color: rgb(255, 255, 255); font-size: 25%;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
