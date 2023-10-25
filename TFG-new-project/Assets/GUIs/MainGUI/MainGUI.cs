@@ -19,15 +19,9 @@ public class MainGUI : SuperGUI {
     Label rightTabLabel;
     Label leftTabLabel;
 
-	PlayerController playerController = null;
-	VisualElement fileSelector;
-	TextField filePathTextBox;
-	Button filePathSubmitButton;
-
-	Label infoText;
-
 	VideoSelectorBoxManager videoSelectorBoxManager;
 	InfoBoxManager infoBoxManager;
+	ConnectBoxManager connectBoxManager;
 
 	void Start(){
         base.Init();
@@ -53,6 +47,9 @@ public class MainGUI : SuperGUI {
 
 		VisualElement infoBox = root.Q<VisualElement>("InfoBox");
 		infoBoxManager = new InfoBoxManager(infoBox);
+
+		VisualElement connectBox = root.Q<VisualElement>("ConnectBox");
+		connectBoxManager = new ConnectBoxManager(connectBox);
 
 		timeLabel = root
             .Q<VisualElement>("root")

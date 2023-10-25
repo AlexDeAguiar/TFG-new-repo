@@ -59,7 +59,7 @@ public class NetworkPlayer : NetworkBehaviour {
 
 		//Toggle vTog = StartMenu.toggle;
 		//if (vTog.value){ GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox(); }
-		GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox();
+		//GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox();
     }
 
     // Update is called once per frame

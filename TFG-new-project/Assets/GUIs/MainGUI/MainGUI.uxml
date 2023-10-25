@@ -31,4 +31,11 @@
             <ui:Label text="info" display-tooltip-when-elided="true" name="InfoText" style="justify-content: center; align-items: center; width: 100%; height: 30%; -unity-text-align: middle-center; white-space: normal; color: rgb(255, 255, 255); font-size: 25%;" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="ConnectBox">
+        <ui:Button text="Connect host" display-tooltip-when-elided="true" name="HostButton" />
+        <ui:VisualElement name="ClientBox" style="flex-direction: row-reverse;">
+            <ui:Button text="Connect as client" display-tooltip-when-elided="true" name="ClientButton" style="width: 50%;" />
+            <ui:TextField picking-mode="Ignore" label="JoinCode" name="JoinCodeBox" style="width: 45%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
