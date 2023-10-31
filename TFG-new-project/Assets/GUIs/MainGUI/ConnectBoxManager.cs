@@ -19,7 +19,7 @@ public class ConnectBoxManager : MonoBehaviour {
 		hostButton.RegisterCallback<ClickEvent>(evt => connectHost(evt));
 		clientButton.RegisterCallback<ClickEvent>(evt => connectClient(evt));
 
-		testRelay = new TestRelay();
+		testRelay = TestRelay.Instance;
 	}
 
 	public void show() {

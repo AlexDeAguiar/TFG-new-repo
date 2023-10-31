@@ -56,7 +56,9 @@ public class MainGUI : SuperGUI {
             .Q<VisualElement>("TopBar")
             .Q<VisualElement>("TimeFrame")
             .Q<Label>("timeLabel");
-        updateTime();
+        
+		/*	
+		updateTime();
 
         updateUserData();
         if(User.Instance.userType == 0){
@@ -65,6 +67,7 @@ public class MainGUI : SuperGUI {
         else{
             NetworkManager.Singleton.StartHost();
         }
+		*/
 	}
 
     void Update(){
