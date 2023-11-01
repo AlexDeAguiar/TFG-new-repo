@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -20,33 +21,25 @@ public class TestRelay : MonoBehaviour
 	}
 
 	private async void Start() {
-		Debug.Log("1");
 		await UnityServices.InitializeAsync();
-
 
 		//Add an event to when user signs in. The event is to log it.
 		//AuthenticationService.Instance.SignedIn += () => { Debug.Log("Signed In"); };
-		Debug.Log("2");
 		await AuthenticationService.Instance.SignInAnonymouslyAsync();
 	}
 
 	public async Task<string> createRelay() {
 		try {
 			//------------------------------
-			Debug.Log("3");
 			//Create a room with 1+3 = 4 slots
 			Allocation allocation = await RelayService.Instance.CreateAllocationAsync(3);
 
-			Debug.Log("4");
 			string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 			Debug.Log("Join code: " + joinCode);
 
-			Debug.Log("5");
 			RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
-			Debug.Log("6");
 			NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
-			Debug.Log("7");
 			NetworkManager.Singleton.StartHost();
 
 			return joinCode;
@@ -60,20 +53,24 @@ public class TestRelay : MonoBehaviour
 	public async void joinRelay(string joinCode) {
 		try {
 
-			Debug.Log("3");
 			Debug.Log("Joining relay with code: " + joinCode);
 			JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-			Debug.Log("4");
 			RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
 
-			Debug.Log("5");
 			NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
-			Debug.Log("6");
+			doSomeAsyncMagic();
+
 			NetworkManager.Singleton.StartClient();
 		} catch (RelayServiceException e) {
 			Debug.LogWarning("Error while joining relay. Exception message:\n" + e, this);
 		}
+	}
+
+	private void doSomeAsyncMagic() {
+		//TODO: When we don't sleep, there is some race condition between connecting and something else. Investigate this.
+		//Don't remove... Seriously
+		Thread.Sleep(1000);
 	}
 }
