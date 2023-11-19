@@ -46,3 +46,39 @@
 .my-input-text > .unity-base-field__input {
     width: 0;
 }
+
+.video-input-field {
+}
+
+.video-input-field > .unity-base-text-field__input {
+    margin-left: 183px;
+    margin-right: -65px;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(66, 117, 255, 0.33);
+    padding-top: 1px;
+    padding-bottom: 5px;
+    top: 1px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: rgb(255, 255, 255);
+    -unity-font: url('project://database/Assets/Fonts/neuropol.otf?fileID=12800000&guid=4b7f8da8185d07943810bdbb5e0a05e0&type=3#neuropol');
+    -unity-font-definition: initial;
+    -unity-font-style: italic;
+    left: -20%;
+    font-size: 90%;
+}
+
+.video-input-field > .unity-text-element {
+    left: 11%;
+    top: 25%;
+    font-size: 120%;
+    -unity-font: url('project://database/Assets/Fonts/neuropol.otf?fileID=12800000&guid=4b7f8da8185d07943810bdbb5e0a05e0&type=3#neuropol');
+    -unity-font-definition: initial;
+    color: rgb(255, 255, 255);
+}
