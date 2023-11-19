@@ -12,7 +12,7 @@ public class VivoxPlayer : NetworkBehaviour {
     private int PermissionAskedCount;
     [SerializeField] public string VoiceChannelName = "MiCanalUwU"; //nombre del canal
 
-    private Transform xrCam; //position of our Main Camera
+    private Transform mainCam; //position of our Main Camera
 
     // Start is called before the first frame update
     void Start() {
@@ -20,7 +20,7 @@ public class VivoxPlayer : NetworkBehaviour {
         _vvm.OnUserLoggedInEvent  += OnUserLoggedIn;
         _vvm.OnUserLoggedOutEvent += OnUserLoggedOut;
 
-        xrCam = GameObject.Find("CameraParent").transform;
+        mainCam = GameObject.Find("MainCamera").transform;
     }
 
     public void SignIntoVivox () {
@@ -124,7 +124,7 @@ public class VivoxPlayer : NetworkBehaviour {
         
         if (_chan.ChannelState.ToString() == "Connected"){
             if (Time.time > _nextUpdate) {
-                _chan.Set3DPosition(xrCam.position, xrCam.position, xrCam.forward, xrCam.up);
+                _chan.Set3DPosition(mainCam.position, mainCam.position, mainCam.forward, mainCam.up);
                 _nextUpdate += 0.5f;
             }
         }
