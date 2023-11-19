@@ -66,16 +66,13 @@ public class PlayerController : MonoBehaviour{
 		{
 			//TODO: Mover esta logica a la puerta, no tiene porque estar en el controller
 			//Ignore collisions with the door
-			OnTriggerEnter(GetComponent<Collider>(), door);
+			//OnTriggerEnter(GetComponent<Collider>(), door);
 
-			if (door.GetComponent<doorController>().isOpen())
-			{
-				door.GetComponent<doorController>().closeDoor();
-			}
-			else
-			{
-				door.GetComponent<doorController>().openDoor();
-			}
+			string doorPath = Main.GetFullPath(door.transform);
+
+			Debug.Log(doorPath);
+
+			NetworkPlayer.MyInstance.ToggleDoorServerRpc(doorPath);
 		}
 	}
 

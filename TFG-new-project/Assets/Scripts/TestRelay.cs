@@ -53,6 +53,9 @@ public class TestRelay : MonoBehaviour
 	public async void joinRelay(string joinCode) {
 		try {
 
+			//Stop previous connection attempts to be able to retry if it gets stuck the 1st time
+			NetworkManager.Singleton.StopAllCoroutines();
+
 			Debug.Log("Joining relay with code: " + joinCode);
 			JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 

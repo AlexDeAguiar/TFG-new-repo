@@ -1,0 +1,24 @@
+{
+    "LAN_NAME": "日本語",
+    "Provide a username": "ユーザー名を入力してください",
+    "Provide a Password": "パスワードを入力してください",
+    "Passwords do not match": "パスワードが一致しません",
+    "Please select a user Type": "ユーザータイプを選択してください",
+    "Username is already taken": "そのユーザー名は既に使用されています",
+    "Accept": "受け入れる",
+    "Username": "ユーザー名",
+    "Password": "パスワード",
+    "Repeat Password": "パスワードを繰り返して入力",
+
+    "Login": "ログイン",
+    "Sign Up": "サインアップ",
+    "Settings": " 設定",
+
+    "Student": "学生",
+    "Professor": "教授",
+
+    "Language": "言語",
+
+    "INTERACTION_INFO_BLACKBOARD": "E を押してビデオを選択します\nP を押してビデオを一時停止/再開します",
+    "INTERACTION_INFO_DOOR": "Eを押してドアを開閉します"
+}

@@ -157,8 +157,12 @@ MonoBehaviour:
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
   InLocalSpace: 0
   Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &3173820562415476449 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f8f5e656e92cd24589460da03f063a0, type: 3}
@@ -196,22 +200,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 951099334
   AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &1635329502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3173820562415476449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b52340df17d6fb4fa3a14552866e3e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactDistance: 2
-  interactKey: 101
 --- !u!114 &872164259539268268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,8 +230,12 @@ MonoBehaviour:
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
   InLocalSpace: 0
   Interpolate: 1
+  SlerpPosition: 0
 --- !u!114 &2095816968381570109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,12 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee750f38c7f12a44b88454adf0d8ee13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatarLeftPositionOffset: {x: 0, y: 0, z: 0}
-  avatarRightPositionOffset: {x: 0, y: 0, z: 0}
-  avatarLeftRotationOffset: {x: 0, y: 0, z: 0, w: 0}
-  avatarRightRotationOffset: {x: 0, y: 0, z: 0, w: 0}
-  avatarHeadPositionOffset: {x: 0, y: 0, z: 0}
-  avatarHeadRotationOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6678453001777584028 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -259972160606440404, guid: 4f8f5e656e92cd24589460da03f063a0, type: 3}
@@ -285,5 +277,9 @@ MonoBehaviour:
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
   InLocalSpace: 0
   Interpolate: 1
+  SlerpPosition: 0

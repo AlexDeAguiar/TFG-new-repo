@@ -14,4 +14,10 @@ public class Main : MonoBehaviour{
 		return timeNow.Year.ToString() + "-" + timeNow.Month.ToString()  + "-" + timeNow.Day.ToString() + " " + 
 				timeNow.Hour.ToString() + ":" + timeNow.Minute.ToString() + ":" + timeNow.Second.ToString();
 	}
+
+	public static string GetFullPath(Transform current) {
+		if (current.parent == null)
+			return "/" + current.name;
+		return GetFullPath(current.parent) + "/" + current.name;
+	}
 }
