@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using VivoxUnity;
 
 public class NetworkPlayer : NetworkBehaviour {
 
@@ -16,6 +17,7 @@ public class NetworkPlayer : NetworkBehaviour {
 
 			playerControler.setScTpsController(scTpsController);
 			GameObject.Find("UIDocument").GetComponent<MainGUI>().getVideoSelectorBoxManager().setPlayerController(playerControler);
+			GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox();
 		}
 	}
 
