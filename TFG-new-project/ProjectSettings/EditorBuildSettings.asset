@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Samples/Vivox/15.1.210000-pre.1/Chat Channel Sample/Assets/ChatChannelSample/Scenes/MainScene.unity
     guid: dbc457e6df4234749aff8bd5ffa028ef
+  - enabled: 1
+    path: Assets/Samples/Vivox/15.1.210000-pre.1/Chat Channel Sample/Assets/PackageTesting/PackageTest.unity
+    guid: f8ab9c3c0c13440418f181d39317d6aa
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4ad44d9692ac6c443bb88d012b79a9fd, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 9d574056cedb75f4a8334c5c814820d7, type: 2}

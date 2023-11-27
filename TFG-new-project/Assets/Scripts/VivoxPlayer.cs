@@ -6,7 +6,7 @@ using UnityEngine.Android;
 using Unity.Netcode;
 using VivoxUnity;
 
-public class VivoxPlayer : NetworkBehaviour {
+public class VivoxPlayer : MonoBehaviour {
     private VivoxVoiceManager _vvm;
     IChannelSession _chan;
     private int PermissionAskedCount;
@@ -80,17 +80,22 @@ public class VivoxPlayer : NetworkBehaviour {
             return PermissionAskedCount == 1;
         }
 
+		Debug.Log("Called vivoxPlayer.SignIntoVivox()");
+
         //Actual code runs from here
         if (IsMicPermissionGranted()) {
-            _vvm.Login(transform.name.ToString());
+			Debug.Log("1st IF");
+			_vvm.Login(transform.name.ToString());
         }
         else {
             if (IsPermissionsDenied()) {
-                PermissionAskedCount = 0;
+				Debug.Log("2nd IF");
+				PermissionAskedCount = 0;
                 _vvm.Login(transform.name.ToString());
             }
             else {
-                AskForPermissions();
+				Debug.Log("3rd IF");
+				AskForPermissions();
             }
         }
     }
@@ -99,7 +104,7 @@ public class VivoxPlayer : NetworkBehaviour {
         if (_vvm.LoginState == VivoxUnity.LoginState.LoggedIn) {
             Debug.Log("Successfully connected to Vivox");
             Debug.Log("Joining voice channel: " + VoiceChannelName);
-            _vvm.JoinChannel(VoiceChannelName, ChannelType.Positional, VivoxVoiceManager.ChatCapability.AudioOnly);
+            _vvm.JoinChannel(VoiceChannelName, ChannelType.NonPositional, VivoxVoiceManager.ChatCapability.AudioOnly);
 
             var cid = new Channel(VoiceChannelName, ChannelType.Positional);
             _chan = _vvm.LoginSession.GetChannelSession(cid);

@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.Services.Vivox;
 using UnityEngine;
 using VivoxUnity;
 
@@ -10,14 +11,21 @@ public class NetworkPlayer : NetworkBehaviour {
 		var myID = transform.GetComponent<NetworkObject>().NetworkObjectId;
 		setName(myID);
 
+		Debug.Log("OnNetworkSpawn()");
+
 		if (IsOwner) {
+			Debug.Log("IsOwner");
 			MyInstance = this;
 			var scTpsController = gameObject.AddComponent<SC_TPSController>();
 			var playerControler = gameObject.AddComponent<PlayerController>();
 
 			playerControler.setScTpsController(scTpsController);
 			GameObject.Find("UIDocument").GetComponent<MainGUI>().getVideoSelectorBoxManager().setPlayerController(playerControler);
+			Debug.Log("Before vivox service");
+			VivoxService.Instance.Initialize();
+			Debug.Log("Before vivox player");
 			GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox();
+			Debug.Log("After vivox service");
 		}
 	}
 
