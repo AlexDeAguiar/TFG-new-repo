@@ -7,6 +7,8 @@ using Unity.Netcode;
 using VivoxUnity;
 
 public class VivoxPlayer : MonoBehaviour {
+	public static VivoxPlayer Instance;
+
     private VivoxVoiceManager _vvm;
     IChannelSession _chan;
     private int PermissionAskedCount;
@@ -16,7 +18,9 @@ public class VivoxPlayer : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        _vvm = VivoxVoiceManager.Instance;
+		Instance = this;
+
+		_vvm = VivoxVoiceManager.Instance;
         _vvm.OnUserLoggedInEvent  += OnUserLoggedIn;
         _vvm.OnUserLoggedOutEvent += OnUserLoggedOut;
 
