@@ -50,11 +50,8 @@ public class PlayerNetworkMessagesController : MonoBehaviour {
 
 	[ClientRpc]
 	public void toggleDoorClientRpc(string doorName) {
-		Debug.Log(doorName);
 		GameObject door = GameObject.Find(doorName);
-		Debug.Log(door);
 		DoorController doorController = door.GetComponent<DoorController>();
-		Debug.Log(doorController);
 		doorController.toggleDoor();
 	}
 }
