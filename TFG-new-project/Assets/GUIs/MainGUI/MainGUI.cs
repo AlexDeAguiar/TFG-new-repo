@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.Netcode;
 using System; 
-using TMPro;
 
 public class MainGUI : SuperGUI {
+	public static new MainGUI Instance; //Note: Using keyword "new" because SuperGUI is also a singleton
+
     UIDocument myUI;
     VisualElement root;
     VisualElement userPic;
@@ -25,7 +24,10 @@ public class MainGUI : SuperGUI {
 
 	void Start(){
         base.Init();
-        showRight = false;
+
+		Instance = this;
+
+		showRight = false;
         showLeft  = false;
 
         myUI = GetComponent<UIDocument>();

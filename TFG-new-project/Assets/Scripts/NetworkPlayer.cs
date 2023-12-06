@@ -1,74 +1,41 @@
 using Unity.Netcode;
 using Unity.Services.Vivox;
-using UnityEngine;
-using VivoxUnity;
 
 public class NetworkPlayer : NetworkBehaviour {
 
 	public static NetworkPlayer MyInstance;
+	public static bool MyKeysEnabled;
 
+	/// <summary>
+	/// <b>OnNetworkSpawn</b> is automatically called when any <b>NetworkPlayer</b> is created in the scene.<br/>
+	///	It is in charge of locally initializing all the scripts and properties related to any player.<br/>
+	///	The <b>IsOwner</b> section is only run in single machine that owns the player (i.e. On the machine of the player that is now joining).
+	/// </summary>
 	public override void OnNetworkSpawn() {
-		var myID = transform.GetComponent<NetworkObject>().NetworkObjectId;
-		setName(myID);
-
-		Debug.Log("OnNetworkSpawn()");
+		var playerId = transform.GetComponent<NetworkObject>().NetworkObjectId;
+		setPlayerName(playerId);
 
 		if (IsOwner) {
-			Debug.Log("IsOwner");
 			MyInstance = this;
-			var scTpsController = gameObject.AddComponent<SC_TPSController>();
-			var playerControler = gameObject.AddComponent<PlayerController>();
+			MyKeysEnabled = true;
+			gameObject.AddComponent<PlayerMovementController>();
+			gameObject.AddComponent<PlayerInteractionController>();
+			gameObject.AddComponent<PlayerNetworkMessagesController>();
 
-			playerControler.setScTpsController(scTpsController);
-			GameObject.Find("UIDocument").GetComponent<MainGUI>().getVideoSelectorBoxManager().setPlayerController(playerControler);
-			Debug.Log("Before vivox service");
 			VivoxService.Instance.Initialize();
-			Debug.Log("Before vivox player");
-			GameObject.Find("NetworkManager").GetComponent<VivoxPlayer>().SignIntoVivox();
-			Debug.Log("After vivox service");
+			VivoxPlayer.Instance.SignIntoVivox();
 		}
 	}
 
-	private void setName(ulong myID) {
+	private void setPlayerName(ulong myID) {
 		if (IsOwnedByServer) {
 			transform.name = "Host:" + myID;
 		} else {
 			transform.name = "Client:" + myID;
 		}
-		Debug.Log(transform.name);
 	}
 
-
-
-	// Update is called once per frame
-	void Update() {
-		if (!IsOwner) { return; }
-		//TODO: Remove this temporary code
-		if (Input.GetKeyDown(KeyCode.Q)) {
-			PingClientRpc();
-		}
-	}
-
-
-	[ServerRpc]
-	public void PingServerRpc(ServerRpcParams serverRpcParams = default) {
-		Debug.Log("Server pong");
-	}
-
-	[ClientRpc]
-	public void PingClientRpc(ClientRpcParams clientRpcParams = default) {
-		Debug.Log("Client pong");
-	}
-
-	[ServerRpc]
-	public void ToggleDoorServerRpc(string doorName) {
-		ToggleDoorClientRpc(doorName);
-	}
-
-	[ClientRpc]
-	public void ToggleDoorClientRpc(string doorName) {
-		GameObject door = GameObject.Find(doorName);
-		DoorController doorController = door.GetComponent<DoorController>();
-		doorController.toggleDoor();
+	public string getPlayerName() {
+		return transform.name;
 	}
 }
