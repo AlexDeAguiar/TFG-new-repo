@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using AnotherFileBrowser.Windows;
 
 public class PlayerInteractionController : MonoBehaviour{
 
@@ -32,8 +34,7 @@ public class PlayerInteractionController : MonoBehaviour{
 			// Raycast para detectar la puerta cercana
 			RaycastHit hit;
 
-			if (Physics.Raycast(transform.position, transform.forward, out hit, interactDistance))
-			{
+			if (Physics.Raycast(transform.position, transform.forward, out hit, interactDistance)){
 				var targetObject = hit.collider.gameObject;
 
 				switch (hit.collider.tag) {
@@ -55,9 +56,8 @@ public class PlayerInteractionController : MonoBehaviour{
 		InfoBoxManager.Instance.showText(doorInteractionTextKey);
 
 		//Detectar teclas y llamar a los metodos apropiados
-		if (Input.GetKeyDown(doorInteractKey))
-		{
-			//TODO: Mover esta logica a la puerta, no tiene porque estar en el controller
+		if (Input.GetKeyDown(doorInteractKey)){
+			//TODO: Mover esta logica a la puerta, no tiene por que estar en el controller
 			//Ignore collisions with the door
 			//OnTriggerEnter(GetComponent<Collider>(), door);
 
@@ -73,26 +73,33 @@ public class PlayerInteractionController : MonoBehaviour{
 	private void handleBlackBoardBehaviour(GameObject blackboard) {
 		InfoBoxManager.Instance.showText(blackboardInteractionTextKey);
 
-		if (Input.GetKeyDown(bBoardPlayPauseKey))
-		{
-
-			if (blackboard.GetComponent<VideoWithAudio>().isPlaying())
-			{
+		if (Input.GetKeyDown(bBoardPlayPauseKey)){
+			if (blackboard.GetComponent<VideoWithAudio>().isPlaying()){
 				blackboard.GetComponent<VideoWithAudio>().Pause();
 			}
 			else { blackboard.GetComponent<VideoWithAudio>().Play(); }
 		}
 
-		if (Input.GetKeyDown(boardSelectVideoKey))
-		{
+		if (Input.GetKeyDown(boardSelectVideoKey)){
+			/*
 			//Mostar la UI
 			VideoSelectorBoxManager.Instance.show();
 
 			//Deshabilitar teclas de todos los controller
 			NetworkPlayer.MyKeysEnabled = false;
+			*/
 
 			//Guardar la referencia de la pizarra
 			currentBlackboard = blackboard;
+			currentBlackboard
+				.GetComponent<FileBrowserUpdate>()
+				.OpenFileBrowser();
+		}
+	}
+
+	public void StopVideo(){
+		if(currentBlackboard != null){
+			currentBlackboard.GetComponent<VideoWithAudio>().Stop();
 		}
 	}
 
@@ -101,5 +108,12 @@ public class PlayerInteractionController : MonoBehaviour{
 		VideoSelectorBoxManager.Instance.hide();
 		currentBlackboard = null;
 		NetworkPlayer.MyKeysEnabled = true;
+	}
+
+	public void changeImg(Texture newTexture){
+		if(currentBlackboard != null){
+			Renderer renderer = currentBlackboard.GetComponent<Renderer>();
+			renderer.material.SetTexture("_MainTex",newTexture);
+		}
 	}
 }

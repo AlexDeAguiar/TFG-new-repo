@@ -6,7 +6,7 @@ public class Main : MonoBehaviour{
 
 	void Start(){
 		Instance = this;
-		Web = GetComponent<Web>();;
+		Web = GetComponent<Web>();
 	}
 
 	public static string DateToString(){

@@ -24,11 +24,9 @@ public class VideoSelectorBoxManager : MonoBehaviour {
 	public void hide() {
 		videoSelectorBox.AddToClassList("hidden");
 	}
-	private void submitFilePath(ClickEvent evt)
-	{
-		if (PlayerInteractionController.Instance == null)
-		{
-			Debug.Log("video Selector can not submit the video pat, because PlayerInteractionController is null. Has the player connected to the world?");
+	private void submitFilePath(ClickEvent evt){
+		if (PlayerInteractionController.Instance == null){
+			Debug.Log("video Selector can not submit the video path, because PlayerInteractionController is null. Has the player connected to the world?");
 			return;
 		}
 
@@ -37,5 +35,4 @@ public class VideoSelectorBoxManager : MonoBehaviour {
 
 		PlayerInteractionController.Instance.changeVideo(path);
 	}
-
 }
