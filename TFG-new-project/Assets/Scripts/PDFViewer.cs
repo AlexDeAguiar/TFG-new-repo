@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pdfium;
+//using Pdfium;
 
-public class PDFViewer : MonoBehaviour
-{
+public class PDFViewer : MonoBehaviour{
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         
     }
 
@@ -19,6 +17,7 @@ public class PDFViewer : MonoBehaviour
     }
 
     void exportPDF(string filename,string path){
+        /*
         using (var document = PdfDocument.Load($"{path}{filename}.pdf")){
             using (var renderer = new PdfRenderer(document)){
                 for (int i = 0; i < document.PageCount; i++){
@@ -29,5 +28,6 @@ public class PDFViewer : MonoBehaviour
             }
         }
         Debug.Log($"Images saved at {path}{filename}/");
+        */
     }
 }
