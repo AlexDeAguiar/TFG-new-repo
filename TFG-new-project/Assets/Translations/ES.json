@@ -20,5 +20,9 @@
     "Language": "Idioma",
 
     "INTERACTION_INFO_BLACKBOARD": "Presiona E para escoger el video\nPresiona P para pausar/reanudar el video",
-    "INTERACTION_INFO_DOOR": "Presiona E para abrir/cerrar la puerta"
+    "INTERACTION_INFO_DOOR": "Presiona E para abrir/cerrar la puerta",
+
+    "Choose a File": "Selecciona un archivo",
+    "Image files": "Archivos de Imagen",
+    "Video files": "Archivos de Video"
 }
