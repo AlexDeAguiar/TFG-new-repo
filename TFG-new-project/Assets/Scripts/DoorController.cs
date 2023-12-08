@@ -1,54 +1,61 @@
 using UnityEngine;
 
-public class DoorController : MonoBehaviour{
-    private const float OPENANGLE = 90; // El angulo de apertura de la puerta
-    public float smoothTime = 2f; // El tiempo que tarda la puerta en abrirse o cerrarse
-    private bool open = false;
-    private float initialAngle;
-    private Quaternion targetRotation;
-    public bool isLeftDoor = false;
-	
-	//icono de interaccion:
-	private Renderer interactionIcon;
-    private Texture2D texture;
-    private Vector3 iconOffset = new Vector3(0, 2.5f, 0); // Offset hacia arriba
+public class DoorController : MonoBehaviour {
+	public float angleDiff = 90; // El angulo de apertura de la puerta
+	public bool isLeftDoor = false;
+	public bool isOpen = false;
 
-    // Start is called before the first frame update
-    void Start(){
-        initialAngle = transform.rotation.eulerAngles.y;
+	private float openAngle;
+	private float closeAngle;
+
+	private float animationTime = 1f; // El tiempo que tarda la puerta en abrirse o cerrarse
+	private float remainingAnimationTime = 0f;
+	private Quaternion targetRotation;
+
+	// Start is called before the first frame update
+	void Start() {
+		setOpen(isOpen); //Necessary
+		if (isOpen) {
+			openAngle = transform.rotation.eulerAngles.y;
+			closeAngle = openAngle + angleDiff * (isLeftDoor ? -1 : 1);
+		} else {
+			closeAngle = transform.rotation.eulerAngles.y;
+			openAngle = closeAngle + angleDiff * (isLeftDoor ? 1 : -1);
+		}
 	}
 
-	public bool isOpen() { return open; }
+	private void setOpen(bool open) {
+		this.isOpen = open;
+		GetComponent<Collider>().enabled = !open;
+	}
 
 	public void openDoor() {
-		//x, y ,z
+		targetRotation = Quaternion.Euler(0, openAngle, 0);
+		remainingAnimationTime = animationTime;
 
-		targetRotation = Quaternion.Euler(0, initialAngle + (OPENANGLE * (isLeftDoor ? -1 : 1)), 0);
-
-		open = true;
-
-		GetComponent<Collider>().isTrigger = false;
-
+		setOpen(true);
 	}
 
 	public void closeDoor() {
-		targetRotation = Quaternion.Euler(0, initialAngle, 0);
+		targetRotation = Quaternion.Euler(0, closeAngle, 0);
+		remainingAnimationTime = animationTime;
 
-		open = false;
-
-		GetComponent<Collider>().isTrigger = true;
-
+		setOpen(false);
 	}
 
 	public void toggleDoor() {
-		if (isOpen()) {
+		if (isOpen) {
 			closeDoor();
 		} else {
 			openDoor();
 		}
 	}
 
-	void Update(){
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, smoothTime * Time.deltaTime);
-    }
+	void Update() {
+		if (remainingAnimationTime > 0f) {
+			float animationDiff = Mathf.Min(Time.deltaTime, remainingAnimationTime);
+			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, animationDiff / remainingAnimationTime);
+			remainingAnimationTime -= animationDiff;
+		}
+	}
 }
