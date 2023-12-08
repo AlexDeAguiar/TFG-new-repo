@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Threading;
 using AnotherFileBrowser.Windows;
 
 public class PlayerInteractionController : MonoBehaviour{
@@ -114,6 +115,15 @@ public class PlayerInteractionController : MonoBehaviour{
 		if(currentBlackboard != null){
 			Renderer renderer = currentBlackboard.GetComponent<Renderer>();
 			renderer.material.SetTexture("_MainTex",newTexture);
+		}
+	}
+
+	public void changePDF(string path){
+		Texture2D[] pdfImages = PDFViewer.ConvertPdfToImages(path);
+
+		for(int i = 0; i < pdfImages.Length; i++){
+			changeImg(pdfImages[i]);
+			Thread.Sleep(2000);
 		}
 	}
 }
