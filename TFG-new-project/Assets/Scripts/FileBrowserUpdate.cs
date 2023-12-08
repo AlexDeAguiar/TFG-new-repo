@@ -7,25 +7,25 @@ using UnityEngine.UI;
 using System.IO;
 
 public class FileBrowserUpdate : MonoBehaviour{
-    public const string[][] COMPATIBLE_EXTENSIONS = {
-        ["Image files", ".jpg", ".jpeg", ".jpe", ".jfif", ".png"],
-        ["Video files", ".mp4"]
+    public static readonly string[][] COMPATIBLE_EXTENSIONS = {
+        new string[] { "Image files", ".jpg", ".jpeg", ".jpe", ".jfif", ".png" },
+        new string[] { "Video files", ".mp4" }
     };
 
     string getFilterString(){
-        string filterStr = ""
-        for (int i = 0; i < COMPATIBLE_EXTENSIONS.length; i++){
+        string filterStr = "";
+        for (int i = 0; i < COMPATIBLE_EXTENSIONS.Length; i++){
             filterStr += Translator._INTL(COMPATIBLE_EXTENSIONS[i][0]);
 
             string part1 = "";
             string part2 = "";
-            int length = COMPATIBLE_EXTENSIONS[i].length;
+            int length = COMPATIBLE_EXTENSIONS[i].Length;
             for (int j = 1; j < length; j++){
                 part1 += "*" + COMPATIBLE_EXTENSIONS[i][j] + ((j + 1 < length) ? ", " : "");
               //part2 += "*" + COMPATIBLE_EXTENSIONS[i][j] + ((j + 1 < length) ? "; " : "");
             }
 
-            filterStr += "(" + part1 + ") | " + part1 + ((i + 1 < COMPATIBLE_EXTENSIONS.length) ? " | " : "")
+            filterStr += "(" + part1 + ") | " + part1 + ((i + 1 < COMPATIBLE_EXTENSIONS.Length) ? " | " : "");
         }
         Debug.Log(filterStr);
         return filterStr;
