@@ -111,8 +111,7 @@ public class StartMenu : SuperGUI, Translatable {
 		NetworkManager.Singleton.StartHost();
 	}
 
-	public void VivoxClientBtnOnSameScene(ClickEvent evt)
-	{
+	public void VivoxClientBtnOnSameScene(ClickEvent evt){
 		Debug.Log("Client started");
 		NetworkManager.Singleton.StartClient();
 	}

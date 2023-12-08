@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.IO;
+using System.Collections;
 using System.Threading;
 using AnotherFileBrowser.Windows;
+using UnityEngine.Networking;
 
 public class PlayerInteractionController : MonoBehaviour{
+    public static readonly string[][] BL_BOARD_FILE_EXTS = {
+        new string[] { "Image files", ".jpg", ".jpeg", ".jpe", ".jfif", ".png" },
+        new string[] { "Video files", ".mp4" },
+        new string[] { "PDF files", ".pdf" }
+    };
 
 	public static PlayerInteractionController Instance;
-
 	public float interactDistance = 2f; // La distancia a la que el jugador puede interactuar con la puerta
 	public const KeyCode doorInteractKey = KeyCode.E; // La tecla que el jugador debe presionar para interactuar con la puerta
     public const KeyCode bBoardPlayPauseKey = KeyCode.P; // La tecla que el jugador debe presionar para pausar o reanudar el video de la pizarra
 	public const KeyCode boardSelectVideoKey = KeyCode.E; // Tecla para mostrar selector de que video meter en la pizarra
-
 	private GameObject currentBlackboard;
 
-	// Start is called before the first frame update
-	void Start(){
-		Instance = this;
-	}
-    
+	void Start(){ Instance = this; }
     void OnTriggerEnter(Collider other, GameObject door){
         if (other.gameObject == door){
 			//TODO: En vez de esto, deberiamos simplemente desactivar el componente collider de la puerta (para que otros usuarios puedan pasar tambien)
@@ -28,9 +31,7 @@ public class PlayerInteractionController : MonoBehaviour{
 
     // Update is called once per frame
     void Update() {
-
 		InfoBoxManager.Instance.hide();
-
 		if (NetworkPlayer.MyKeysEnabled) {
 			// Raycast para detectar la puerta cercana
 			RaycastHit hit;
@@ -63,9 +64,6 @@ public class PlayerInteractionController : MonoBehaviour{
 			//OnTriggerEnter(GetComponent<Collider>(), door);
 
 			string doorPath = Main.GetFullPath(door.transform);
-
-			Debug.Log(doorPath);
-
 			PlayerNetworkMessagesController.Instance.toggleDoorServerRpc(doorPath);
 		}
 	}
@@ -82,48 +80,60 @@ public class PlayerInteractionController : MonoBehaviour{
 		}
 
 		if (Input.GetKeyDown(boardSelectVideoKey)){
-			/*
-			//Mostar la UI
-			VideoSelectorBoxManager.Instance.show();
-
-			//Deshabilitar teclas de todos los controller
-			NetworkPlayer.MyKeysEnabled = false;
-			*/
-
-			//Guardar la referencia de la pizarra
 			currentBlackboard = blackboard;
 			currentBlackboard
 				.GetComponent<FileBrowserUpdate>()
-				.OpenFileBrowser();
+				.OpenFileBrowser(DisplayOnBlackboard,BL_BOARD_FILE_EXTS);
 		}
 	}
 
 	public void StopVideo(){
-		if(currentBlackboard != null){
-			currentBlackboard.GetComponent<VideoWithAudio>().Stop();
-		}
+		if(currentBlackboard != null){ currentBlackboard.GetComponent<VideoWithAudio>().Stop(); }
+	}
+
+	public void DisplayOnBlackboard(string path){
+		StopVideo();
+		string e = Path.GetExtension(path);
+		Debug.Log(e);
+			 if(e == ".mp4"){ changeVideo(path); }
+		else if(e == ".pdf"){ changePDF(path);   }
+		else                { changeImg(path);   }
 	}
 
 	public void changeVideo(string path) {
-		currentBlackboard.GetComponent<VideoWithAudio>().changeVideo(path);
-		VideoSelectorBoxManager.Instance.hide();
-		currentBlackboard = null;
-		NetworkPlayer.MyKeysEnabled = true;
+		if(currentBlackboard != null){
+			currentBlackboard.GetComponent<VideoWithAudio>().changeVideo(path);
+			currentBlackboard = null;
+		}
 	}
 
-	public void changeImg(Texture newTexture){
-		if(currentBlackboard != null){
-			Renderer renderer = currentBlackboard.GetComponent<Renderer>();
-			renderer.material.SetTexture("_MainTex",newTexture);
+	public async void changeImg(string path){ StartCoroutine(InternalChangeImg(path)); }
+	private IEnumerator InternalChangeImg(string path){
+		using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(path)){
+			yield return uwr.SendWebRequest();
+
+			if (uwr.isNetworkError || uwr.isHttpError){ Debug.Log(uwr.error); }
+			else{
+				var uwrTexture = DownloadHandlerTexture.GetContent(uwr);
+				updateTexture(uwrTexture);
+			}
 		}
 	}
 
 	public void changePDF(string path){
+		//NO FUNCIONA LOL
 		Texture2D[] pdfImages = PDFViewer.ConvertPdfToImages(path);
 
 		for(int i = 0; i < pdfImages.Length; i++){
-			changeImg(pdfImages[i]);
+			updateTexture(pdfImages[i]);
 			Thread.Sleep(2000);
+		}
+	}
+
+	public void updateTexture(Texture newTexture){
+		if(currentBlackboard != null){
+			Renderer renderer = currentBlackboard.GetComponent<Renderer>();
+			renderer.material.SetTexture("_MainTex",newTexture);
 		}
 	}
 }
