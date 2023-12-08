@@ -9,7 +9,8 @@ using System.IO;
 public class FileBrowserUpdate : MonoBehaviour{
     public static readonly string[][] COMPATIBLE_EXTENSIONS = {
         new string[] { "Image files", ".jpg", ".jpeg", ".jpe", ".jfif", ".png" },
-        new string[] { "Video files", ".mp4" }
+        new string[] { "Video files", ".mp4" },
+        new string[] { "PDF files", ".pdf" }
     };
 
     string getFilterString(){
@@ -44,6 +45,9 @@ public class FileBrowserUpdate : MonoBehaviour{
             Debug.Log(extension);
             if(extension == ".mp4"){
                 PlayerInteractionController.Instance.changeVideo(path);
+            }
+            else if(extension == ".pdf"){
+                PlayerInteractionController.Instance.changePDF(path);
             }
             else{
                 PlayerInteractionController.Instance.StopVideo();
