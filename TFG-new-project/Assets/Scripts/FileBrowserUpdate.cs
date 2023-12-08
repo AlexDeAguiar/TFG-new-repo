@@ -21,10 +21,10 @@ public class FileBrowserUpdate : MonoBehaviour{
             string part1 = "";
             int length = COMPATIBLE_EXTENSIONS[i].Length;
             for (int j = 1; j < length; j++){
-                part1 += "*" + COMPATIBLE_EXTENSIONS[i][j] + ((j + 1 < length) ? ", " : "");
-            }
+				part1 += "*" + COMPATIBLE_EXTENSIONS[i][j] + ((j + 1 < length) ? ";" : "");
+			}
 
-            filterStr += " (" + part1 + ") | " + part1 + ((i + 1 < COMPATIBLE_EXTENSIONS.Length) ? " | " : "");
+            filterStr += "|" + part1 + ((i + 1 < COMPATIBLE_EXTENSIONS.Length) ? "|" : "");
         }
         Debug.Log(filterStr);
         return filterStr;
