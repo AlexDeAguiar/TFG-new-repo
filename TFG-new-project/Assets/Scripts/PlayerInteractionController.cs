@@ -88,11 +88,14 @@ public class PlayerInteractionController : MonoBehaviour {
 
 	public void DisplayOnBlackboard(string path){
 		StopVideo();
-		string e = Path.GetExtension(path);
-		Debug.Log(e);
-			 if(e == ".mp4"){ changeVideo(path); }
-		else if(e == ".pdf"){ changePDF(path);   }
-		else                { changeImg(path);   }
+		if(currentBlackboard != null){
+			currentBlackboard.SetActive(true);
+			string e = Path.GetExtension(path);
+			Debug.Log(e);
+				if(e == ".mp4"){ changeVideo(path); }
+			else if(e == ".pdf"){ changePDF(path);   }
+			else                { changeImg(path);   }
+		}
 	}
 
 	public void changeVideo(string path) {
@@ -128,7 +131,23 @@ public class PlayerInteractionController : MonoBehaviour {
 	public void updateTexture(Texture newTexture){
 		if(currentBlackboard != null){
 			Renderer renderer = currentBlackboard.GetComponent<Renderer>();
-			renderer.material.SetTexture("_MainTex",newTexture);
+			renderer.material.SetTexture("_MainTex", newTexture);
+
+			// Obtener la textura y sus proporciones originales
+			Vector3 bBoardscale  = currentBlackboard.transform.localScale;
+			float boardAspectRatio = 1f * bBoardscale.x / bBoardscale.y;
+			float imgAspectRatio   = 1f * newTexture.width / newTexture.height;
+			float deformationRatio = imgAspectRatio   / boardAspectRatio;
+
+			Debug.Log(newTexture.width + ", " + newTexture.height);
+			Debug.Log("UwU'meter: [ " + boardAspectRatio + ", " + imgAspectRatio + ", " + deformationRatio + " ]");
+			float w = 1, h = 1;
+			if (deformationRatio < 1f) { w = 1 / deformationRatio; }
+			else { h = deformationRatio; }
+
+			currentBlackboard.transform.localScale = scale;
+			renderer.material.mainTextureScale  = new Vector2(w, h);
+			renderer.material.mainTextureOffset = new Vector2(0.5f, 0);
 		}
 	}
 }
