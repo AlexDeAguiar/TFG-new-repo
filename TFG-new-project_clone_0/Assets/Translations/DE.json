@@ -1,0 +1,24 @@
+{
+    "LAN_NAME": "Deutsch",
+    "Provide a username": "Geben Sie einen Benutzernamen an",
+    "Provide a Password": "Geben Sie ein Passwort ein",
+    "Passwords do not match": "Passwörter stimmen nicht überein",
+    "Please select a user Type": "Bitte wählen Sie einen Benutzertyp aus",
+    "Username is already taken": "Benutzername bereits vergeben",
+    "Accept": "Akzeptieren",
+    "Username": "Nutzername",
+    "Password": "Passwort",
+    "Repeat Password": "Passwort wiederholen",
+
+    "Login": "Einloggen",
+    "Sign Up": "Anmelden",
+    "Settings": "Einstellungen",
+
+    "Student": "Student",
+    "Professor": "Professor",
+
+    "Language": "Sprache",
+
+    "INTERACTION_INFO_BLACKBOARD": "Drücken Sie E, um das Video auszuwählen\nDrücken Sie P, um das Video anzuhalten bzw. die Pause aufzuheben",
+    "INTERACTION_INFO_DOOR": "Drücken Sie E, um die Tür zu öffnen/schließen"
+}

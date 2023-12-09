@@ -1,0 +1,101 @@
+VisualElement {
+}
+
+.boton {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-image: url('project://database/Assets/Resources/Graphics/sprites/button00.png?fileID=21300000&guid=a205381c4e3f32b47b008af894148834&type=3#button00');
+    -unity-background-scale-mode: stretch-to-fill;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    align-items: center;
+    justify-content: center;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    -unity-font: url('project://database/Assets/Fonts/neuropol.otf?fileID=12800000&guid=4b7f8da8185d07943810bdbb5e0a05e0&type=3#neuropol');
+    -unity-font-definition: initial;
+    height: 50%;
+    width: 100%;
+    font-size: 170%;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    transition-duration: 0.25s;
+}
+
+.boton:hover {
+    -unity-background-image-tint-color: rgb(25, 160, 255);
+    color: rgb(255, 255, 255);
+    width: 110%;
+    height: 50%;
+    font-size: 180%;
+    transition-duration: 0.25s;
+}
+
+.hidden {
+    display: none;
+}
+
+.username-field {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.username-field > .unity-text-field__label {
+    width: 0;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0);
+    max-width: none;
+    -unity-text-align: middle-right;
+    -unity-font-style: bold;
+    font-size: 14px;
+    -unity-font: url('project://database/Assets/Fonts/neuropol.otf?fileID=12800000&guid=4b7f8da8185d07943810bdbb5e0a05e0&type=3#neuropol');
+    -unity-font-definition: initial;
+    white-space: normal;
+}
+
+.username-field > .unity-text-field__input {
+    width: 100%;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: rgb(0, 0, 0);
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.tab {
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    top: 80px;
+}
+
+.user-type {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.user-type > .unity-base-field__input {
+    flex-direction: row;
+}
+
+.user-type > .unity-base-field__input > .unity-radio-button {
+    padding-left: 5px;
+    padding-right: 5px;
+}

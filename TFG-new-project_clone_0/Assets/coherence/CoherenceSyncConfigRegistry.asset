@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5793928725704637057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 579f4a509fd2f994fa391c0c78ea3f11, type: 3}
+  m_Name: Player (Networked)
+  m_EditorClassIdentifier: 
+  id: 394226a786d0c1d499b22e6b6bffa171
+  editorTarget: {fileID: 1803698713834244662, guid: 394226a786d0c1d499b22e6b6bffa171, type: 3}
+  includeInSchema: 1
+  objectProvider:
+    rid: 6277512663994204199
+  objectInstantiator:
+    rid: 6277512663994204200
+  references:
+    version: 2
+    RefIds:
+    - rid: 6277512663994204199
+      type: {class: ResourcesProvider, ns: Coherence.Toolkit, asm: Coherence.Toolkit}
+      data:
+        resourcesPath: Player (Networked)
+    - rid: 6277512663994204200
+      type: {class: DefaultInstantiator, ns: Coherence.Toolkit, asm: Coherence.Toolkit}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe206545a28be2142b8fa937387721e8, type: 3}
+  m_Name: CoherenceSyncConfigRegistry
+  m_EditorClassIdentifier: 
+  configs:
+  - {fileID: -5793928725704637057}
+  loadFromAssetDatabase: 0
