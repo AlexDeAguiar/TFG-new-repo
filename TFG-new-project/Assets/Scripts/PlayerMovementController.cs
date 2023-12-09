@@ -84,6 +84,6 @@ public class PlayerMovementController : MonoBehaviour{
 		playerCamera.transform.SetPositionAndRotation(head.transform.position, head.transform.rotation);
 	}
 	private bool canMove() {
-		return NetworkPlayer.MyKeysEnabled && MoveKeysEnabled;
+		return PlayerControllers.MyKeysEnabled && MoveKeysEnabled;
 	}
 }

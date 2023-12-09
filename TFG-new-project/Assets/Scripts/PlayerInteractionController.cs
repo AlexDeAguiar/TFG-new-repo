@@ -6,8 +6,9 @@ using System.Collections;
 using System.Threading;
 using AnotherFileBrowser.Windows;
 using UnityEngine.Networking;
+using Unity.Netcode;
 
-public class PlayerInteractionController : MonoBehaviour{
+public class PlayerInteractionController : MonoBehaviour {
     public static readonly string[][] BL_BOARD_FILE_EXTS = {
         new string[] { "Image files", ".jpg", ".jpeg", ".jpe", ".jfif", ".png" },
         new string[] { "Video files", ".mp4" },
@@ -26,7 +27,7 @@ public class PlayerInteractionController : MonoBehaviour{
     // Update is called once per frame
     void Update() {
 		InfoBoxManager.Instance.hide();
-		if (NetworkPlayer.MyKeysEnabled) {
+		if (PlayerControllers.MyKeysEnabled) {
 			// Raycast para detectar la puerta cercana
 			RaycastHit hit;
 
@@ -58,7 +59,7 @@ public class PlayerInteractionController : MonoBehaviour{
 			//OnTriggerEnter(GetComponent<Collider>(), door);
 
 			string doorPath = Main.GetFullPath(door.transform);
-			PlayerNetworkMessagesController.Instance.toggleDoorServerRpc(doorPath);
+			PlayerNetworkMessages.MyInstance.toggleDoorServerRpc(doorPath);
 		}
 	}
 

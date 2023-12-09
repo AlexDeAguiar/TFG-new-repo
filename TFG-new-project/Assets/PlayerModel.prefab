@@ -236,7 +236,7 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &2095816968381570109
+--- !u!114 &2984817683250750868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,7 +245,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3173820562415476449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee750f38c7f12a44b88454adf0d8ee13, type: 3}
+  m_Script: {fileID: 11500000, guid: bfea72a0a4e3a584c8fd32ecb8337f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5364892256222564735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3173820562415476449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4582203d67f46bd4c9b3a8694376d599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6678453001777584028 stripped
