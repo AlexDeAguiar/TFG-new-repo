@@ -68,28 +68,28 @@ public class PlayerInteractionController : MonoBehaviour {
 		InfoBoxManager.Instance.showText(blackboardInteractionTextKey);
 
 		if (Input.GetKeyDown(bBoardPlayPauseKey)){
-			if (blackboard.GetComponent<VideoWithAudio>().isPlaying()){
-				blackboard.GetComponent<VideoWithAudio>().Pause();
+			if (blackboard.GetComponent<Blackboard>().plane.GetComponent<VideoWithAudio>().isPlaying()){
+				blackboard.GetComponent<Blackboard>().plane.GetComponent<VideoWithAudio>().Pause();
 			}
-			else { blackboard.GetComponent<VideoWithAudio>().Play(); }
+			else { blackboard.GetComponent<Blackboard>().plane.GetComponent<VideoWithAudio>().Play(); }
 		}
 
 		if (Input.GetKeyDown(boardSelectVideoKey)){
 			currentBlackboard = blackboard;
-			currentBlackboard
+			currentBlackboard.GetComponent<Blackboard>().plane
 				.GetComponent<FileBrowserUpdate>()
 				.OpenFileBrowser(DisplayOnBlackboard,BL_BOARD_FILE_EXTS);
 		}
 	}
 
 	public void StopVideo(){
-		if(currentBlackboard != null){ currentBlackboard.GetComponent<VideoWithAudio>().Stop(); }
+		if(currentBlackboard != null){ currentBlackboard.GetComponent<Blackboard>().plane.GetComponent<VideoWithAudio>().Stop(); }
 	}
 
 	public void DisplayOnBlackboard(string path){
 		StopVideo();
 		if(currentBlackboard != null){
-			currentBlackboard.SetActive(true);
+			currentBlackboard.GetComponent<Blackboard>().reset();
 			string e = Path.GetExtension(path);
 			Debug.Log(e);
 				if(e == ".mp4"){ changeVideo(path); }
@@ -100,7 +100,7 @@ public class PlayerInteractionController : MonoBehaviour {
 
 	public void changeVideo(string path) {
 		if(currentBlackboard != null){
-			currentBlackboard.GetComponent<VideoWithAudio>().changeVideo(path);
+			currentBlackboard.GetComponent<Blackboard>().plane.GetComponent<VideoWithAudio>().changeVideo(path);
 			currentBlackboard = null;
 		}
 	}
@@ -130,11 +130,15 @@ public class PlayerInteractionController : MonoBehaviour {
 
 	public void updateTexture(Texture newTexture){
 		if(currentBlackboard != null){
-			Renderer renderer = currentBlackboard.GetComponent<Renderer>();
+			var blackboardScript = currentBlackboard.GetComponent<Blackboard>();
+			var background = blackboardScript.hitbox;
+			var plane = blackboardScript.plane;
+
+			Renderer renderer = plane.GetComponent<Renderer>();
 			renderer.material.SetTexture("_MainTex", newTexture);
 
 			// Obtener la textura y sus proporciones originales
-			Vector3 bBoardscale  = currentBlackboard.transform.localScale;
+			Vector3 bBoardscale  = background.transform.localScale;
 			float boardAspectRatio = 1f * bBoardscale.x / bBoardscale.y;
 			float imgAspectRatio   = 1f * newTexture.width / newTexture.height;
 			float deformationRatio = imgAspectRatio   / boardAspectRatio;
@@ -142,12 +146,14 @@ public class PlayerInteractionController : MonoBehaviour {
 			Debug.Log(newTexture.width + ", " + newTexture.height);
 			Debug.Log("UwU'meter: [ " + boardAspectRatio + ", " + imgAspectRatio + ", " + deformationRatio + " ]");
 			float w = 1, h = 1;
-			if (deformationRatio < 1f) { w = 1 / deformationRatio; }
-			else { h = deformationRatio; }
+			if (deformationRatio < 1f) { w = deformationRatio; }
+			else { h = 1/ deformationRatio; }
 
-			currentBlackboard.transform.localScale = scale;
-			renderer.material.mainTextureScale  = new Vector2(w, h);
-			renderer.material.mainTextureOffset = new Vector2(0.5f, 0);
+			plane.transform.localScale = new Vector3(w, 1f, h);
+			//plane.transform.localScale = scale;
+			renderer.material.mainTextureScale  = new Vector2(1f, 1f);
+			renderer.material.mainTextureOffset = new Vector2(0f, 0f);
+			//renderer.material.mainTexture.wrapMode = TextureWrapMode.Clamp;
 		}
 	}
 }

@@ -3,6 +3,7 @@ using UnityEngine.Video;
 
 public class VideoWithAudio : MonoBehaviour{
     public VideoPlayer videoPlayer; // Asigna el componente VideoPlayer en el Inspector
+	public GameObject blackboardBackground;
     private bool is_Playing;
     private bool videoLoaded;
 
