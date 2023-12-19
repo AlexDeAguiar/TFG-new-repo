@@ -1,0 +1,111 @@
+@startuml
+!theme vibrant
+
+component Scene #FFAAAA
+component Player #AAAAFF
+component NetworkManagerObject as "NetworkManager (obj)" #FFAAAA
+component VivoxVoiceManagerObject as "VivoxVoiceManager (obj)" #FFAAAA
+package OverlayUI {
+  component UIDocument #FFAAAA
+  component Canvas #FFAAAA
+}
+component BlackboardObject as "Blackboard (obj)" #FFAAAA
+component BlackboardScript as "Blackboard (script)" #AAFFAA
+component Plane #FFAAAA
+component VideoWithAudio #AAFFAA
+component FileBrowserUpdate #AAFFAA
+
+
+
+component Facultad #FFAAAA
+component MainCamera #FFAAAA
+component OtherScripts #FFAAAA
+
+component NetworkObject #AAFFAA
+component NetworkTransform #AAFFAA
+component ClientNetworkTransform #AAFFAA
+component PlayerNetworkInitializer #AAFFAA
+component PlayerNetworkMessages #AAFFAA
+
+component PlayerControllers #AAFFAA
+component PlayerMovementControllers #AAFFAA
+component PlayerInteractionControllers #AAFFAA
+component DoorController #AAFFAA
+
+component TestRelay #AAFFAA
+component Door #AAAAFF
+
+component MainGui #AAFFAA
+component VideoSelectorBoxManager #AAFFAA
+component InfoBoxManager #AAFFAA
+component ConnectBoxManager #AAFFAA
+
+component InGameDebugConsole #FFAAAA
+component DebugLogManager #AAFFAA
+
+component NetworkManagerScript as "NetworkManager (script)" #AAFFAA
+component UnityTransport #AAFFAA
+component VivoxPlayer #AAFFAA
+
+component VivoxVoiceManagerScript as "VivoxVoiceManager (script)" #AAFFAA
+
+
+'First line ordering
+'NetworkManagerObject -[hidden]r-> NetworkManagerObject
+'NetworkManager -[hidden]r-> VivoxVoiceManager
+'VivoxVoiceManager -[hidden]r-> Canvas
+'Canvas -[hidden]r-> UIDocument
+'UIDocument -[hidden]r-> Player
+
+
+
+NetworkTransform <|-- ClientNetworkTransform
+
+Scene *-- Player
+Scene *-- NetworkManagerObject
+Scene *-- VivoxVoiceManagerObject
+Scene *-- UIDocument
+Scene *-- Canvas
+Scene *-- Facultad
+Scene *-- MainCamera
+Scene *-- OtherScripts
+
+Scene *-- BlackboardObject
+BlackboardObject *-- BlackboardScript
+BlackboardObject *-- Plane
+Plane *-- VideoWithAudio
+Plane *-- FileBrowserUpdate
+
+Player *-- NetworkObject
+Player *-- ClientNetworkTransform
+Player *-- PlayerNetworkMessages
+Player *-- PlayerNetworkInitializer
+Player o-- PlayerControllers
+Player o-- PlayerMovementControllers
+Player o-- PlayerInteractionControllers
+PlayerNetworkInitializer .l.> PlayerControllers : Creates if owner
+PlayerControllers *-- PlayerMovementControllers
+PlayerControllers *-- PlayerInteractionControllers
+
+OtherScripts *-- TestRelay
+
+Facultad *-- Door
+Door *-- DoorController
+Door *-- NetworkObject
+Door *-- NetworkTransform
+
+UIDocument *-- MainGui
+MainGui *-- VideoSelectorBoxManager
+MainGui *-- InfoBoxManager
+MainGui *-- ConnectBoxManager
+
+Canvas *-- InGameDebugConsole
+InGameDebugConsole *-- DebugLogManager
+
+NetworkManagerObject *-- NetworkManagerScript
+NetworkManagerObject *-- VivoxPlayer
+NetworkManagerObject *-- UnityTransport
+VivoxVoiceManagerObject *-- VivoxVoiceManagerScript
+
+
+@enduml
