@@ -8,7 +8,7 @@ public class PlayerNetworkInitializer : NetworkBehaviour {
 		setPlayerName(playerId);
 
 		if (IsOwner) {
-			gameObject.AddComponent<PlayerControllers>();
+			new PlayerControllers(gameObject);
 
 			VivoxService.Instance.Initialize();
 			VivoxPlayer.Instance.SignIntoVivox();

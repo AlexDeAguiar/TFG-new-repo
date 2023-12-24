@@ -1,37 +1,46 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System;
 using System.IO;
 using System.Collections;
 using System.Threading;
-using AnotherFileBrowser.Windows;
 using UnityEngine.Networking;
-using Unity.Netcode;
 
-public class PlayerInteractionController : MonoBehaviour {
-    public static readonly string[][] BL_BOARD_FILE_EXTS = {
+public class PlayerInteractionController : MonoBehaviour, IController {
+
+	public static PlayerInteractionController Instance { get; private set; } = null;
+	private bool InteractionKeysEnabled = false;
+
+	private PlayerControllers playerControllers;
+	private GameObject player;
+
+	public static readonly string[][] BL_BOARD_FILE_EXTS = {
         new string[] { "Image files", ".jpg", ".jpeg", ".jpe", ".jfif", ".png" },
         new string[] { "Video files", ".mp4" },
         new string[] { "PDF files", ".pdf" }
     };
 
-	public static PlayerInteractionController Instance;
+	
 	public float interactDistance = 2f; // La distancia a la que el jugador puede interactuar con la puerta
 	public const KeyCode doorInteractKey = KeyCode.E; // La tecla que el jugador debe presionar para interactuar con la puerta
     public const KeyCode bBoardPlayPauseKey = KeyCode.P; // La tecla que el jugador debe presionar para pausar o reanudar el video de la pizarra
 	public const KeyCode boardSelectVideoKey = KeyCode.E; // Tecla para mostrar selector de que video meter en la pizarra
 	private GameObject currentBlackboard;
 
-	void Start(){ Instance = this; }
+	public PlayerInteractionController(PlayerControllers playerControllers, GameObject player) {
+		this.playerControllers = playerControllers;
+		this.player = player;
+
+		Instance = this;
+		InteractionKeysEnabled = true;
+	}
 
     // Update is called once per frame
-    void Update() {
+    public void updateController() {
 		InfoBoxManager.Instance.hide();
-		if (PlayerControllers.MyKeysEnabled) {
+		if (canInteract()) {
 			// Raycast para detectar la puerta cercana
 			RaycastHit hit;
 
-			if (Physics.Raycast(transform.position, transform.forward, out hit, interactDistance)){
+			if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, interactDistance)){
 				var targetObject = hit.collider.gameObject;
 
 				switch (hit.collider.tag) {
@@ -105,7 +114,7 @@ public class PlayerInteractionController : MonoBehaviour {
 		}
 	}
 
-	public async void changeImg(string path){ StartCoroutine(InternalChangeImg(path)); }
+	public async void changeImg(string path){ PlayerControllers.Instance.requestStartCoroutine(InternalChangeImg(path)); }
 	private IEnumerator InternalChangeImg(string path){
 		using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(path)){
 			yield return uwr.SendWebRequest();
@@ -155,5 +164,9 @@ public class PlayerInteractionController : MonoBehaviour {
 			renderer.material.mainTextureOffset = new Vector2(0f, 0f);
 			//renderer.material.mainTexture.wrapMode = TextureWrapMode.Clamp;
 		}
+	}
+
+	private bool canInteract() {
+		return playerControllers.KeysEnabled && InteractionKeysEnabled;
 	}
 }
