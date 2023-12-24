@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovementController : MonoBehaviour, IController {
+public class PlayerMovementController : IController {
 
 	public static PlayerMovementController Instance { get; private set; } = null;
 	private bool MoveKeysEnabled = false;
@@ -36,7 +36,7 @@ public class PlayerMovementController : MonoBehaviour, IController {
 		MoveKeysEnabled = true;
 	}
 
-    public void updateController() {
+    public void update() {
 
 		if (characterController.isGrounded) {
             // We are grounded, so recalculate move direction based on axes

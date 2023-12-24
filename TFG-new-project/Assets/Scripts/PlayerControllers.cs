@@ -25,7 +25,7 @@ public class PlayerControllers : MonoBehaviour {
 
 	void Update() {
 		foreach (var controller in controllers) {
-			controller.updateController();
+			controller.update();
 		}
 	}
 

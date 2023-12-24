@@ -4,7 +4,7 @@ using System.Collections;
 using System.Threading;
 using UnityEngine.Networking;
 
-public class PlayerInteractionController : MonoBehaviour, IController {
+public class PlayerInteractionController : IController {
 
 	public static PlayerInteractionController Instance { get; private set; } = null;
 	private bool InteractionKeysEnabled = false;
@@ -33,8 +33,7 @@ public class PlayerInteractionController : MonoBehaviour, IController {
 		InteractionKeysEnabled = true;
 	}
 
-    // Update is called once per frame
-    public void updateController() {
+    public void update() {
 		InfoBoxManager.Instance.hide();
 		if (canInteract()) {
 			// Raycast para detectar la puerta cercana
@@ -152,8 +151,6 @@ public class PlayerInteractionController : MonoBehaviour, IController {
 			float imgAspectRatio   = 1f * newTexture.width / newTexture.height;
 			float deformationRatio = imgAspectRatio   / boardAspectRatio;
 
-			Debug.Log(newTexture.width + ", " + newTexture.height);
-			Debug.Log("UwU'meter: [ " + boardAspectRatio + ", " + imgAspectRatio + ", " + deformationRatio + " ]");
 			float w = 1, h = 1;
 			if (deformationRatio < 1f) { w = deformationRatio; }
 			else { h = 1/ deformationRatio; }

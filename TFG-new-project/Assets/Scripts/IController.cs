@@ -1,4 +1,4 @@
 public interface IController
 {
-	public void updateController();
+	public void update();
 }
