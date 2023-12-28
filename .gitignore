@@ -63,4 +63,4 @@ crashlytics-build.properties
 #-----Added ignores for tfg project----
 /TFG-new-project*/UserSettings/Layouts
 TFG-new-project*/ModeloFacultadFBX.zip
-TFG-new-project/.vscode/settings.json
+*.vscode/settings.json
