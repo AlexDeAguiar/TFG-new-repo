@@ -1,0 +1,13 @@
+@startuml
+component host
+component client
+component relay
+component unityServers
+
+host <-> unityServers
+client <-> unityServers
+
+
+host - relay : Internet
+relay - client : Internet
+@enduml
