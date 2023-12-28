@@ -1,0 +1,36 @@
+@startuml DoorController
+autonumber
+
+actor Player order 10
+
+box "Client Machine" #555555
+participant "PlayerInteractionController" as PIC order 20
+participant "DoorController" as DC order 50
+participant "InfoBoxManager" as IBM order 60
+end box
+
+box "Server Machine" #777777
+participant "PlayerNetworkMessages" as PNM order 70
+end box
+
+PIC -> DC: interact()
+activate DC
+
+DC -> IBM: ShowText(doorInteractKey)
+activate IBM
+IBM --> DC
+deactivate IBM
+
+Player -> DC: Presses "E"
+
+DC -> PNM: toggleDoorServerRpc()
+activate PNM
+PNM --> DC
+deactivate PNM
+
+
+DC --> PIC
+deactivate DC
+
+deactivate PIC
+@enduml

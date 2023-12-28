@@ -1,0 +1,30 @@
+@startuml playerInteractionController
+autonumber
+
+actor Player order 10
+participant "PlayerInteractionController" as PIC order 20
+participant "InfoBoxManager" as IBM order 30
+participant "Physics" as PRC order 40
+participant "IInteractable" as II order 50
+
+Player -> PIC: observe an interactable object 
+activate PIC
+PIC -> IBM: Hide()
+
+activate IBM
+IBM --> PIC
+deactivate IBM
+
+PIC -> PRC: Raycast()
+activate PRC
+PRC --> PIC: return Target Object
+deactivate PRC 
+
+PIC -> II: interact()
+activate II
+II --> PIC
+deactivate II
+
+PIC --> Player
+deactivate PIC
+@enduml
