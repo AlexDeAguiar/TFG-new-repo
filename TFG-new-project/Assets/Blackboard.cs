@@ -29,7 +29,7 @@ public class Blackboard : MonoBehaviour, IInteractable {
 	}
 
 	private const string blackboardInteractionTextKey = "INTERACTION_INFO_BLACKBOARD";
-	public void handleBehaviour(GameObject targetObject) {
+	public void interact(GameObject targetObject) {
 		InfoBoxManager.Instance.showText(blackboardInteractionTextKey);
 
 		if (Input.GetKeyDown(bBoardPlayPauseKey)){

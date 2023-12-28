@@ -27,7 +27,7 @@ public class DoorController : MonoBehaviour, IInteractable {
 
 	//TODO: Mover este texto tambien a la puerta, por si queremos que mande distintos mensajes si esta abierto o cerrado, o para que cambie el mensaje dependiendo del idioma
 	private const string doorInteractionTextKey = "INTERACTION_INFO_DOOR";
-	public void handleBehaviour(GameObject targetObject) {
+	public void interact(GameObject targetObject) {
 		//Mostrar el mensaje informativo siempre
 		InfoBoxManager.Instance.showText(doorInteractionTextKey);
 

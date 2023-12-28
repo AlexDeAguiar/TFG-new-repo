@@ -31,7 +31,7 @@ public class PlayerInteractionController : IController {
 				IInteractable interactable = targetObject.GetComponent<IInteractable>();
 				
 				if(interactable != null){
-					interactable.handleBehaviour(targetObject);
+					interactable.interact(targetObject);
 				}
 
 /*//ALTERNATIVE
