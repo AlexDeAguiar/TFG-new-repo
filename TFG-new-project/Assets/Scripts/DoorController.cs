@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class DoorController : MonoBehaviour {
+public class DoorController : MonoBehaviour, IInteractable {
+	public const KeyCode doorInteractKey = KeyCode.E; // La tecla que el jugador debe presionar para interactuar con la puerta
 	public float angleDiff = 90; // El angulo de apertura de la puerta
 	public bool isLeftDoor = false;
 	public bool isOpen = false;
@@ -21,6 +22,23 @@ public class DoorController : MonoBehaviour {
 		} else {
 			closeAngle = transform.rotation.eulerAngles.y;
 			openAngle = closeAngle + angleDiff * (isLeftDoor ? 1 : -1);
+		}
+	}
+
+	//TODO: Mover este texto tambien a la puerta, por si queremos que mande distintos mensajes si esta abierto o cerrado, o para que cambie el mensaje dependiendo del idioma
+	private const string doorInteractionTextKey = "INTERACTION_INFO_DOOR";
+	public void handleBehaviour(GameObject targetObject) {
+		//Mostrar el mensaje informativo siempre
+		InfoBoxManager.Instance.showText(doorInteractionTextKey);
+
+		//Detectar teclas y llamar a los metodos apropiados
+		if (Input.GetKeyDown(doorInteractKey)){
+			//TODO: Mover esta logica a la puerta, no tiene por que estar en el controller
+			//Ignore collisions with the door
+			//OnTriggerEnter(GetComponent<Collider>(), door);
+
+			string doorPath = Main.GetFullPath(targetObject.transform);
+			PlayerNetworkMessages.MyInstance.toggleDoorServerRpc(doorPath);
 		}
 	}
 
