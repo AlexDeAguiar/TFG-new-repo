@@ -32,18 +32,18 @@ public class Blackboard : MonoBehaviour, IInteractable {
 	public void interact(GameObject targetObject) {
 		InfoBoxManager.Instance.showText(blackboardInteractionTextKey);
 
+		if (Input.GetKeyDown(boardSelectVideoKey)){
+			currentBlackboard = targetObject;
+			currentBlackboard.GetComponent<Blackboard>().plane
+				.GetComponent<FileBrowserUpdate>()
+				.OpenFileBrowser(DisplayOnBlackboard,BL_BOARD_FILE_EXTS,3,true);
+		}
+
 		if (Input.GetKeyDown(bBoardPlayPauseKey)){
 			if (targetObject.GetComponent<Blackboard>().plane.GetComponent<VideoWithAudio>().isPlaying()){
 				targetObject.GetComponent<Blackboard>().plane.GetComponent<VideoWithAudio>().Pause();
 			}
 			else { targetObject.GetComponent<Blackboard>().plane.GetComponent<VideoWithAudio>().Play(); }
-		}
-
-		if (Input.GetKeyDown(boardSelectVideoKey)){
-			currentBlackboard = targetObject;
-			currentBlackboard.GetComponent<Blackboard>().plane
-				.GetComponent<FileBrowserUpdate>()
-				.OpenFileBrowser(DisplayOnBlackboard,BL_BOARD_FILE_EXTS);
 		}
 	}
 
