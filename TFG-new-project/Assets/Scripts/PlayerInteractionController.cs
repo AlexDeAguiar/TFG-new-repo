@@ -33,23 +33,6 @@ public class PlayerInteractionController : IController {
 				if(interactable != null){
 					interactable.interact(targetObject);
 				}
-
-/*//ALTERNATIVE
-				if(hit.collider.tag == "Interactable"){
-					targetObject.GetComponent<IInteractable>().handleBehaviour(targetObject);
-				}
-*/
-
-/*//OLD CODE
-				switch (hit.collider.tag) {
-					case "Door":
-						handleDoorBehaviour(targetObject);
-						break;
-					case "BlackBoard":
-						handleBlackBoardBehaviour(targetObject);
-						break;
-				}
-//*/
 			}
 		}
 	}

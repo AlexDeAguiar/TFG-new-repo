@@ -18,10 +18,10 @@ namespace AnotherFileBrowser.Windows
         /// </summary>
         /// <param name="browserProperties">Special Properties of File Dialog</param>
         /// <param name="filepath">User picked path (Callback)</param>
-        public void OpenFileBrowser(BrowserProperties browserProperties, Action<string> filepath)
+        public void OpenFileBrowser(BrowserProperties browserProperties, Action<string[]> filepath)
         {
             var ofd = new VistaOpenFileDialog();
-            ofd.Multiselect = false;
+            ofd.Multiselect = true;
             ofd.Title = browserProperties.title == null ? "Select a File" : browserProperties.title;
             ofd.InitialDirectory = browserProperties.initialDir == null ? @"C:\" : browserProperties.initialDir;
             ofd.Filter = browserProperties.filter == null ? "All files (*.*)|*.*" : browserProperties.filter;
@@ -30,7 +30,7 @@ namespace AnotherFileBrowser.Windows
 
             if (ofd.ShowDialog(new WindowWrapper(GetActiveWindow())) == DialogResult.OK)
             {
-                filepath(ofd.FileName);
+                filepath(ofd.FileNames);
             }
         }
 
