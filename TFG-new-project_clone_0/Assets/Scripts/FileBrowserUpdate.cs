@@ -6,19 +6,19 @@ using UnityEngine.UI;
 using System;
 
 public class FileBrowserUpdate : MonoBehaviour{
-    public void OpenFileBrowser(Action<string> result, string[][] extensions){
+    public void OpenFileBrowser(Action<string[]> result, string[][] extensions, int filterIndex, bool includeAllFilesOption){
         var bp = new BrowserProperties(Translator._INTL("Choose a File"));
         //bp.initialDir(path) -> where dialog should be opened initially
-        bp.filter = getFilterString(extensions);
-        bp.filterIndex = 0;
+        bp.filter = getFilterString(extensions,includeAllFilesOption);
+        bp.filterIndex = filterIndex;
 
         //OpenMultiSelectFileBrowser
         //OpenFolderBrowser
         //SaveFileBrowser
-        new FileBrowser().OpenFileBrowser(bp, path => result(path));
+        new FileBrowser().OpenFileBrowser(bp, paths => result(paths));
     }
 
-    string getFilterString(string[][] extensions){
+    string getFilterString(string[][] extensions, bool includeAllFilesOption){
         string filterStr = "";
         for (int i = 0; i < extensions.Length; i++){
             filterStr += Translator._INTL(extensions[i][0]);
@@ -31,6 +31,8 @@ public class FileBrowserUpdate : MonoBehaviour{
 
             filterStr += "|" + part1 + ((i + 1 < extensions.Length) ? "|" : "");
         }
+
+        if(includeAllFilesOption){ filterStr += "|All files (*.*)|*.*"; }
         Debug.Log(filterStr);
         return filterStr;
     }

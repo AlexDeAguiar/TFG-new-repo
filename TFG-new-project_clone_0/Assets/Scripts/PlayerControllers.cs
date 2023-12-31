@@ -1,16 +1,35 @@
-using Unity.Netcode;
-using Unity.Services.Vivox;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerControllers : MonoBehaviour {
 
-	public static PlayerControllers Instance;
-	public static bool MyKeysEnabled;
+	public static PlayerControllers Instance { get; private set; } = null;
+	public bool KeysEnabled = false;
 
-	public void Start() {
+	private List<IController> controllers;
+
+	private void init(GameObject player) {
+		controllers = new List<IController>() {
+			new PlayerMovementController(this, player),
+			new PlayerInteractionController(this, player)
+		};
+
 		Instance = this;
-		MyKeysEnabled = true;
-		gameObject.AddComponent<PlayerMovementController>();
-		gameObject.AddComponent<PlayerInteractionController>();
+		KeysEnabled = true;
+	}
+
+	public static void createController(GameObject player) {
+		GameObject.Find("Controllers").AddComponent<PlayerControllers>().init(player);
+	}
+
+	void Update() {
+		foreach (var controller in controllers) {
+			controller.update();
+		}
+	}
+
+	public void requestStartCoroutine(IEnumerator enumerator) {
+		StartCoroutine(enumerator);	
 	}
 }

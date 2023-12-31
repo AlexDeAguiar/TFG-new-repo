@@ -19,7 +19,7 @@
 
     "Language": "Idioma",
 
-    "INTERACTION_INFO_BLACKBOARD": "Presiona E para escoger el video\nPresiona P para pausar/reanudar el video",
+    "INTERACTION_INFO_BLACKBOARD": "Presiona E para escoger el archivo\nPresiona C para limpiar la pizarra\nPresiona las flechas izquierda/derecha para ir al archivo anterior/siguiente\nPresiona P para pausar/reanudar un video",
     "INTERACTION_INFO_DOOR": "Presiona E para abrir/cerrar la puerta",
 
     "Choose a File": "Selecciona un archivo",

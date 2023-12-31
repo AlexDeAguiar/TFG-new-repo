@@ -19,7 +19,7 @@ public class PlayerControllers : MonoBehaviour {
 		KeysEnabled = true;
 	}
 
-	public PlayerControllers(GameObject player) {
+	public static void createController(GameObject player) {
 		GameObject.Find("Controllers").AddComponent<PlayerControllers>().init(player);
 	}
 

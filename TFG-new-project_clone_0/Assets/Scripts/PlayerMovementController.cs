@@ -1,49 +1,47 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+public class PlayerMovementController : IController {
 
-public class PlayerMovementController : MonoBehaviour{
+	public static PlayerMovementController Instance { get; private set; } = null;
+	private bool MoveKeysEnabled = false;
 
-	public static PlayerMovementController Instance;
-
+	private PlayerControllers playerControllers;
 	private GameObject player;
 	private GameObject head;
+	private CharacterController characterController;
 
-    public float speed = 7.5f;
+	public float speed = 7.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     public GameObject playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 60.0f;
 
-    CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     Vector2 rotation = Vector2.zero;
 
-	[HideInInspector]
-	public bool MoveKeysEnabled;
+	public PlayerMovementController(PlayerControllers playerControllers, GameObject player) {
+		this.playerControllers = playerControllers;
+		this.player = player;
+		this.head = Utility.FindChildByTag(player, "Head");
+		this.characterController = player.GetComponent<CharacterController>();
 
-	void Start() {
-		Instance = this;
-		MoveKeysEnabled = true;
-
-		player = gameObject;
-		head = Utility.FindChildByTag(player, "Head");
-
-
-		characterController = GetComponent<CharacterController>();
+		//TODO: Refactor so that Main Camera follows the model, rather than the controller moving the camera, to follow MVC
 		playerCamera = GameObject.Find("MainCamera");
-
 		playerCamera.transform.SetPositionAndRotation(head.transform.position, head.transform.rotation);
 
-		rotation.y = transform.eulerAngles.y;
-    }
+		rotation.y = player.transform.eulerAngles.y;
 
-    void Update() {
-        if (characterController.isGrounded) {
+		Instance = this;
+		MoveKeysEnabled = true;
+	}
+
+    public void update() {
+
+		if (characterController.isGrounded) {
             // We are grounded, so recalculate move direction based on axes
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
-            Vector3 right = transform.TransformDirection(Vector3.right);
+            Vector3 forward = player.transform.TransformDirection(Vector3.forward);
+            Vector3 right = player.transform.TransformDirection(Vector3.right);
             float curSpeedX = canMove() ? speed * Input.GetAxis("Vertical") : 0;
             float curSpeedY = canMove() ? speed * Input.GetAxis("Horizontal") : 0;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
@@ -84,6 +82,6 @@ public class PlayerMovementController : MonoBehaviour{
 		playerCamera.transform.SetPositionAndRotation(head.transform.position, head.transform.rotation);
 	}
 	private bool canMove() {
-		return PlayerControllers.MyKeysEnabled && MoveKeysEnabled;
+		return playerControllers.KeysEnabled && MoveKeysEnabled;
 	}
 }

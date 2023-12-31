@@ -5,10 +5,13 @@ component Scene #FFAAAA
 component Player #AAAAFF
 component NetworkManagerObject as "NetworkManager (obj)" #FFAAAA
 component VivoxVoiceManagerObject as "VivoxVoiceManager (obj)" #FFAAAA
-package OverlayUI {
+
+package "Overlay UI" {
   component UIDocument #FFAAAA
   component Canvas #FFAAAA
 }
+component Controllers #FFAAAA
+
 component BlackboardObject as "Blackboard (obj)" #FFAAAA
 component BlackboardScript as "Blackboard (script)" #AAFFAA
 component Plane #FFAAAA
@@ -21,15 +24,17 @@ component Facultad #FFAAAA
 component MainCamera #FFAAAA
 component OtherScripts #FFAAAA
 
-component NetworkObject #AAFFAA
-component NetworkTransform #AAFFAA
-component ClientNetworkTransform #AAFFAA
-component PlayerNetworkInitializer #AAFFAA
-component PlayerNetworkMessages #AAFFAA
+package "Network elements" {
+  component NetworkObject #AAFFAA
+  component NetworkTransform #AAFFAA
+  component ClientNetworkTransform #AAFFAA
+}
+
+component PlayerNetwork #AAFFAA
 
 component PlayerControllers #AAFFAA
-component PlayerMovementControllers #AAFFAA
-component PlayerInteractionControllers #AAFFAA
+component PlayerMovementController #AAFFAA
+component PlayerInteractionController #AAFFAA
 component DoorController #AAFFAA
 
 component TestRelay #AAFFAA
@@ -69,6 +74,7 @@ Scene *-- Canvas
 Scene *-- Facultad
 Scene *-- MainCamera
 Scene *-- OtherScripts
+Scene *-- Controllers
 
 Scene *-- BlackboardObject
 BlackboardObject *-- BlackboardScript
@@ -78,14 +84,8 @@ Plane *-- FileBrowserUpdate
 
 Player *-- NetworkObject
 Player *-- ClientNetworkTransform
-Player *-- PlayerNetworkMessages
-Player *-- PlayerNetworkInitializer
-Player o-- PlayerControllers
-Player o-- PlayerMovementControllers
-Player o-- PlayerInteractionControllers
-PlayerNetworkInitializer .l.> PlayerControllers : Creates if owner
-PlayerControllers *-- PlayerMovementControllers
-PlayerControllers *-- PlayerInteractionControllers
+Player *-- PlayerNetwork
+PlayerNetwork ..> PlayerControllers : Creates if owner
 
 OtherScripts *-- TestRelay
 
@@ -107,5 +107,8 @@ NetworkManagerObject *-- VivoxPlayer
 NetworkManagerObject *-- UnityTransport
 VivoxVoiceManagerObject *-- VivoxVoiceManagerScript
 
+Controllers o-- PlayerControllers
+PlayerControllers *-- PlayerMovementController
+PlayerControllers *-- PlayerInteractionController
 
 @enduml

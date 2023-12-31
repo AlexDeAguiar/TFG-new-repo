@@ -9,6 +9,7 @@ TagManager:
   - Head
   - Body
   - BlackBoard
+  - Interactable
   layers:
   - Default
   - TransparentFX

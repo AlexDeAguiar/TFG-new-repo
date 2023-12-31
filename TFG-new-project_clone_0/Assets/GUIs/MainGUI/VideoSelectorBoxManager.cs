@@ -33,6 +33,6 @@ public class VideoSelectorBoxManager : MonoBehaviour {
 		string path = videoSelectorTextBox.text;
 		Debug.Log("Selected path: " + path);
 
-		PlayerInteractionController.Instance.changeVideo(path);
+		//PlayerInteractionController.Instance.changeVideo(path);
 	}
 }
