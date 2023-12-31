@@ -4,10 +4,11 @@ component client
 component relay
 component unityServers
 
-host <-> unityServers
-client <-> unityServers
+unityServers <-d-> host
+unityServers <-d-> relay
+unityServers <-d-> client
 
 
-host - relay : Internet
-relay - client : Internet
+host <-r-> relay
+relay <-r-> client
 @enduml

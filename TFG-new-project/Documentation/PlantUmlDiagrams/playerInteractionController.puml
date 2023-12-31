@@ -20,7 +20,7 @@ activate PRC
 PRC --> PIC: return Target Object
 deactivate PRC 
 
-PIC -> II: interact()
+PIC -> II: interact(targetObject)
 activate II
 II --> PIC
 deactivate II

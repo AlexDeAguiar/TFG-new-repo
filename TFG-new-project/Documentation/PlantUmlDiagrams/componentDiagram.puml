@@ -35,7 +35,7 @@ component PlayerNetwork #AAFFAA
 component PlayerControllers #AAFFAA
 component PlayerMovementController #AAFFAA
 component PlayerInteractionController #AAFFAA
-component DoorController #AAFFAA
+component DoorInteraction #AAFFAA
 
 component TestRelay #AAFFAA
 component Door #AAAAFF
@@ -90,7 +90,7 @@ PlayerNetwork ..> PlayerControllers : Creates if owner
 OtherScripts *-- TestRelay
 
 Facultad *-- Door
-Door *-- DoorController
+Door *-- DoorInteraction
 Door *-- NetworkObject
 Door *-- NetworkTransform
 
