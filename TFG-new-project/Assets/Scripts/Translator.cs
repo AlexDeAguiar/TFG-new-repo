@@ -55,5 +55,13 @@ public class Translator : MonoBehaviour {
         foreach (Translatable tr in translatables) { tr.updateTexts(); }
     }
 
+    public static int getCurrentLanIdx(){ return (int) LAN; }
+
+    public static List<string> getLanguagesList(){
+        List<string> options = new List<string>();
+        foreach (LANGUAGES lan in Enum.GetValues(typeof(LANGUAGES))){ options.Add(Translator._INTL("LAN_NAME", lan)); }
+		return options;
+    }
+
     public static void Register(Translatable tr){ translatables.Add(tr); }
 }
