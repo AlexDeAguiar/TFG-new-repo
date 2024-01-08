@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum LANGUAGES{ ES, EN, DE, FR, JP, TM, /*...*/ }
+public enum LANGUAGES{ ES, EN, DE, FR, /*...*/ }
 public interface Translatable{ public void updateTexts(); }
 
 public class Translator : MonoBehaviour {
