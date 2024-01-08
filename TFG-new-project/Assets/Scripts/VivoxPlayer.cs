@@ -12,7 +12,7 @@ public class VivoxPlayer : MonoBehaviour {
     private VivoxVoiceManager _vvm;
     IChannelSession _chan;
     private int PermissionAskedCount;
-    [SerializeField] public string VoiceChannelName = "MiCanalUwU"; //nombre del canal
+    [SerializeField] public string VoiceChannelName; //nombre del canal
 
     private Transform mainCam; //position of our Main Camera
 

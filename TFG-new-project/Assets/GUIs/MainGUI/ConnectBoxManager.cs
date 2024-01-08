@@ -20,7 +20,7 @@ public class ConnectBoxManager : SuperGUI, Translatable {
 	private TestRelay testRelay;
 
 	private Label joinCode;
-	private string joinCodeStr;
+	public string joinCodeStr { get; private set; } = "";
 	private Label roomSize;
 	private string roomSizeStr;
 

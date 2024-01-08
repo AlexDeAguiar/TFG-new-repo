@@ -35,6 +35,8 @@ public class TestRelay : MonoBehaviour
 			Allocation allocation = await RelayService.Instance.CreateAllocationAsync(roomSize);
 
 			string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+			VivoxPlayer.Instance.VoiceChannelName = joinCode;
+
 			Debug.Log("Join code: " + joinCode);
 			Debug.Log("Size: " + roomSize.ToString());
 
@@ -53,6 +55,8 @@ public class TestRelay : MonoBehaviour
 
 	public async void joinRelay(string joinCode) {
 		try {
+
+			VivoxPlayer.Instance.VoiceChannelName = joinCode;
 
 			//Stop previous connection attempts to be able to retry if it gets stuck the 1st time
 			NetworkManager.Singleton.StopAllCoroutines();
