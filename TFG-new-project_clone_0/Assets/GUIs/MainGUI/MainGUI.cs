@@ -7,7 +7,6 @@ public class MainGUI : SuperGUI {
 	public static new MainGUI Instance; //Note: Using keyword "new" because SuperGUI is also a singleton
 
     UIDocument myUI;
-    VisualElement root;
     VisualElement userPic;
     Label timeLabel;
 
@@ -20,7 +19,7 @@ public class MainGUI : SuperGUI {
 
 	VideoSelectorBoxManager videoSelectorBoxManager;
 	InfoBoxManager infoBoxManager;
-	ConnectBoxManager connectBoxManager;
+	public ConnectBoxManager connectBoxManager;
 
 	void Start(){
         base.Init();
@@ -30,31 +29,26 @@ public class MainGUI : SuperGUI {
 		showRight = false;
         showLeft  = false;
 
-        myUI = GetComponent<UIDocument>();
-        root = myUI.rootVisualElement;
-        userPic = root.Q<VisualElement>("UserPic");
+        userPic = Root.Q<VisualElement>("UserPic");
         userPic.RegisterCallback<ClickEvent>(evt => ChangeBackgroundSprite(evt));
 
-        rightTab = root.Q<VisualElement>("RightTab");
+        rightTab = Root.Q<VisualElement>("RightTab");
         rightTab.Q<VisualElement>("RightArrowBtn").RegisterCallback<ClickEvent>(toggleRightTab);
         rightTabLabel = rightTab.Q<VisualElement>("RightArrowBtn").Q<Label>();
 
-        leftTab = root.Q<VisualElement>("LeftTab");
+        leftTab = Root.Q<VisualElement>("LeftTab");
         leftTab.Q<VisualElement>("LeftArrowBtn").RegisterCallback<ClickEvent>(toggleLeftTab);
         leftTabLabel = leftTab.Q<VisualElement>("LeftArrowBtn").Q<Label>();
 
-
-		VisualElement videoSelectorBox = root.Q<VisualElement>("FileSelector");
+		VisualElement videoSelectorBox = Root.Q<VisualElement>("FileSelector");
 		videoSelectorBoxManager = new VideoSelectorBoxManager(videoSelectorBox);
 
-		VisualElement infoBox = root.Q<VisualElement>("InfoBox");
+		VisualElement infoBox = Root.Q<VisualElement>("InfoBox");
 		infoBoxManager = new InfoBoxManager(infoBox);
 
-		VisualElement connectBox = root.Q<VisualElement>("ConnectBox");
-		connectBoxManager = new ConnectBoxManager(connectBox);
+		connectBoxManager.Init(Root);
 
-		timeLabel = root
-            .Q<VisualElement>("root")
+		timeLabel = Root
             .Q<VisualElement>("TopBar")
             .Q<VisualElement>("TimeFrame")
             .Q<Label>("timeLabel");
@@ -70,6 +64,7 @@ public class MainGUI : SuperGUI {
             NetworkManager.Singleton.StartHost();
         }
 		*/
+        Translator.changeLan(Translator.LAN);
 	}
 
     void Update(){
@@ -84,7 +79,7 @@ public class MainGUI : SuperGUI {
 
     void updateUserData(){
         User myUser = User.Instance;
-        root.Q<Label>("Username").text = myUser.username;
+        Root.Q<Label>("Username").text = myUser.username;
         NetworkManager.Singleton.StartHost();
     }
 

@@ -82,3 +82,177 @@
     -unity-font-definition: initial;
     color: rgb(255, 255, 255);
 }
+
+.connectBox {
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left-color: rgb(142, 153, 253);
+    border-right-color: rgb(142, 153, 253);
+    border-top-color: rgb(142, 153, 253);
+    border-bottom-color: rgb(142, 153, 253);
+    justify-content: space-around;
+    margin-top: 3%;
+    padding-top: 5px;
+    margin-bottom: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+}
+
+.connectButton {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-left-color: rgb(72, 75, 101);
+    border-right-color: rgb(72, 75, 101);
+    border-top-color: rgb(72, 75, 101);
+    border-bottom-color: rgb(72, 75, 101);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    background-image: resource('Graphics/sprites/button00');
+    background-color: rgba(0, 0, 0, 0);
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(255, 255, 255);
+}
+
+#JoinCodeBox > .unity-text-field__label {
+    min-width: 70px;
+    color: rgb(255, 255, 255);
+}
+
+#JoinCodeBox > .unity-text-field__input {
+    flex-shrink: 0;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgb(27, 67, 103);
+    color: rgb(255, 255, 255);
+    height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-left-color: rgb(102, 174, 222);
+    border-right-color: rgb(102, 174, 222);
+    border-top-color: rgb(102, 174, 222);
+    border-bottom-color: rgb(102, 174, 222);
+}
+
+.connectButton {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    -unity-text-align: middle-center;
+    height: 60px;
+}
+
+.connectButton:hover {
+    -unity-background-image-tint-color: rgb(92, 96, 133);
+    width: 42%;
+    transition-duration: 2s;
+    transition-property: width;
+    transition-timing-function: ease;
+}
+
+.connectBox-Label {
+    position: absolute;
+    left: 25px;
+    top: -1px;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    background-color: rgb(142, 153, 253);
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 14px;
+    -unity-font: url('project://database/Assets/Fonts/neuropol.otf?fileID=12800000&guid=4b7f8da8185d07943810bdbb5e0a05e0&type=3#neuropol');
+    -unity-text-align: middle-left;
+    -unity-font-style: bold;
+}
+
+#LanDropdown > .unity-popup-field__input {
+    flex-shrink: 0;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgb(27, 67, 103);
+    color: rgb(255, 255, 255);
+    height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-left-color: rgb(102, 174, 222);
+    border-right-color: rgb(102, 174, 222);
+    border-top-color: rgb(102, 174, 222);
+    border-bottom-color: rgb(102, 174, 222);
+}
+
+#LanDropdownIngame > .unity-popup-field__input {
+    flex-shrink: 0;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgb(27, 67, 103);
+    color: rgb(255, 255, 255);
+    height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-left-color: rgb(102, 174, 222);
+    border-right-color: rgb(102, 174, 222);
+    border-top-color: rgb(102, 174, 222);
+    border-bottom-color: rgb(102, 174, 222);
+}

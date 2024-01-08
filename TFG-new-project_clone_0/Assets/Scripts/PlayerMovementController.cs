@@ -36,50 +36,62 @@ public class PlayerMovementController : IController {
 		MoveKeysEnabled = true;
 	}
 
+	private readonly float MOUSE_MOVEMENT = 25f;
     public void update() {
+		if(!Input.GetKey(KeyCode.LeftAlt)){
+			Cursor.visible = false;
+			if (characterController.isGrounded) {
+				float mouseEvent = 0;
+				if(Input.mouseScrollDelta.y > 0)	 { mouseEvent =  MOUSE_MOVEMENT; }
+				else if(Input.mouseScrollDelta.y < 0){ mouseEvent = -MOUSE_MOVEMENT; }
 
-		if (characterController.isGrounded) {
-            // We are grounded, so recalculate move direction based on axes
-            Vector3 forward = player.transform.TransformDirection(Vector3.forward);
-            Vector3 right = player.transform.TransformDirection(Vector3.right);
-            float curSpeedX = canMove() ? speed * Input.GetAxis("Vertical") : 0;
-            float curSpeedY = canMove() ? speed * Input.GetAxis("Horizontal") : 0;
-            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+				// We are grounded, so recalculate move direction based on axes
+				Vector3 forward = player.transform.TransformDirection(Vector3.forward);
+				Vector3 right = player.transform.TransformDirection(Vector3.right);
+				float curSpeedX = mouseEvent != 0 ? mouseEvent : (canMove() ? speed * Input.GetAxis("Vertical") : 0);
+				float curSpeedY = canMove() ? speed * Input.GetAxis("Horizontal") : 0;
+				moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-            if (Input.GetButton("Jump") && canMove()){
-                moveDirection.y = jumpSpeed;
-            }
-        }
-
-        // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-        // as an acceleration (ms^-2)
-        moveDirection.y -= gravity * Time.deltaTime;
-
-        // Move the controller
-        characterController.Move(moveDirection * Time.deltaTime);
-
-        // Player and Camera rotation
-        if (canMove()) {
-			float currRotationX = head.transform.rotation.eulerAngles.x; // De 0 a 360 grados (90 es abajo, 270 es arriba)
-            float rotationChangeY = Input.GetAxis("Mouse X") * lookSpeed;
-			float rotationChangeX = -Input.GetAxis("Mouse Y") * lookSpeed;
-			if (currRotationX <= 180 )
-			{ //Looking down
-				float maxDownChange = lookXLimit - currRotationX;
-				if (rotationChangeX > maxDownChange) { currRotationX = maxDownChange; }
-			}
-			else
-			{
-				float maxUpChange = -(lookXLimit - currRotationX);
-				if (rotationChangeX < maxUpChange) { currRotationX = 360 + maxUpChange; }
+				if (Input.GetButton("Jump") && canMove()){
+					moveDirection.y = jumpSpeed;
+				}
 			}
 
-			player.transform.Rotate(new Vector3(0, rotationChangeY, 0));
-			head.transform.Rotate(new Vector3(rotationChangeX, 0, 0));
+			// Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
+			// when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
+			// as an acceleration (ms^-2)
+			moveDirection.y -= gravity * Time.deltaTime;
+
+			// Move the controller
+			characterController.Move(moveDirection * Time.deltaTime);
+
+			// Player and Camera rotation
+			if (canMove()) {
+				float currRotationX = head.transform.rotation.eulerAngles.x; // De 0 a 360 grados (90 es abajo, 270 es arriba)
+				float rotationChangeY = Input.GetAxis("Mouse X") * lookSpeed;
+				float rotationChangeX = -Input.GetAxis("Mouse Y") * lookSpeed;
+				if (currRotationX <= 180 )
+				{ //Looking down
+					float maxDownChange = lookXLimit - currRotationX;
+					if (rotationChangeX > maxDownChange) { currRotationX = maxDownChange; }
+				}
+				else
+				{
+					float maxUpChange = -(lookXLimit - currRotationX);
+					if (rotationChangeX < maxUpChange) { currRotationX = 360 + maxUpChange; }
+				}
+
+				player.transform.Rotate(new Vector3(0, rotationChangeY, 0));
+				head.transform.Rotate(new Vector3(rotationChangeX, 0, 0));
+			}
+
+			playerCamera.transform.SetPositionAndRotation(head.transform.position, head.transform.rotation);
 		}
-
-		playerCamera.transform.SetPositionAndRotation(head.transform.position, head.transform.rotation);
+		else{
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.None;
+		}
 	}
 	private bool canMove() {
 		return playerControllers.KeysEnabled && MoveKeysEnabled;

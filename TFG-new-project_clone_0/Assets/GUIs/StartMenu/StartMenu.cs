@@ -11,7 +11,7 @@ public class StartMenu : SuperGUI, Translatable {
     VisualElement SignUp;
     VisualElement Settings;
     VisualElement ErrorWindow;
-    VisualElement Cosos;
+    VisualElement ConnectTab;
 
     TextField UsernameInput;
     TextField PasswordInput;
@@ -85,11 +85,11 @@ public class StartMenu : SuperGUI, Translatable {
 
 
         //nuevos cosos:
-        Cosos = Root.Q<VisualElement>("Cosos");
+        ConnectTab = Root.Q<VisualElement>("Cosos");
 
-        toggle           = Cosos.Q<Toggle>("AudioToggle");
-        Button HostBtn   = Cosos.Q<Button>("HostBtn");
-        Button ClientBtn = Cosos.Q<Button>("ClientBtn");
+        toggle           = ConnectTab.Q<Toggle>("AudioToggle");
+        Button HostBtn   = ConnectTab.Q<Button>("HostButton");
+        Button ClientBtn = ConnectTab.Q<Button>("ClientButton");
         toggle.RegisterCallback<ClickEvent>(evt => VivoxToggle(evt, toggle));
         HostBtn.RegisterCallback<ClickEvent>(evt => VivoxHostBtn(evt));
         ClientBtn.RegisterCallback<ClickEvent>(evt => VivoxClientBtn(evt));
@@ -145,7 +145,6 @@ public class StartMenu : SuperGUI, Translatable {
         soundPlayerSelect.Play();
         Settings.RemoveFromClassList("hidden");
         CurTab = Settings;
-        //Translator.changeLan(LANGUAGES.TM);
     }
 
     public void showErrorWindow(string text){

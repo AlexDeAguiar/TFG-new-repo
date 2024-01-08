@@ -24,5 +24,10 @@
 
     "Choose a File": "Selecciona un archivo",
     "Image files": "Archivos de Imagen",
-    "Video files": "Archivos de Video"
+    "Video files": "Archivos de Video",
+
+    "Connect As Host": "Conectarse como Host",
+    "Connect As Client": "Conectarse como Cliente",
+    "Join Code": "Código de Grupo",
+    "Room Size": "Tamaño de la sala"
 }
