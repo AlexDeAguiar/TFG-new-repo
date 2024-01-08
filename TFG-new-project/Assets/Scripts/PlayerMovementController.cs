@@ -38,7 +38,7 @@ public class PlayerMovementController : IController {
 
 	private readonly float MOUSE_MOVEMENT = 25f;
     public void update() {
-		Cursor.visible = Input.GetKey(KeyCode.LeftAlt)
+		Cursor.visible = Input.GetKey(KeyCode.LeftAlt);
 		if(Cursor.visible){
 			//centrar cursor en pantalla
 			Cursor.lockState = CursorLockMode.Locked;

@@ -43,7 +43,7 @@
                     <ui:Label text="Connect As Host" name="ConnectHostLabel" class="connectBox-Label" />
                     <ui:VisualElement name="Slider" style="width: 100%; flex-direction: row; align-items: stretch; justify-content: center;">
                         <ui:SliderInt picking-mode="Ignore" label="Size of the Room" value="50" high-value="100" show-input-field="false" focusable="false" usage-hints="DynamicTransform" low-value="10" name="SizeSlider" style="width: 80%; margin-left: 6px; margin-right: 6px; margin-top: 6px; margin-bottom: 6px; color: rgb(255, 255, 255);" />
-                        <ui:Label text="0" name="SizeSliderLabel" style="align-items: center; justify-content: center; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255);" />
+                        <ui:Label text="0" name="SizeSliderLabel" style="align-items: center; justify-content: center; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255); width: 45px;" />
                     </ui:VisualElement>
                     <ui:Button text="Connect as host" display-tooltip-when-elided="true" name="HostButton" class="connectButton" />
                 </ui:VisualElement>
@@ -54,6 +54,6 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:DropdownField label="Language" name="LanDropdown" style="width: 25%; color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-definition: initial; margin-left: 15px; margin-right: 15px; position: absolute; top: 0; right: 0; margin-top: 15px; margin-bottom: 15px;" />
+        <ui:DropdownField label="Language" name="LanDropdown" focusable="false" style="width: 25%; color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-definition: initial; margin-left: 15px; margin-right: 15px; position: absolute; top: 0; right: 0; margin-top: 15px; margin-bottom: 15px;" />
     </ui:VisualElement>
 </ui:UXML>
