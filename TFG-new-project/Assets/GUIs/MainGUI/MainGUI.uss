@@ -182,7 +182,6 @@
 
 .connectButton:hover {
     -unity-background-image-tint-color: rgb(92, 96, 133);
-    width: 42%;
     transition-duration: 2s;
     transition-property: width;
     transition-timing-function: ease;
@@ -234,25 +233,6 @@
     border-bottom-color: rgb(102, 174, 222);
 }
 
-#LanDropdownIngame > .unity-popup-field__input {
-    flex-shrink: 0;
-    border-left-width: 2px;
-    border-right-width: 2px;
-    border-top-width: 2px;
-    border-bottom-width: 2px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background-color: rgb(27, 67, 103);
-    color: rgb(255, 255, 255);
-    height: 30px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-left-color: rgb(102, 174, 222);
-    border-right-color: rgb(102, 174, 222);
-    border-top-color: rgb(102, 174, 222);
-    border-bottom-color: rgb(102, 174, 222);
+#LanDropdown Label {
+    -unity-text-align: middle-right;
 }

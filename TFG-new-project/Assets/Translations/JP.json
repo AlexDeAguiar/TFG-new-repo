@@ -20,5 +20,16 @@
     "Language": "言語",
 
     "INTERACTION_INFO_BLACKBOARD": "E を押してビデオを選択します\nP を押してビデオを一時停止/再開します",
-    "INTERACTION_INFO_DOOR": "Eを押してドアを開閉します"
+    "INTERACTION_INFO_DOOR": "Eを押してドアを開閉します",
+
+    "Choose a File": "ファイルを選択",
+    "Image files": "画像ファイル",
+    "Video files": "ビデオファイル",
+    
+    "Connect As Host": "ホストとして接続",
+    "Connect As Client": "クライアントとして接続",
+    "Join Code": "参加コード",
+    "Room Size": "部屋のサイズ",
+    "CONNECTING...": "接続中..."
+    
 }

@@ -29,5 +29,6 @@
     "Connect As Host": "Conectarse como Host",
     "Connect As Client": "Conectarse como Cliente",
     "Join Code": "Código de Grupo",
-    "Room Size": "Tamaño de la sala"
+    "Room Size": "Tamaño de la sala",
+    "CONNECTING...": "CONECTANDO..."
 }

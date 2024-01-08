@@ -53,7 +53,8 @@
                     <ui:Button text="Connect as client" display-tooltip-when-elided="true" name="ClientButton" class="connectButton" style="margin-top: 5px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
+            <ui:Label text="CONNECTING..." display-tooltip-when-elided="true" name="ConnectingLabel" class="hidden" style="align-items: center; justify-content: center; position: absolute; -unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-definition: initial; color: rgb(255, 255, 255); font-size: 30px; background-color: rgba(27, 67, 103, 0.6); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" />
         </ui:VisualElement>
-        <ui:DropdownField label="Language" name="LanDropdown" focusable="false" style="width: 25%; color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-definition: initial; margin-left: 15px; margin-right: 15px; position: absolute; top: 0; right: 0; margin-top: 15px; margin-bottom: 15px;" />
+        <ui:DropdownField label="Language" name="LanDropdown" focusable="false" style="width: 25%; color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-definition: initial; margin-left: 15px; margin-right: 15px; position: absolute; top: 0; right: 0; margin-top: 15px; margin-bottom: 15px; align-items: center;" />
     </ui:VisualElement>
 </ui:UXML>

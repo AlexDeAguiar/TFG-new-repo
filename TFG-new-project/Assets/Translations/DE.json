@@ -20,5 +20,16 @@
     "Language": "Sprache",
 
     "INTERACTION_INFO_BLACKBOARD": "Drücken Sie E, um das Video auszuwählen\nDrücken Sie P, um das Video anzuhalten bzw. die Pause aufzuheben",
-    "INTERACTION_INFO_DOOR": "Drücken Sie E, um die Tür zu öffnen/schließen"
+    "INTERACTION_INFO_DOOR": "Drücken Sie E, um die Tür zu öffnen/schließen",
+
+    "Choose a File": "Datei auswählen",
+    "Image files": "Bilddateien",
+    "Video files": "Videodateien",
+    
+    "Connect As Host": "Als Host verbinden",
+    "Connect As Client": "Als Client verbinden",
+    "Join Code": "Beitrittscode",
+    "Room Size": "Raumgröße",
+    "CONNECTING...": "VERBINDUNG WIRD HERGESTELLT..."
+    
 }

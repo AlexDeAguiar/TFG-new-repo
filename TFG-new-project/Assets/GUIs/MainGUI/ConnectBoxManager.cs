@@ -26,15 +26,20 @@ public class ConnectBoxManager : SuperGUI, Translatable {
 
 	private DropdownField Dropdown;
 	private bool isHost;
+	private Label connectingLabel;
+
+	public static ConnectBoxManager Instance;
 
 	public ConnectBoxManager() {}
 
 	public new void Init(VisualElement Root){
 		base.Init();
+		Instance = this;
 		this.Root = Root;
 		this.connectGUI = Root.Q<VisualElement>("ConnectGUI");
 		this.connectBox = Root.Q<VisualElement>("ConnectBox");
 		this.infoBox 	= Root.Q<VisualElement>("InfoLabelsBox");
+		this.connectingLabel = Root.Q<Label>("ConnectingLabel");
 		isHost = false;
 		joinCodeStr = "";
 		roomSizeStr = "";
@@ -97,6 +102,8 @@ public class ConnectBoxManager : SuperGUI, Translatable {
 
 		joinCode.text = Translator._INTL("Join Code") + ": " + joinCodeStr;
 		roomSize.text = isHost ? (Translator._INTL("Room Size") + ": " + roomSizeStr) : "";
+		
+		connectingLabel.text = Translator._INTL("CONNECTING...");
 	}
 
 	public void show() {
@@ -109,6 +116,9 @@ public class ConnectBoxManager : SuperGUI, Translatable {
 
 	private async void connectHost(ClickEvent evt) {
 		roomSizeStr = SliderLabel.text;
+		connectingLabel.RemoveFromClassList("hidden");
+		connectBox.AddToClassList("hidden");
+
 		joinCodeStr = await testRelay.createRelay(int.Parse(SliderLabel.text));
 		joinCodeBox.SetValueWithoutNotify(this.joinCodeStr);
 		this.hide();
@@ -117,10 +127,13 @@ public class ConnectBoxManager : SuperGUI, Translatable {
 		roomSize.text = Translator._INTL("Room Size") + ": " + roomSizeStr;
 		isHost = true;
 		this.infoBox.RemoveFromClassList("hidden");
+		this.connectingLabel.AddToClassList("hidden");
 	}
 
 	private void connectClient(ClickEvent evt) {
 		testRelay.joinRelay(this.joinCodeStr);
+		connectingLabel.RemoveFromClassList("hidden");
+		connectBox.AddToClassList("hidden");
 		this.hide();
 
 		joinCode.text = Translator._INTL("Join Code") + ": " + this.joinCodeStr;
