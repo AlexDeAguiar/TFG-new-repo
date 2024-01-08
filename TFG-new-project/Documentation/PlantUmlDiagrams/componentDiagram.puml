@@ -22,7 +22,7 @@ component FileBrowserUpdate #AAFFAA
 
 component Facultad #FFAAAA
 component MainCamera #FFAAAA
-component OtherScripts #FFAAAA
+component GlobalScripts #FFAAAA
 
 package "Network elements" {
   component NetworkObject #AAFFAA
@@ -56,6 +56,8 @@ component VivoxVoiceManagerScript as "VivoxVoiceManager (script)" #AAFFAA
 
 
 'First line ordering
+Controllers -[hidden]r-> Player
+Player -[hidden]r-> Facultad
 'NetworkManagerObject -[hidden]r-> NetworkManagerObject
 'NetworkManager -[hidden]r-> VivoxVoiceManager
 'VivoxVoiceManager -[hidden]r-> Canvas
@@ -73,10 +75,10 @@ Scene *-- UIDocument
 Scene *-- Canvas
 Scene *-- Facultad
 Scene *-- MainCamera
-Scene *-- OtherScripts
+Scene *-- GlobalScripts
 Scene *-- Controllers
 
-Scene *-- BlackboardObject
+Facultad *-- BlackboardObject
 BlackboardObject *-- BlackboardScript
 BlackboardObject *-- Plane
 Plane *-- VideoWithAudio
@@ -87,7 +89,7 @@ Player *-- ClientNetworkTransform
 Player *-- PlayerNetwork
 PlayerNetwork ..> PlayerControllers : Creates if owner
 
-OtherScripts *-- TestRelay
+GlobalScripts *-- TestRelay
 
 Facultad *-- Door
 Door *-- DoorInteraction

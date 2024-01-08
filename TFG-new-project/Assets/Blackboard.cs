@@ -45,9 +45,7 @@ public class Blackboard : MonoBehaviour, IInteractable {
 		if (currentBlackboard == null) { return; }
 
 		if (Input.GetKeyDown(boardSelectVideoKey)) {
-			currentBlackboard.GetComponent<Blackboard>().plane
-				.GetComponent<FileBrowserUpdate>()
-				.OpenFileBrowser(DisplayOnBlackboard, BL_BOARD_FILE_EXTS, 3, true);
+			FileBrowserUpdate.OpenFileBrowser(DisplayOnBlackboard, BL_BOARD_FILE_EXTS, 3, true);
 		}
 
 		if (Input.GetKeyDown(bBoardPlayPauseKey)) {

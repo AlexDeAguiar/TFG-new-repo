@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class FileBrowserUpdate : MonoBehaviour{
-    public void OpenFileBrowser(Action<string[]> result, string[][] extensions, int filterIndex, bool includeAllFilesOption){
+public class FileBrowserUpdate {
+    public static void OpenFileBrowser(Action<string[]> result, string[][] extensions, int filterIndex, bool includeAllFilesOption){
         var bp = new BrowserProperties(Translator._INTL("Choose a File"));
         //bp.initialDir(path) -> where dialog should be opened initially
         bp.filter = getFilterString(extensions,includeAllFilesOption);
@@ -18,7 +18,7 @@ public class FileBrowserUpdate : MonoBehaviour{
         new FileBrowser().OpenFileBrowser(bp, paths => result(paths));
     }
 
-    string getFilterString(string[][] extensions, bool includeAllFilesOption){
+    private static string getFilterString(string[][] extensions, bool includeAllFilesOption){
         string filterStr = "";
         for (int i = 0; i < extensions.Length; i++){
             filterStr += Translator._INTL(extensions[i][0]);
