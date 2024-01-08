@@ -27,6 +27,7 @@ public class ConnectBoxManager : SuperGUI, Translatable {
 	private DropdownField Dropdown;
 	private bool isHost;
 	private Label connectingLabel;
+	private Label errorLabel;
 
 	public static ConnectBoxManager Instance;
 
@@ -40,6 +41,7 @@ public class ConnectBoxManager : SuperGUI, Translatable {
 		this.connectBox = Root.Q<VisualElement>("ConnectBox");
 		this.infoBox 	= Root.Q<VisualElement>("InfoLabelsBox");
 		this.connectingLabel = Root.Q<Label>("ConnectingLabel");
+		this.errorLabel = Root.Q<Label>("ErrorLabel");
 		isHost = false;
 		joinCodeStr = "";
 		roomSizeStr = "";
@@ -115,29 +117,52 @@ public class ConnectBoxManager : SuperGUI, Translatable {
 	}
 
 	private async void connectHost(ClickEvent evt) {
-		roomSizeStr = SliderLabel.text;
 		connectingLabel.RemoveFromClassList("hidden");
 		connectBox.AddToClassList("hidden");
 
+		roomSizeStr = SliderLabel.text;
 		joinCodeStr = await testRelay.createRelay(int.Parse(SliderLabel.text));
-		joinCodeBox.SetValueWithoutNotify(this.joinCodeStr);
-		this.hide();
+		if(joinCodeStr != null){
+			joinCodeBox.SetValueWithoutNotify(this.joinCodeStr);
+			this.hide();
 
-		joinCode.text = Translator._INTL("Join Code") + ": " + joinCodeStr;
-		roomSize.text = Translator._INTL("Room Size") + ": " + roomSizeStr;
-		isHost = true;
-		this.infoBox.RemoveFromClassList("hidden");
+			joinCode.text = Translator._INTL("Join Code") + ": " + joinCodeStr;
+			roomSize.text = Translator._INTL("Room Size") + ": " + roomSizeStr;
+			isHost = true;
+			this.infoBox.RemoveFromClassList("hidden");
+		}
+		else{
+			connectBox.RemoveFromClassList("hidden");
+			this.errorLabel.text = Translator._INTL("Connection Refused");
+			this.errorLabel.RemoveFromClassList("NoOpacity");
+		}
+
 		this.connectingLabel.AddToClassList("hidden");
 	}
 
-	private void connectClient(ClickEvent evt) {
-		testRelay.joinRelay(this.joinCodeStr);
-		connectingLabel.RemoveFromClassList("hidden");
-		connectBox.AddToClassList("hidden");
-		this.hide();
+	private async void connectClient(ClickEvent evt) {
+		if(this.joinCodeStr != ""){
+			connectingLabel.RemoveFromClassList("hidden");
+			connectBox.AddToClassList("hidden");
+			int code = await testRelay.joinRelay(this.joinCodeStr);
+			if(code == 0){
+				this.hide();
 
-		joinCode.text = Translator._INTL("Join Code") + ": " + this.joinCodeStr;
-		roomSize.text = "";
-		this.infoBox.RemoveFromClassList("hidden");
+				joinCode.text = Translator._INTL("Join Code") + ": " + this.joinCodeStr;
+				roomSize.text = "";
+				this.infoBox.RemoveFromClassList("hidden");
+			}
+			else{
+				connectBox.RemoveFromClassList("hidden");
+				this.errorLabel.text = Translator._INTL("Connection Refused");
+				this.errorLabel.RemoveFromClassList("NoOpacity");
+			}
+
+			this.connectingLabel.AddToClassList("hidden");
+		}
+		else{
+			this.errorLabel.text = Translator._INTL("You need to provide a Join Code");
+			this.errorLabel.RemoveFromClassList("NoOpacity");
+		}
 	}
 }

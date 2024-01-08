@@ -236,3 +236,7 @@
 #LanDropdown Label {
     -unity-text-align: middle-right;
 }
+
+.NoOpacity {
+    opacity: 0;
+}

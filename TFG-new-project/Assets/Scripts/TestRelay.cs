@@ -53,7 +53,7 @@ public class TestRelay : MonoBehaviour
 		}
 	}
 
-	public async void joinRelay(string joinCode) {
+	public async Task<int> joinRelay(string joinCode) {
 		try {
 
 			VivoxPlayer.Instance.VoiceChannelName = joinCode;
@@ -71,8 +71,10 @@ public class TestRelay : MonoBehaviour
 			doSomeAsyncMagic();
 
 			NetworkManager.Singleton.StartClient();
+			return 0;
 		} catch (RelayServiceException e) {
 			Debug.LogWarning("Error while joining relay. Exception message:\n" + e, this);
+			return -1;
 		}
 	}
 

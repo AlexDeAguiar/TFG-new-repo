@@ -38,7 +38,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="ConnectGUI" style="width: 100%; height: 100%; align-items: center; justify-content: center; flex-direction: row;">
             <ui:VisualElement name="Background" style="position: absolute; left: 0; top: 0; min-width: 100%; min-height: 100%; background-color: rgba(0, 0, 0, 0.78);" />
-            <ui:VisualElement name="ConnectBox" style="align-items: center; justify-content: center; width: 50%; height: 60%; background-image: resource(&apos;Graphics/sprites/panel00&apos;); padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; background-color: rgba(23, 30, 99, 0.33); flex-direction: column; -unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-definition: initial; font-size: 20px; -unity-text-align: middle-left; flex-wrap: nowrap; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px;">
+            <ui:VisualElement name="ConnectBox" style="align-items: center; justify-content: center; width: 50%; height: auto; background-image: resource(&apos;Graphics/sprites/panel00&apos;); padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; background-color: rgba(23, 30, 99, 0.33); flex-direction: column; -unity-font: url(&apos;project://database/Assets/Fonts/neuropol.otf?fileID=12800000&amp;guid=4b7f8da8185d07943810bdbb5e0a05e0&amp;type=3#neuropol&apos;); -unity-font-definition: initial; font-size: 20px; -unity-text-align: middle-left; flex-wrap: nowrap; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px;">
                 <ui:VisualElement name="HostBox" class="connectBox" style="flex-direction: column;">
                     <ui:Label text="Connect As Host" name="ConnectHostLabel" class="connectBox-Label" />
                     <ui:VisualElement name="Slider" style="width: 100%; flex-direction: row; align-items: stretch; justify-content: center;">
@@ -50,6 +50,7 @@
                 <ui:VisualElement name="ClientBox" class="connectBox" style="width: 100%;">
                     <ui:Label text="Connect As Client" display-tooltip-when-elided="true" name="ConnectClientLabel" class="connectBox-Label" />
                     <ui:TextField label="JoinCode" name="JoinCodeBox" focusable="true" max-length="8" tooltip="Enter the room code to join it" style="width: 75%; align-items: center; justify-content: flex-start; flex-direction: row; margin-left: 2px; margin-right: 2px; margin-top: 10px; margin-bottom: 2px;" />
+                    <ui:Label text="You need to provide a Join Code" display-tooltip-when-elided="true" name="ErrorLabel" class="NoOpacity" style="align-items: center; justify-content: center; color: rgb(255, 0, 0); margin-top: 11px; margin-bottom: 15px; margin-right: 2px;" />
                     <ui:Button text="Connect as client" display-tooltip-when-elided="true" name="ClientButton" class="connectButton" style="margin-top: 5px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
