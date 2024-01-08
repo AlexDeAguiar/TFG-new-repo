@@ -84,7 +84,6 @@ public class Blackboard : MonoBehaviour, IInteractable {
 		string path = paths[currPathIdx];
 		if (currentBlackboard != null) {
 			string e = Path.GetExtension(path);
-			Debug.Log(e);
 			if (e == ".mp4") {
 				changeVideo(path);
 			}

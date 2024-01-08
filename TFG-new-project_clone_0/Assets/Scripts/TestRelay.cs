@@ -28,14 +28,15 @@ public class TestRelay : MonoBehaviour
 		await AuthenticationService.Instance.SignInAnonymouslyAsync();
 	}
 
-	public async Task<string> createRelay() {
+	public async Task<string> createRelay(int roomSize) {
 		try {
 			//------------------------------
 			//Create a room with 1+3 = 4 slots
-			Allocation allocation = await RelayService.Instance.CreateAllocationAsync(3);
+			Allocation allocation = await RelayService.Instance.CreateAllocationAsync(roomSize);
 
 			string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 			Debug.Log("Join code: " + joinCode);
+			Debug.Log("Size: " + roomSize.ToString());
 
 			RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
 			NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);

@@ -11,7 +11,6 @@ public class ErrorWindow : SuperGUI {
     // Start is called before the first frame update
     void Start(){
         base.Init();
-        Translator.Register(this);
 
         //ERROR WINDOW ==========================================================
         ErrWindow = Root.Q<VisualElement>("ErrorWindow");
