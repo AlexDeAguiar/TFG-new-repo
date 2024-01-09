@@ -1,14 +1,14 @@
 @startuml blackboardController
 autonumber
 
-actor Player order 10
+actor "User" as Player order 10
 participant "PlayerInteractionController" as PIC order 20
-participant "BlackboardController" as BBC order 50
+participant "Blackboard" as BBC order 50
 participant "InfoBoxManager" as IBM order 60
 participant "FileBrowserUpdate" as FBU order 70
 participant "VideoWithAudio" as VWA order 80
 participant "VideoPlayer" as VP order 90
-participant "CurrentBlackBoard" as BB order 100
+participant "UnityWebRequestTexture" as UWR order 100
 
 activate PIC
 PIC -> BBC: interact()
@@ -19,40 +19,44 @@ activate IBM
 IBM --> BBC
 deactivate IBM
 
+alt User chooses files to display
 Player -> BBC: Presses "E"
-
-BBC -> FBU: OpenFileBrowser()
+BBC -> FBU: OpenFileBrowser(callback:DisplayOnBlackboard())
 activate FBU
-FBU --> BBC: Return File path
+FBU --> BBC: DisplayOnBlackBoard(file paths)
 deactivate FBU
 
-
-BBC -> BBC: DisplayOnBlackboard(path)
-BBC -> BB: changeVideo() / changeImg() / changePDF()
-activate BB
-BB --> BBC
-deactivate BB
+alt User chose an image
+    BBC -> UWR : getTexture(path)
+    activate UWR
+    UWR --> BBC : texture
+    deactivate UWR
+    BBC -> BBC : Change texture of the plane
+else User chose a video
+    BBC -> VWA : changeVideo(path)
+    activate VWA
+    VWA -> VP : Set new file url
+    VWA -> VP : Play()
+    activate VP
+    VP --> VWA
+    deactivate VP
+    VWA --> BBC
+    deactivate VWA
+end
 
 BBC --> PIC
 deactivate BBC
 
-PIC -> BBC: interact()
-activate BBC
-
-BBC -> IBM: ShowText(blackboardInteractionKey)
-activate IBM
-IBM --> BBC
-deactivate IBM
-
+else User pauses/resumes a video
 Player -> BBC: Presses "P"
+activate BBC
 
 BBC -> VWA: Play()/Pause()
 activate VWA
 
 VWA -> VP: Play()/Pause()
 activate VP
-VP --> BB: "Plays/Pauses Video on Blackboard"
-activate BB
+
 VP --> VWA
 deactivate VP
 
@@ -62,4 +66,6 @@ BBC --> PIC
 deactivate BBC
 
 deactivate PIC
+end
+
 @enduml
