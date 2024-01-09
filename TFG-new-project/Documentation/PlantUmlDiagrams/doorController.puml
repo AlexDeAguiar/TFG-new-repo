@@ -5,32 +5,40 @@ actor Player order 10
 
 box "Client Machine" #555555
 participant "PlayerInteractionController" as PIC order 20
-participant "DoorController" as DC order 50
+participant "DoorInteraction" as DIC order 50
 participant "InfoBoxManager" as IBM order 60
 end box
 
 box "Server Machine" #777777
-participant "PlayerNetworkMessages" as PNM order 70
+participant "PlayerNetwork" as PN order 70
+participant "DoorInteraction" as DIH order 80
 end box
 
-PIC -> DC: interact()
-activate DC
+Player -> Player: Turn camera to a door
 
-DC -> IBM: ShowText(doorInteractKey)
+PIC -> DIC: interact()
+activate PIC 
+activate DIC
+
+DIC -> IBM: ShowText(doorInteractKey)
 activate IBM
-IBM --> DC
+IBM --> DIC
 deactivate IBM
 
-Player -> DC: Presses "E"
+Player -> DIC: Presses "E"
 
-DC -> PNM: toggleDoorServerRpc()
-activate PNM
-PNM --> DC
-deactivate PNM
+DIC -> PN: toggleDoorServerRpc()
+activate PN
+PN -> DIH: toggleDoor()
+activate DIH
+DIH --> PN
+deactivate DIH
+PN --> DIC
+deactivate PN
 
 
-DC --> PIC
-deactivate DC
+DIC --> PIC
+deactivate DIC
 
 deactivate PIC
 @enduml
