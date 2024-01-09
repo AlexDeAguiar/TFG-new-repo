@@ -12,13 +12,9 @@ public class FileBrowserUpdate {
         bp.filter = getFilterString(extensions,includeAllFilesOption);
         bp.filterIndex = filterIndex;
 
-
         //OpenMultiSelectFileBrowser
         //OpenFolderBrowser
         //SaveFileBrowser
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible   = true;
         new FileBrowser().OpenFileBrowser(bp, paths => result(paths));
     }
 

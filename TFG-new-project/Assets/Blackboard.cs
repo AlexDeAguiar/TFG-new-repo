@@ -75,7 +75,6 @@ public class Blackboard : MonoBehaviour, IInteractable {
 		this.paths = paths;
 		currPathIdx = 0;
 		setCurrentFileInBlackboard();
-		Cursor.visible = false;
 	}
 
 	private void setCurrentFileInBlackboard() {

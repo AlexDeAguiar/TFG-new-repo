@@ -4,11 +4,13 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GetCameraImage : MonoBehaviour{
+public class GetCameraImage : MonoBehaviour
+{
 	WebCamTexture webCamTexture;
 
 	// Start is called before the first frame update
-	void Start(){
+	void Start()
+	{
 		webCamTexture = new WebCamTexture(WebCamTexture.devices[0].name);
 		webCamTexture.Play();
 		GetComponent<Renderer>().material.mainTexture = webCamTexture;
@@ -23,5 +25,8 @@ public class GetCameraImage : MonoBehaviour{
 	}
 
 	// Update is called once per frame
-	void Update(){}
+	void Update()
+	{
+
+	}
 }
