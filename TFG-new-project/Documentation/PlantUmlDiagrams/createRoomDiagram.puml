@@ -15,7 +15,7 @@ UIDocument -> ConnectBoxManager : click event -> connectHost()
 deactivate UIDocument
 
 activate ConnectBoxManager
-ConnectBoxManager  -> TestRelay: createRelay()
+ConnectBoxManager  -> TestRelay: createRelay(roomSize)
 activate TestRelay
 'Request to allocate a server for our room
 TestRelay -> RelayService : Create allocation(roomSize)
