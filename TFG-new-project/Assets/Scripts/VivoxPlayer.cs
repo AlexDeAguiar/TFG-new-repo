@@ -108,7 +108,7 @@ public class VivoxPlayer : MonoBehaviour {
         if (_vvm.LoginState == VivoxUnity.LoginState.LoggedIn) {
             Debug.Log("Successfully connected to Vivox");
             Debug.Log("Joining voice channel: " + VoiceChannelName);
-            _vvm.JoinChannel(VoiceChannelName, ChannelType.NonPositional, VivoxVoiceManager.ChatCapability.AudioOnly);
+            _vvm.JoinChannel(VoiceChannelName, ChannelType.Positional, VivoxVoiceManager.ChatCapability.AudioOnly);
 
             var cid = new Channel(VoiceChannelName, ChannelType.Positional);
             _chan = _vvm.LoginSession.GetChannelSession(cid);
