@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
-public class StartMenu : SuperGUI, Translatable {
+public class StartMenu : SuperGUI {
     VisualElement MainOptions;
     VisualElement SignIn;
     VisualElement SignUp;
@@ -96,7 +96,7 @@ public class StartMenu : SuperGUI, Translatable {
     }
 
     void VivoxToggle(ClickEvent evt, Toggle t){
-        Debug.Log("Hello there General KenUwUi, toggle is " + t.value);
+        Debug.Log("toggle is " + t.value);
     }
 
     void VivoxHostBtn(ClickEvent evt){

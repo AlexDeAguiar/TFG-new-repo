@@ -1,0 +1,19 @@
+@startuml playerInteractionController
+autonumber
+
+participant "Translator" as TR order 20
+participant "=SuperGUI\n----\nITranslatable" as IT order 30
+
+[-> TR: changeLan(newLan)
+activate TR
+TR -> IT:updateTexts()
+note left: forAll(ITranslatable : trList)
+activate IT
+IT -> TR: _INTL(key)
+TR --> IT: retrieve current\n translation
+IT --> TR
+deactivate IT
+
+[<-- TR
+deactivate TR
+@enduml

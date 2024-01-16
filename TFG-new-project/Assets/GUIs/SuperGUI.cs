@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SuperGUI : MonoBehaviour, Translatable{
+public class SuperGUI : MonoBehaviour, ITranslatable{
     public static SuperGUI _Instance;
     public AudioSource soundPlayer;
     public AudioSource soundPlayerSelect;
@@ -19,7 +19,6 @@ public class SuperGUI : MonoBehaviour, Translatable{
 
     protected void Init(){
         Root = GetComponent<UIDocument>()?.rootVisualElement;
-        Translator.InitDicts();
         Translator.Register(this);
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.IO;
 
-public class ConnectBoxManager : SuperGUI, Translatable {
+public class ConnectBoxManager : SuperGUI {
 	private VisualElement connectBox;
 	private VisualElement connectGUI;
 	private VisualElement infoBox;

@@ -7,11 +7,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum LANGUAGES{ ES, EN, DE, FR, /*...*/ }
-public interface Translatable{ public void updateTexts(); }
+public interface ITranslatable{ public void updateTexts(); }
 
 public class Translator : MonoBehaviour {
     public const  string PATH   = "./Assets/Translations/";
-    private static List<Translatable> translatables = new List<Translatable>();
+    private static List<ITranslatable> translatables = new List<ITranslatable>();
 
     public static Dictionary<LANGUAGES, Dictionary<string, string>> jsons;
     public static LANGUAGES LAN = LANGUAGES.ES;
@@ -52,7 +52,7 @@ public class Translator : MonoBehaviour {
 
     public static void changeLan(LANGUAGES newLan){
         LAN = newLan;
-        foreach (Translatable tr in translatables) { tr.updateTexts(); }
+        foreach (ITranslatable tr in translatables) { tr.updateTexts(); }
     }
 
     public static int getCurrentLanIdx(){ return (int) LAN; }
@@ -63,5 +63,5 @@ public class Translator : MonoBehaviour {
 		return options;
     }
 
-    public static void Register(Translatable tr){ translatables.Add(tr); }
+    public static void Register(ITranslatable tr){ translatables.Add(tr); }
 }

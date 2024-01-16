@@ -1,0 +1,26 @@
+@startuml playerInteractionController
+autonumber
+
+participant "=MainGUI" as MG order 10
+participant "Translator" as TR order 20
+participant "=SuperGUI\n----\nITranslatable" as IT order 30
+
+[-> MG: Start()
+activate MG
+MG -> TR: initDicts()
+note right: Load all translations\nfrom the json files
+activate TR
+TR --> MG
+deactivate TR
+deactivate MG
+
+[-> IT: init()
+activate IT
+
+IT -> TR: register(this)
+activate TR
+note right: Add this object\nto trList
+TR --> IT
+deactivate TR
+deactivate IT
+@enduml

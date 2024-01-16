@@ -23,6 +23,7 @@ public class MainGUI : SuperGUI {
 
 	void Start(){
         base.Init();
+        Translator.InitDicts();
 
 		Instance = this;
 
