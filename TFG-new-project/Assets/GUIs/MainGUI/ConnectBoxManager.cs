@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.IO;
 
-public class ConnectBoxManager : SuperGUI {
+public class ConnectBoxManager : SuperGUI, ITranslatable {
 	private VisualElement connectBox;
 	private VisualElement connectGUI;
 	private VisualElement infoBox;
+    private VisualElement timeFrame;
 	private Button hostButton;
 	private Button clientButton;
 	private TextField joinCodeBox;
@@ -77,6 +78,9 @@ public class ConnectBoxManager : SuperGUI {
 
 		joinCode = this.infoBox.Q<Label>("JoinCode");
 		roomSize = this.infoBox.Q<Label>("RoomSize");
+
+        timeFrame = Root
+            .Q<VisualElement>("TimeFrame");
 	}
 
 	private void registerDropdownCallback(DropdownField d, int idx, List<string> options){
@@ -130,6 +134,7 @@ public class ConnectBoxManager : SuperGUI {
 			roomSize.text = Translator._INTL("Room Size") + ": " + roomSizeStr;
 			isHost = true;
 			this.infoBox.RemoveFromClassList("hidden");
+			this.timeFrame.RemoveFromClassList("hidden");
 		}
 		else{
 			connectBox.RemoveFromClassList("hidden");
@@ -151,6 +156,7 @@ public class ConnectBoxManager : SuperGUI {
 				joinCode.text = Translator._INTL("Join Code") + ": " + this.joinCodeStr;
 				roomSize.text = "";
 				this.infoBox.RemoveFromClassList("hidden");
+				this.timeFrame.RemoveFromClassList("hidden");
 			}
 			else{
 				connectBox.RemoveFromClassList("hidden");

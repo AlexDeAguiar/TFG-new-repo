@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ErrorWindow : SuperGUI {
+public class ErrorWindow : SuperGUI, ITranslatable {
     VisualElement ErrWindow;
     Button ErrorBtn;
 

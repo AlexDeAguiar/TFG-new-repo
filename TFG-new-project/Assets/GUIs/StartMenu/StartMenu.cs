@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
-public class StartMenu : SuperGUI {
+public class StartMenu : SuperGUI, ITranslatable {
     VisualElement MainOptions;
     VisualElement SignIn;
     VisualElement SignUp;

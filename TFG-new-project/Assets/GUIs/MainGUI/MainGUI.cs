@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 using Unity.Netcode;
 using System; 
 
-public class MainGUI : SuperGUI {
+public class MainGUI : SuperGUI, ITranslatable {
 	public static new MainGUI Instance; //Note: Using keyword "new" because SuperGUI is also a singleton
 
     UIDocument myUI;
@@ -50,7 +50,6 @@ public class MainGUI : SuperGUI {
 		connectBoxManager.Init(Root);
 
 		timeLabel = Root
-            .Q<VisualElement>("TopBar")
             .Q<VisualElement>("TimeFrame")
             .Q<Label>("timeLabel");
         
