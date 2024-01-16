@@ -10,6 +10,7 @@ TagManager:
   - Body
   - BlackBoard
   - Interactable
+  - Username
   layers:
   - Default
   - TransparentFX

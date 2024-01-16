@@ -139,12 +139,12 @@
     color: rgb(255, 255, 255);
 }
 
-#JoinCodeBox > .unity-text-field__label {
+TextField > .unity-text-field__label {
     min-width: 70px;
     color: rgb(255, 255, 255);
 }
 
-#JoinCodeBox > .unity-text-field__input {
+TextField > .unity-text-field__input {
     flex-shrink: 0;
     border-left-width: 2px;
     border-right-width: 2px;

@@ -7,12 +7,17 @@ using System.IO;
 
 public class ConnectBoxManager : SuperGUI, ITranslatable {
 	private VisualElement connectBox;
+	private VisualElement hostBox;
+	private VisualElement clientBox;
+	private VisualElement usernameBox;
 	private VisualElement connectGUI;
 	private VisualElement infoBox;
     private VisualElement timeFrame;
 	private Button hostButton;
 	private Button clientButton;
+	private Button acceptButton;
 	private TextField joinCodeBox;
+	private TextField usernameBoxField;
 	private Label SliderLabel;
 	private Label ConnectHostLabel;
 	private Label ConnectClientLabel;
@@ -28,9 +33,12 @@ public class ConnectBoxManager : SuperGUI, ITranslatable {
 	private DropdownField Dropdown;
 	private bool isHost;
 	private Label connectingLabel;
+	private Label UsernameLabel;
 	private Label errorLabel;
+	private Label usernameErrorLabel;
 
 	public static ConnectBoxManager Instance;
+	public static string usernameStr;
 
 	public ConnectBoxManager() {}
 
@@ -47,7 +55,7 @@ public class ConnectBoxManager : SuperGUI, ITranslatable {
 		joinCodeStr = "";
 		roomSizeStr = "";
 
-		var hostBox = connectBox.Q<VisualElement>("HostBox");
+		hostBox = connectBox.Q<VisualElement>("HostBox");
 		hostButton = connectBox.Q<Button>("HostButton");
 		hostButton.RegisterCallback<ClickEvent>(evt => connectHost(evt));
 		hostButton.RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
@@ -58,13 +66,22 @@ public class ConnectBoxManager : SuperGUI, ITranslatable {
 
 		ConnectHostLabel = connectBox.Q<Label>("ConnectHostLabel");
 		ConnectClientLabel = connectBox.Q<Label>("ConnectClientLabel");
+		UsernameLabel = connectBox.Q<Label>("UsernameLabel");
 
-		var clientBox = connectBox.Q<VisualElement>("ClientBox");
+		clientBox = connectBox.Q<VisualElement>("ClientBox");
 		clientButton = clientBox.Q<Button>("ClientButton");
 		clientButton.RegisterCallback<ClickEvent>(evt => connectClient(evt));
 		clientButton.RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
 		joinCodeBox = clientBox.Q<TextField>("JoinCodeBox");
 		joinCodeBox.RegisterValueChangedCallback(x => joinCodeStr = joinCodeBox.value.ToString());
+
+		usernameBox = connectBox.Q<VisualElement>("UsernameBox");
+		acceptButton = usernameBox.Q<Button>("AcceptButton");
+		acceptButton.RegisterCallback<ClickEvent>(evt => showConnectMenu());
+		acceptButton.RegisterCallback<MouseEnterEvent>(evt => PlaySelectSound(evt));
+		usernameBoxField = usernameBox.Q<TextField>("UsernameBoxField");
+		usernameBoxField.RegisterValueChangedCallback(x => { ConnectBoxManager.usernameStr = usernameBoxField.value.ToString(); });
+		usernameErrorLabel = Root.Q<Label>("UsernameErrorLabel");
 
 		testRelay = TestRelay.Instance;
 
@@ -110,6 +127,11 @@ public class ConnectBoxManager : SuperGUI, ITranslatable {
 		roomSize.text = isHost ? (Translator._INTL("Room Size") + ": " + roomSizeStr) : "";
 		
 		connectingLabel.text = Translator._INTL("CONNECTING...");
+
+		usernameBoxField.label = Translator._INTL("Username");
+		acceptButton.text = Translator._INTL("Accept");
+		UsernameLabel.text = Translator._INTL("Enter username");
+		usernameErrorLabel.text = Translator._INTL("You need to provide a Username");
 	}
 
 	public void show() {
@@ -118,6 +140,18 @@ public class ConnectBoxManager : SuperGUI, ITranslatable {
 
 	public void hide() {
 		connectGUI.AddToClassList("hidden");
+	}
+
+	private void showConnectMenu(){
+		if(ConnectBoxManager.usernameStr != ""){
+			usernameBox.AddToClassList("hidden");
+			hostBox.RemoveFromClassList("hidden");
+			clientBox.RemoveFromClassList("hidden");
+		}
+		else{
+			this.usernameErrorLabel.text = Translator._INTL("You need to provide a Username");
+			this.usernameErrorLabel.RemoveFromClassList("NoOpacity");
+		}
 	}
 
 	private async void connectHost(ClickEvent evt) {

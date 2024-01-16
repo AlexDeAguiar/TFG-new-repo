@@ -24,9 +24,7 @@ public class PlayerControllers : MonoBehaviour {
 	}
 
 	void Update() {
-		foreach (var controller in controllers) {
-			controller.update();
-		}
+		foreach (var controller in controllers) { controller.update(); }
 	}
 
 	public void requestStartCoroutine(IEnumerator enumerator) {
