@@ -30,5 +30,11 @@
     "Connect As Client": "Conectarse como Cliente",
     "Join Code": "Código de Grupo",
     "Room Size": "Tamaño de la sala",
-    "CONNECTING...": "CONECTANDO..."
+    "CONNECTING...": "CONECTANDO...",
+
+    "Connection Refused": "Conexión rechazada",
+    "You need to provide a Join Code": "Es necesario introducir un código de sala",
+    "You need to provide a Username": "Es necesario introducir un Nombre de Usuario",
+    "Enter username": "Introduce nombre de Usuario",
+    "QUIT": "SALIR"
 }

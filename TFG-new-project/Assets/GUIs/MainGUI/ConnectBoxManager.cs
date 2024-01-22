@@ -16,6 +16,7 @@ public class ConnectBoxManager : SuperGUI, ITranslatable {
 	private Button hostButton;
 	private Button clientButton;
 	private Button acceptButton;
+	private Button closeButton;
 	private TextField joinCodeBox;
 	private TextField usernameBoxField;
 	private Label SliderLabel;
@@ -96,8 +97,13 @@ public class ConnectBoxManager : SuperGUI, ITranslatable {
 		joinCode = this.infoBox.Q<Label>("JoinCode");
 		roomSize = this.infoBox.Q<Label>("RoomSize");
 
-        timeFrame = Root
-            .Q<VisualElement>("TimeFrame");
+        timeFrame = Root.Q<VisualElement>("TimeFrame");
+
+		closeButton = Root.Q<Button>("CloseButton");
+		closeButton.RegisterCallback<ClickEvent>(evt => {
+			Application.Quit();
+			UnityEditor.EditorApplication.isPlaying = false;
+		});
 	}
 
 	private void registerDropdownCallback(DropdownField d, int idx, List<string> options){
@@ -132,6 +138,10 @@ public class ConnectBoxManager : SuperGUI, ITranslatable {
 		acceptButton.text = Translator._INTL("Accept");
 		UsernameLabel.text = Translator._INTL("Enter username");
 		usernameErrorLabel.text = Translator._INTL("You need to provide a Username");
+
+		closeButton.text = Translator._INTL("QUIT");
+
+		this.errorLabel.AddToClassList("NoOpacity");
 	}
 
 	public void show() {
