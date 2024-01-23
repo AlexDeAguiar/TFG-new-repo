@@ -36,5 +36,6 @@
     "You need to provide a Join Code": "Es necesario introducir un código de sala",
     "You need to provide a Username": "Es necesario introducir un Nombre de Usuario",
     "Enter username": "Introduce nombre de Usuario",
-    "QUIT": "SALIR"
+    "QUIT": "SALIR",
+    "PELOTA_INFO_DOOR": "Prohibido jugar a La Pelota en los pasillos"
 }
