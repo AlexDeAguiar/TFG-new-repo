@@ -13,7 +13,7 @@ public class GetCameraImage : MonoBehaviour{
 		webCamTexture = new WebCamTexture(WebCamTexture.devices[0].name);
 		webCamTexture.requestedWidth = 1;
 		webCamTexture.requestedHeight = 1;
-		webCamTexture.requestedFPS = 30;
+		webCamTexture.requestedFPS = 1;
 		webCamTexture.Play();
 		renderer = GetComponent<Renderer>();
 		binaryFormater = new BinaryFormatter();
