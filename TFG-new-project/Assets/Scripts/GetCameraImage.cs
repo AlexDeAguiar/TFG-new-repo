@@ -8,12 +8,15 @@ public class GetCameraImage : MonoBehaviour{
 	private Renderer renderer;
 	private BinaryFormatter binaryFormater;
 
+	private float updateTime = 1f;
+	private float currTime = 0f;
+
 	// Start is called before the first frame update
 	void Start(){
 		webCamTexture = new WebCamTexture(WebCamTexture.devices[0].name);
 		webCamTexture.requestedWidth = 1;
 		webCamTexture.requestedHeight = 1;
-		webCamTexture.requestedFPS = 1;
+		webCamTexture.requestedFPS = 30;
 		webCamTexture.Play();
 		renderer = GetComponent<Renderer>();
 		binaryFormater = new BinaryFormatter();
@@ -21,6 +24,10 @@ public class GetCameraImage : MonoBehaviour{
 
 	// Update is called once per frame
 	void Update(){
+		currTime += Time.deltaTime;
+		if (currTime < 0.5f) { return; }
+		currTime = 0f;
+
 		//Cast webcamTexture -> texture2D
 		Color32[] colors = webCamTexture.GetPixels32();
 		Texture2D texture = new Texture2D(webCamTexture.width, webCamTexture.height);
@@ -28,7 +35,7 @@ public class GetCameraImage : MonoBehaviour{
 		texture.Apply();
 
 		//Cast texture2d -> png bytes
-		var bytes = texture.EncodeToPNG();
+		var bytes = texture.EncodeToJPG();
 
 		string faceCamPath = Main.GetFullPath(gameObject.transform);
 
@@ -39,7 +46,7 @@ public class GetCameraImage : MonoBehaviour{
 		dummyBytes[2] = 200;
 		*/
 
-		PlayerNetwork.MyInstance.updateWebcamServerRpc(faceCamPath, bytes, webCamTexture.width, webCamTexture.height);
+		PlayerNetwork.MyInstance.updateWebcamClientRpc(faceCamPath, bytes, webCamTexture.width, webCamTexture.height);
 	}
 
 	public void setWebcamTexture(byte[] bytes, int width, int height) {

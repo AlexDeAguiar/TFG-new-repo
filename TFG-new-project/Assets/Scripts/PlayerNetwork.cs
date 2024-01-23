@@ -44,7 +44,6 @@ public class PlayerNetwork : NetworkBehaviour {
 
 	[ServerRpc(RequireOwnership = false)]
 	public void updateWebcamServerRpc(string faceCamPath, byte[] bytes, int width, int height) {
-		Debug.Log("A");
 		updateWebcamClientRpc(faceCamPath, bytes, width, height);
 	}
 
