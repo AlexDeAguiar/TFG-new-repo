@@ -102,7 +102,7 @@ public class ConnectBoxManager : SuperGUI, ITranslatable {
 		closeButton = Root.Q<Button>("CloseButton");
 		closeButton.RegisterCallback<ClickEvent>(evt => {
 			Application.Quit();
-			UnityEditor.EditorApplication.isPlaying = false;
+			//UnityEditor.EditorApplication.isPlaying = false;
 		});
 	}
 
