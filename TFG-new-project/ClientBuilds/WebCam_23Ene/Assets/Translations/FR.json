@@ -1,0 +1,35 @@
+{
+    "LAN_NAME": "Français",
+    "Provide a username": "Fournir un nom d'utilisateur",
+    "Provide a Password": "Fournir un mot de passe",
+    "Passwords do not match": "Les mots de passe ne correspondent pas",
+    "Please select a user Type": "Veuillez sélectionner un type d'utilisateur",
+    "Username is already taken": "Nom d'utilisateur déjà pris",
+    "Accept": "Accepter",
+    "Username": "Nom d'utilisateur",
+    "Password": "Mot de passe",
+    "Repeat Password": "Répéter le mot de passe",
+
+    "Login": "Se connecter",
+    "Sign Up": "S'inscrire",
+    "Settings": "Paramètres",
+
+    "Student": "Étudiant",
+    "Professor": "Professeur",
+
+    "Language": "Langue",
+    
+    "INTERACTION_INFO_BLACKBOARD": "Appuyez sur E pour choisir la vidéo.\n Appuyez sur P pour mettre en pause/reprendre la vidéo",
+    "INTERACTION_INFO_DOOR": "Appuyez sur E pour ouvrir/fermer la porte",
+
+    "Choose a File": "Choisir un fichier",
+    "Image files": "Fichiers image",
+    "Video files": "Fichiers vidéo",
+    
+    "Connect As Host": "Se connecter en tant qu'hôte",
+    "Connect As Client": "Se connecter en tant que client",
+    "Join Code": "Code de connexion",
+    "Room Size": "Taille de la salle",
+    "CONNECTING...": "CONNEXION EN COURS..."
+    
+}

@@ -41,4 +41,17 @@ public class PlayerNetwork : NetworkBehaviour {
 		DoorInteraction doorController = door.GetComponent<DoorInteraction>();
 		doorController.toggleDoor();
 	}
+
+	[ServerRpc(RequireOwnership = false)]
+	public void updateWebcamServerRpc(string faceCamPath, byte[] bytes, int width, int height) {
+		Debug.Log("A");
+		updateWebcamClientRpc(faceCamPath, bytes, width, height);
+	}
+
+	[ClientRpc]
+	public void updateWebcamClientRpc(string webcamPath, byte[] bytes, int width, int height) {
+		GameObject webcam = GameObject.Find(webcamPath);
+		GetCameraImage getCameraImage = webcam.GetComponent<GetCameraImage>();
+		getCameraImage.setWebcamTexture(bytes, width, height);
+	}
 }
