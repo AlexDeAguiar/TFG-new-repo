@@ -25,6 +25,8 @@ public class GetCameraImage : MonoBehaviour{
 
 	// Update is called once per frame
 	void Update(){
+		if (!isOwner) { return; }
+
 		currTime += Time.deltaTime;
 		if (currTime < 0.5f) { return; }
 		currTime = 0f;
