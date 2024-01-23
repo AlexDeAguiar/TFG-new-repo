@@ -6,20 +6,21 @@ using UnityEngine;
 public class GetCameraImage : MonoBehaviour{
 	WebCamTexture webCamTexture;
 	private Renderer renderer;
-	private BinaryFormatter binaryFormater;
-
-	private float updateTime = 1f;
 	private float currTime = 0f;
+	private bool isOwner = false;
 
 	// Start is called before the first frame update
 	void Start(){
+		renderer = GetComponent<Renderer>();
+	}
+
+	public void initForOwner() {
+		isOwner = true;
 		webCamTexture = new WebCamTexture(WebCamTexture.devices[0].name);
 		webCamTexture.requestedWidth = 1;
 		webCamTexture.requestedHeight = 1;
 		webCamTexture.requestedFPS = 30;
 		webCamTexture.Play();
-		renderer = GetComponent<Renderer>();
-		binaryFormater = new BinaryFormatter();
 	}
 
 	// Update is called once per frame

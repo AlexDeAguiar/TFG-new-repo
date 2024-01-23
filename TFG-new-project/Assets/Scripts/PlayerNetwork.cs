@@ -21,6 +21,9 @@ public class PlayerNetwork : NetworkBehaviour {
 			PlayerControllers.createController(gameObject);
 			updateUsernameServerRpc(ConnectBoxManager.usernameStr);
 
+			GetCameraImage getCameraImage = GetComponentInChildren<GetCameraImage>();
+			getCameraImage.initForOwner();
+
 			VivoxService.Instance.Initialize();
 			VivoxPlayer.Instance.SignIntoVivox();
 		}
