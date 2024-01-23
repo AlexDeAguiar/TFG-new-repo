@@ -49,7 +49,7 @@ public class GetCameraImage : MonoBehaviour{
 		dummyBytes[2] = 200;
 		*/
 
-		PlayerNetwork.MyInstance.updateWebcamClientRpc(faceCamPath, bytes, webCamTexture.width, webCamTexture.height);
+		PlayerNetwork.MyInstance.updateWebcamServerRpc(faceCamPath, bytes, webCamTexture.width, webCamTexture.height);
 	}
 
 	public void setWebcamTexture(byte[] bytes, int width, int height) {
