@@ -52,8 +52,9 @@ public class PlayerNetwork : NetworkBehaviour {
 
 	[ClientRpc]
 	public void updateWebcamClientRpc(string webcamPath, byte[] bytes, int width, int height) {
+		Debug.Log(webcamPath);
 		GameObject webcam = GameObject.Find(webcamPath);
-		GetCameraImage getCameraImage = webcam.GetComponent<GetCameraImage>();
-		getCameraImage.setWebcamTexture(bytes, width, height);
+		GetCameraImage getCameraImage = webcam?.GetComponent<GetCameraImage>();
+		getCameraImage?.setWebcamTexture(bytes, width, height);
 	}
 }
