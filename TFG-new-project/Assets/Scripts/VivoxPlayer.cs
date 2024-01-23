@@ -88,17 +88,14 @@ public class VivoxPlayer : MonoBehaviour {
 
         //Actual code runs from here
         if (IsMicPermissionGranted()) {
-			Debug.Log("1st IF");
 			_vvm.Login(transform.name.ToString());
         }
         else {
             if (IsPermissionsDenied()) {
-				Debug.Log("2nd IF");
 				PermissionAskedCount = 0;
                 _vvm.Login(transform.name.ToString());
             }
             else {
-				Debug.Log("3rd IF");
 				AskForPermissions();
             }
         }
