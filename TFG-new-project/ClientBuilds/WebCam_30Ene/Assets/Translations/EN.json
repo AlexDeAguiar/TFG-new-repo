@@ -1,0 +1,6 @@
+{
+    "LAN_NAME": "English",
+    "INTERACTION_INFO_BLACKBOARD": "Press E to choose a file to put in the blackboard\nPress C to clear the blackboard\nPress left/right arrows to go to the previous/next file\nPress P to pause/unpause videos\n",
+    "INTERACTION_INFO_DOOR": "Press E to open/close the door",
+    "PELOTA_INFO_DOOR": "Playing La Pelota in the corridors is forbidden"
+}
